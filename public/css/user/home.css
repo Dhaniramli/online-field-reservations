@@ -1,0 +1,75 @@
+.main-carousel{
+    background-color: #FCA500;
+}
+
+.main-carousel .carousel-cell {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    background: #00AA9F;
+    border-radius: 5px;
+    /* counter-increment: gallery-cell; */
+}
+
+/* cell number */
+.main-carousel .carousel-cell:before {
+    display: block;
+    text-align: center;
+    /* content: counter(gallery-cell); */
+    line-height: 200px;
+    font-size: 80px;
+    color: white;
+    position: relative;
+}
+
+.main-carousel .overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.main-carousel img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .main-carousel .carousel-cell {
+        height: 30vh;
+    }
+
+    .main-carousel img {
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.carousel-first {
+    height: 550px;
+}
+
+/* big buttons, no circle */
+.main-carousel .flickity-prev-next-button {
+    width: 100px;
+    height: 100px;
+    background: transparent;
+}
+
+/* arrow color */
+.main-carousel .flickity-prev-next-button .arrow {
+    fill: #FF7000;
+}
+
+.main-carousel .flickity-prev-next-button.no-svg {
+    color: #FF7000;
+}
+
+.main-carousel .flickity-prev-next-button:hover {
+    background: transparent;
+}
+
+/* hide disabled button */
+.main-carousel .flickity-prev-next-button:disabled {
+    display: none;
+}

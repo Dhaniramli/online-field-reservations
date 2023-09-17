@@ -1,0 +1,34 @@
+nav {
+    background-color: #00AA9F;
+}
+
+nav .nav-link {
+    color: black;
+    font-size: 1pc;
+    font-weight: 400;
+}
+
+nav .nav-link:hover {
+    color: #FF7000;
+}
+
+nav .btn-login {
+    background-color: #FF7000;
+    font-weight: 1pc;
+    font-weight: 500;
+}
+
+nav .btn-login:hover {
+    background-color: #FCA500;
+}
+
+nav .btn-register {
+    color: #FF7000;
+    font-weight: 1pc;
+    font-weight: 500;
+    margin-left: 100px;
+}
+
+nav .btn-register:hover {
+    background-color: #FCA500;
+}

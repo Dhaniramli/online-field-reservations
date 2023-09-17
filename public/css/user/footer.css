@@ -1,0 +1,31 @@
+footer{
+    background-color: #00AA9F;
+    color: black;
+}
+
+footer a{
+    color: black;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+footer h3{
+    font-size: 20px;
+}
+
+footer a:hover{
+    color: #FF7000;
+}
+
+footer .container{
+    padding-top: 50px;
+}
+
+footer .cr{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+footer .isi{
+    margin-bottom: 20px;
+}
