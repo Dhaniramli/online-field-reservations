@@ -2,19 +2,26 @@ nav {
     background-color: #00AA9F;
 }
 
-nav .nav-link {
+.navbar a {
     color: black;
+}
+
+nav .nav-link {
     font-size: 1pc;
     font-weight: 400;
 }
 
-nav .nav-link:hover {
+
+.navbar .nav-link:hover {
+    color: #FF7000;
+}
+
+.navbar .nav-link.active {
     color: #FF7000;
 }
 
 nav .btn-login {
     background-color: #FF7000;
-    font-weight: 1pc;
     font-weight: 500;
 }
 
@@ -24,11 +31,24 @@ nav .btn-login:hover {
 
 nav .btn-register {
     color: #FF7000;
-    font-weight: 1pc;
     font-weight: 500;
     margin-left: 100px;
 }
 
 nav .btn-register:hover {
     background-color: #FCA500;
+}
+
+nav .dropdown-menu {
+    background-color: #FCA500;
+}
+
+nav .dropdown-menu .dropdown-item:hover {
+    background-color: #FF7000;
+}
+
+nav .dropdown-menu a {
+    font-size: 15px;
+    font-weight: 400;
+    color: black;
 }

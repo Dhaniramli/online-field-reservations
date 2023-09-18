@@ -51,8 +51,8 @@
 
 /* big buttons, no circle */
 .main-carousel .flickity-prev-next-button {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     background: transparent;
 }
 

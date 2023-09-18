@@ -1,0 +1,47 @@
+#myTable {
+    overflow-x: auto;
+}
+
+.content-schedule {
+    height: 100vh;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.table-responsive table {
+    min-width: 100%;
+}
+
+.table-responsive table th:first-child,
+.table-responsive table td:first-child {
+    position: sticky;
+    left: 0;
+    background-color: #FF7000;
+    z-index: 1;
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    background-color: #FF7000;
+    z-index: 2;
+}
+
+.dataTables_filter {
+    display: none;
+}
+
+/* Tambahkan warna border pada tabel */
+table {
+    border-collapse: collapse;
+    border: 2px solid #00AA9F; /* Ganti dengan warna yang Anda inginkan */
+}
+
+/* Tambahkan warna border pada sel tabel */
+table th, table td {
+    border: 1px solid #00AA9F; /* Ganti dengan warna yang Anda inginkan */
+}

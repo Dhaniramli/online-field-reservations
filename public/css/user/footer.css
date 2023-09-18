@@ -1,5 +1,6 @@
 footer{
-    background-color: #00AA9F;
+    background-color: #FF7000;
+    /* background-color: #00AA9F; */
     color: black;
 }
 
@@ -14,7 +15,9 @@ footer h3{
 }
 
 footer a:hover{
-    color: #FF7000;
+    color: #00AA9F;
+    /* color: #FF7000; */
+    font-size: 16px;
 }
 
 footer .container{

@@ -3,8 +3,10 @@
 
 <link rel="stylesheet" href="/css/user/navbar.css">
 <link rel="stylesheet" href="/css/user/body.css">
-<link rel="stylesheet" href="/css/user/home.css">
+<link rel="stylesheet" href="/css/user/venueCreate.css">
 <link rel="stylesheet" href="/css/user/footer.css">
+<link rel="stylesheet" href="/css/user/home.css">
+<link rel="stylesheet" href="/css/user/schedule.css">
 
 <!-- Font Awesome -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
@@ -27,3 +29,18 @@
 
 {{-- FLICKITY CAROUSEL --}}
 <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+{{-- SWEETALERT --}}
+<script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
+{{-- DATATABLES --}}
+{{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"> --}}
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+{{-- <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script> --}}
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<!-- Custom styles for this page -->
+<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
