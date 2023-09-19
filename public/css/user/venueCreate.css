@@ -96,4 +96,16 @@
     display: block;
 }
 
+#timeDropdown {
+    position: absolute;
+    z-index: 2;
+    /* Atur z-index lebih tinggi daripada elemen input */
+}
+
+#fieldSoccerInput {
+    position: relative;
+    z-index: 1;
+    /* Atur z-index lebih rendah daripada dropdown */
+}
+
 /* AKHIR JAM & LAPANGAN*/

@@ -22,7 +22,7 @@
                                 <td></td>
                                 <td>
                                     <div class="dropdown">
-                                        <input type="text" id="timeInput" placeholder="pilih waktu">
+                                        <input type="text" id="timeInput" placeholder="pilih waktu" autocomplete="off">
                                         <ul class="dropdown-list" id="timeDropdown">
                                             <li>00:00</li>
                                             <li>01:00</li>
@@ -65,7 +65,7 @@
                                 <td></td>
                                 <td>
                                     <div class="dropdown">
-                                        <input type="text" id="fieldSoccerInput" placeholder="pilih lapangan">
+                                        <input type="text" id="fieldSoccerInput" placeholder="pilih lapangan" autocomplete="off">
                                         <ul class="dropdown-list" id="fieldSoccerDropdown">
                                             <li>Lapangan 1</li>
                                             <li>Lapangan 2</li>
