@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand" href="#">KARSA MINI SOCCER</a>
+        <a class="navbar-brand" href="/">KARSA MINI SOCCER</a>
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="toggler-icon top-bar"></span>
@@ -25,12 +25,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Blog</a>
                 </li>
-                <li>
-                    <hr>
-                </li>
+                <hr>
+                
             </ul>
             <ul class="navbar-nav navbar-btn ms-auto mb-2 mb-lg-0 mb-md-3 mb-sm-3">
-                <li class="nav-item mb-lg-0 mb-md-3 mb-sm-4">
+                <li class="nav-item mb-lg-0 mb-md-2 mb-sm-2">
                     <button type="button" class="btn btn-login">Login</button>
                 </li>
                 <li class="nav-item">

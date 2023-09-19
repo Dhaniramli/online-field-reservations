@@ -133,9 +133,12 @@ nav .dropdown-menu a {
     .navbar-toggler-icon {
         color: aqua;
     }
+}
 
-    .btn-login {
-        margin-bottom: 10px;
-    }
 
+.navbar hr {
+    border: none;
+    height: 2px;
+    background-color: #FF6000;
+    margin: 10px 0;
 }
