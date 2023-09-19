@@ -1,4 +1,99 @@
-.venue-create table tr{
+.venue-create table tr {
     height: 50px;
 }
 
+.venue-create .modal-header {
+    background-color: #FCA500;
+    color: black;
+    margin-bottom: 0px;
+}
+
+.venue-create .modal-header h1 {
+    font-size: 1.5pc;
+    font-weight: 700;
+}
+
+.venue-create .modal-body {
+    background-color: #FCA500;
+    color: black;
+    margin: 0px;
+}
+
+.venue-create .title {
+    font-size: 1pc;
+    font-weight: 700;
+}
+
+.venue-create .modal-footer {
+    background-color: #FCA500;
+    color: black;
+}
+
+.venue-create input {
+    font-size: 15px;
+}
+
+/* JAM & LAPANGAN*/
+.dropdown {
+    position: relative;
+    /* display: inline-block; */
+}
+
+#timeInput {
+    /* padding: 10px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+}
+
+#fieldSoccerInput {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+    max-height: 100px;
+    /* Atur tinggi maksimum sesuai kebutuhan */
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    display: none;
+}
+
+.dropdown-list li {
+    /* padding: 10px; */
+    padding-left: 10px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.dropdown-list li:hover {
+    background-color: #00AA9F;
+    color: white;
+}
+
+/* Menampilkan dropdown saat input di-focus */
+#timeInput:focus+.dropdown-list {
+    display: block;
+}
+
+#fieldSoccerInput:focus+.dropdown-list {
+    display: block;
+}
+
+/* AKHIR JAM & LAPANGAN*/

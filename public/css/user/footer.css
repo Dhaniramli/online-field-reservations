@@ -11,7 +11,8 @@ footer a{
 }
 
 footer h3{
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 500;
 }
 
 footer a:hover{
@@ -31,4 +32,15 @@ footer .cr{
 
 footer .isi{
     margin-bottom: 20px;
+}
+
+@media (max-width: 767.98px) {
+    footer h3{
+        text-align: center;
+    }
+
+    footer .isi{
+        text-align: center;
+    }
+
 }
