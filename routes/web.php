@@ -1,17 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\FieldListController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('user.home');
@@ -20,3 +10,11 @@ Route::get('/', function () {
 Route::get('/jadwal-lapangan', function () {
     return view('user.fieldSchedule.index');
 });
+
+Route::get('/admin', function () {
+    return view('admin.home');
+});
+
+Route::get('/admin/daftar-lapangan', [FieldListController::class, 'index']);
+Route::post('/admin/daftar-lapangan/create', [FieldListController::class, 'store']);
+Route::get('/admin/daftar-lapangan/hapus/{id}', [FieldListController::class, 'destroy']);

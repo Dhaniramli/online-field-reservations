@@ -1,0 +1,11 @@
+.sidebar{
+    background-color: #00AA9F;
+}
+
+.sidebar-brand-text{
+    color: #FCA500;
+}
+
+.sidebar .collapse-inner a .active{
+    color: #FCA500;
+}

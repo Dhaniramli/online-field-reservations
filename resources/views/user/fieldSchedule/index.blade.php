@@ -1,7 +1,7 @@
 @extends('user.layouts.main')
 
 @section('content')
-<div class="container content-schedule mb-4 mt-4">
+<div class="container content-schedule mb-5 mt-4">
     <h1 class="title-jadwal text-center mb-5">Jadwal Lapangan</h1>
     <!-- Tambahkan input pencarian di luar tabel -->
     <div class="row">
