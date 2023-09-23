@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('data_fields', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('field_list_id');
-            $table->string('time');
+            $table->unsignedBigInteger('playing_time_id');
+            // $table->string('time');
             $table->string('price');
             $table->timestamps();
 
             $table->foreign('field_list_id')->references('id')->on('field_lists')->onDelete('cascade');
+            $table->foreign('playing_time_id')->references('id')->on('playing_times')->onDelete('cascade');
         });
     }
 

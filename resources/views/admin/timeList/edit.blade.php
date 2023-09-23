@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="{{ 'edit'.$item->id }}Label">Tambah jam Main</h1>
+                <h1 class="modal-title fs-5" id="{{ 'edit'.$item->id }}Label">Edit jam Main</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="{{ 'formedit'.$item->id }}" action="/admin/jam-main/edit/{{ $item->id }}" method="POST">

@@ -33,7 +33,7 @@
                             <td>
                                 @if ($itemTwo = $itemsTwo->where('field_list_id', $item->id))
                                 @foreach ($itemTwo as $itemTwoo)
-                                {{ $itemTwoo->time }} <br>
+                                {{ $itemTwoo->playingTime->time }} <br>
                                 @endforeach
                                 @else
                                 Data tidak ditemukan.
@@ -49,11 +49,11 @@
                                 @endif
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
-                                <a href="/admin/daftar-lapangan/{{ $item->id }}/edit"
+                                <a href="/admin/daftar-lapangan/edit/{{ $item->id }}"
                                     class="btn btn-warning btn-icon-split btn-sm">
                                     <span class="text">Edit</span>
                                 </a>
-                                <a href="{{ url('/admin/daftar-lapangan/hapus/' . $item->id) }}"
+                                <a id="deleteButton" href="{{ url('/admin/daftar-lapangan/hapus/' . $item->id) }}"
                                     class="btn btn-danger btn-icon-split btn-sm">
                                     <span class="text">Hapus</span>
                                 </a>
@@ -69,3 +69,5 @@
 </div>
 
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

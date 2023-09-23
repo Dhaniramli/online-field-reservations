@@ -68,7 +68,9 @@
                 if (result.isConfirmed) {
                     window.location.href = link;
                     Swal.fire(
-                        'Berhasil dihapus!',
+                        'Terhapus!',
+                        'Data berhasil dihapus!',
+                        'success'
                     )
                 }
             })

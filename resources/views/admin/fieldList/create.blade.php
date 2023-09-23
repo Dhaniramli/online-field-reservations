@@ -23,8 +23,9 @@
                             <div id="inputContainer">
                                 <div class="row mb-2">
                                     <div class="col">
-                                        <input type="time" class="form-control" name="time[]" placeholder="Jam"
+                                        <input type="text" class="form-control" placeholder="Jam" name="time_display[]"
                                             value="{{ $item->time }}" readonly>
+                                        <input type="hidden" name="time[]" value="{{ $item->id }}">
                                     </div>
                                     <div class="col">
                                         <input type="number" class="form-control" name="price[]" placeholder="Harga"
@@ -36,7 +37,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a href="/admin/daftar-lapangan" class="btn btn-secondary">Batal</a>
+                        <a href="/admin/daftar-lapangan" class="btn btn-secondary me-auto">Kembali</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>

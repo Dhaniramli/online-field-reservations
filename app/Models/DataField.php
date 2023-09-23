@@ -14,4 +14,7 @@ class DataField extends Model
     public function fieldList(){
         return $this->belongsTo(FieldList::class, 'field_list_id');
     }
+    public function playingTime(){
+        return $this->belongsTo(PlayingTime::class, 'playing_time_id');
+    }
 }

@@ -8,11 +8,15 @@
     @include('user.partials.linkCss')
 </head>
 
-<body>
+<body id="page-top">
     @include('user.partials.navbar')
     
     @yield('content')
     
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up" style="margin-top: 12px;"></i>
+    </a>
+
     @include('user.partials.linkJs')
 
     @include('user.partials.footer')

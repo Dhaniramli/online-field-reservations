@@ -32,7 +32,7 @@ class FieldListController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'time' => 'required|array',
-            'time.*' => 'required|date_format:H:i',
+            'time.*' => 'required',
             'price' => 'required|array',
             'price.*' => 'required|numeric',
         ]);
@@ -50,7 +50,7 @@ class FieldListController extends Controller
         foreach ($times as $key => $time) {
             $hargaPerjam = new DataField([
                 'field_list_id' => $lapangan->id,
-                'time' => $time,
+                'playing_time_id' => $time,
                 'price' => $prices[$key],
             ]);
             $hargaPerjam->save();
@@ -59,16 +59,62 @@ class FieldListController extends Controller
         return redirect('/admin/daftar-lapangan')->with('success', 'Berhasil ditambahkan!');
     }
 
+    public function edit($id)
+    {
+        $items = PlayingTime::all();
+        $itemField = FieldList::find($id);
+        $itemdatas = DataField::where('field_list_id', $id)->get();
+
+        return view('admin.fieldList.edit', compact('items', 'itemField', 'itemdatas'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'time' => 'required|array',
+            'time.*' => 'required',
+            'price' => 'required|array',
+            'price.*' => 'required|numeric',
+        ]);
+
+        // Mengambil data lapangan yang akan diubah
+        $lapangan = FieldList::find($id);
+
+        if (!$lapangan) {
+            return redirect('/admin/daftar-lapangan')->with('error', 'Lapangan tidak ditemukan!');
+        }
+
+        // Mengupdate data lapangan
+        $lapangan->name = $request->input('name');
+        $lapangan->save();
+
+        // Simpan data harga perjam
+        $times = $request->input('time');
+        $prices = $request->input('price');
+
+        // Hapus data harga perjam yang ada terlebih dahulu
+        $lapangan->dataFields()->delete();
+
+        // Simpan data harga perjam yang baru
+        foreach ($times as $key => $time) {
+            $hargaPerjam = new DataField([
+                'field_list_id' => $lapangan->id,
+                'playing_time_id' => $time,
+                'price' => $prices[$key],
+            ]);
+            $hargaPerjam->save();
+        }
+
+        return redirect('/admin/daftar-lapangan')->with('success', 'Berhasil diperbarui!');
+    }
+
+
     public function destroy($id)
     {
         FieldList::destroy($id);
 
-        return redirect('/admin/daftar-lapangan')->with('success', 'Berhasil dihapus!');
-    }
-
-    public function getData()
-    {
-        $itemsThree = PlayingTime::all();
-        return response()->json($itemsThree);
+        return redirect('/admin/daftar-lapangan');
     }
 }

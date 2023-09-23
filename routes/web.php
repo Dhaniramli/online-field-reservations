@@ -19,6 +19,8 @@ Route::get('/admin', function () {
 Route::get('/admin/daftar-lapangan', [FieldListController::class, 'index']);
 Route::get('/admin/daftar-lapangan/create', [FieldListController::class, 'create']);
 Route::post('/admin/daftar-lapangan/store', [FieldListController::class, 'store']);
+Route::get('/admin/daftar-lapangan/edit/{id}', [FieldListController::class, 'edit']);
+Route::put('/admin/daftar-lapangan/update/{id}', [FieldListController::class, 'update']);
 Route::get('/admin/daftar-lapangan/hapus/{id}', [FieldListController::class, 'destroy']);
 
 Route::get('/admin/jam-main', [PlayingTimeController::class, 'index']);
