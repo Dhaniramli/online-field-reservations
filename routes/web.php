@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\FieldListController;
+use App\Http\Controllers\Admin\PlayingTimeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,5 +17,15 @@ Route::get('/admin', function () {
 });
 
 Route::get('/admin/daftar-lapangan', [FieldListController::class, 'index']);
-Route::post('/admin/daftar-lapangan/create', [FieldListController::class, 'store']);
+Route::get('/admin/daftar-lapangan/create', [FieldListController::class, 'create']);
+Route::post('/admin/daftar-lapangan/store', [FieldListController::class, 'store']);
 Route::get('/admin/daftar-lapangan/hapus/{id}', [FieldListController::class, 'destroy']);
+
+Route::get('/admin/jam-main', [PlayingTimeController::class, 'index']);
+Route::post('/admin/jam-main/create', [PlayingTimeController::class, 'store']);
+Route::get('/admin/jam-main/hapus/{id}', [PlayingTimeController::class, 'destroy']);
+Route::post('/admin/jam-main/edit/{id}', [PlayingTimeController::class, 'update']);
+
+Route::get('/admin/jadwal-lapangan', function () {
+    return view('admin.fieldSchedule.index');
+});

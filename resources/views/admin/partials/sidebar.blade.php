@@ -18,7 +18,7 @@
             <span>Dashboard</span></a>
     </li>
 
-    <li class="nav-item {{ Request::is('admin/daftar-lapangan*') || Request::is('admin/jadwal-lapangan*') ? 'active' : '' }}">
+    <li class="nav-item {{ Request::is('admin/daftar-lapangan*') || Request::is('admin/jadwal-lapangan*') || Request::is('admin/jam-main*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseOne">
             <i class="fa fa-futbol"></i>
@@ -26,6 +26,7 @@
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item {{ Request::is('admin/jam-main*') ? 'active' : ''}}" href="/admin/jam-main">Jam Main</a>
                 <a class="collapse-item {{ Request::is('admin/daftar-lapangan*') ? 'active' : ''}}" href="/admin/daftar-lapangan">Daftar Lapangan</a>
                 <a class="collapse-item {{ Request::is('admin/jadwal-lapangan*') ? 'active' : ''}}" href="/admin/jadwal-lapangan">Jadwal Lapangan</a>
             </div>

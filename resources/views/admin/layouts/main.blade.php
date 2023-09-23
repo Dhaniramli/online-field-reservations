@@ -58,9 +58,6 @@
 
     <!-- Logout Modal-->
     @include('admin.partials.logoutModal')
-
-    {{-- SEMUA MODAL --}}
-    @include('admin.fieldList.create')
     
     @include('admin.partials.js')
 

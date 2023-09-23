@@ -1,0 +1,15 @@
+.time-list .center-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Set tinggi minimum sesuai dengan tinggi viewport */
+}
+
+.card {
+    flex-grow: 1; /* Tabel akan mengisi ruang yang tersedia */
+}
+
+.time-list .tabel-responsive{
+    max-height: 200px;
+    overflow-y: auto;
+}
