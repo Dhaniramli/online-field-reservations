@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\FieldListController;
+use App\Http\Controllers\Admin\FieldScheduleController;
 use App\Http\Controllers\Admin\PlayingTimeController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,4 @@ Route::post('/admin/jam-main/create', [PlayingTimeController::class, 'store']);
 Route::get('/admin/jam-main/hapus/{id}', [PlayingTimeController::class, 'destroy']);
 Route::post('/admin/jam-main/edit/{id}', [PlayingTimeController::class, 'update']);
 
-Route::get('/admin/jadwal-lapangan', function () {
-    return view('admin.fieldSchedule.index');
-});
+Route::get('/admin/jadwal-lapangan', [FieldScheduleController::class, 'index']);

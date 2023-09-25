@@ -19,6 +19,9 @@
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
 
+{{-- DATATABLES --}}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js">
+
 
 {{-- SWEETALERT --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
