@@ -26,15 +26,15 @@
 
                 @foreach ($dates as $date)
                 <tr>
-                    <td style="text-align: center; width:20px;">{{ $date['day'] . ' ' . $date['date'] }}</td>
+                    <td style="text-align: center; width:20px;">{{ $date['day'] . ' ' . $date['dateNoFormats'] }}</td>
                     @foreach ($playingTimes as $playingTime)
                     @php
-                    $booking = $bookeds->where('date', $date['dateNoFormats'])->where('time',
+                    $booking = $bookeds->where('field_name', $field_id)->where('date', $date['dateNoFormats'])->where('time',
                     $playingTime->time)->first();
                     @endphp
                     <td style="text-align: center; width:30px; vertical-align: middle;"">
                         @if ($booking)
-                        {{ $booking->name_user }}
+                        {{ $booking->user_name}}
                         @endif
                     </td>
                     @endforeach

@@ -10,9 +10,10 @@ use App\Http\Controllers\Controller;
 
 class FieldScheduleController extends Controller
 {
-    public function index()
+    public function index($id)
     {
         $playingTimes = PlayingTime::all();
+        $field_id = $id;
 
         $minDate = now(); // Tanggal hari ini
         $maxYear = 2023; // Tahun maksimum
@@ -47,6 +48,6 @@ class FieldScheduleController extends Controller
         }
 
 
-        return view('user.fieldSchedule.index', compact('playingTimes', 'dates'));
+        return view('user.fieldSchedule.index', compact('playingTimes', 'dates', 'field_id'));
     }
 }
