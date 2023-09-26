@@ -19,20 +19,29 @@
                 <tr>
                     <th class="sticky-header-tanggal">Hari / Tanggal</th>
                     @foreach ($playingTimes as $playingTime)
-                    <th class="" style="text-align: center">{{ $playingTime->time }}</th>
+                    <th class="" style="text-align: center;">{{ $playingTime->time }}</th>
                     @endforeach
                 </tr>
             </thead>
             <tbody>
-                @foreach ($playingTimes as $playingTime)
+
+                @foreach ($dates as $date)
                 <tr>
-                    <td style="text-align: center">Senin {{ $playingTime->time }}</td>
+                    <td class="" style="text-align: center; width:20px;">{{ $date['day'] . ' ' . $date['date'] }}</td>
                     @foreach ($playingTimes as $playingTime)
-                    <td style="text-align: center">Data {{ $playingTime->time }}</td>
+                    @php
+                    $booking = $bookeds->where('date', $date['dateNoFormats'])->where('time',
+                    $playingTime->time)->first();
+                    @endphp
+                    <td style="text-align: center;  vertical-align: middle;"">
+                        @if ($booking)
+                        {{ $booking->name_user }}
+                        @endif
+                    </td>
                     @endforeach
                 </tr>
                 @endforeach
-                
+
             </tbody>
         </table>
     </div>

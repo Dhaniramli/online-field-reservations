@@ -18,8 +18,9 @@
                         Jadwal Lapangan
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/jadwal-lapangan">Lapangan 1</a></li>
-                        <li><a class="dropdown-item" href="/jadwal-lapangan">Lapangan 2</a></li>
+                        @foreach ($fieldLists as $fieldList)
+                        <li><a class="dropdown-item" href="/jadwal-lapangan">{{ $fieldList->name }}</a></li>
+                        @endforeach
                     </ul>
                 </li>
                 <li class="nav-item">

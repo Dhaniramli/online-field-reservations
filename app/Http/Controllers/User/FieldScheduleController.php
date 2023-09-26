@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Models\PlayingTime;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Controller;
 
 class FieldScheduleController extends Controller
 {
@@ -47,6 +47,6 @@ class FieldScheduleController extends Controller
         }
 
 
-        return view('admin.fieldSchedule.index', compact('playingTimes', 'dates'));
+        return view('user.fieldSchedule.index', compact('playingTimes', 'dates'));
     }
 }

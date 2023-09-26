@@ -14,7 +14,7 @@
                                 <td class="title">Tanggal</td>
                                 <td></td>
                                 <td width="100%">
-                                    <input type="date" name="date" class="form-control" id="date" placeholder="Tanggal">
+                                    <input type="date" name="date" class="form-control" id="date" placeholder="Tanggal" min="<?php echo date('Y-m-d'); ?>">
                                 </td>
                             </tr>
                             <tr>
@@ -24,30 +24,9 @@
                                     <div class="dropdown">
                                         <input type="text" id="timeInput" placeholder="pilih waktu" autocomplete="off">
                                         <ul class="dropdown-list" id="timeDropdown">
-                                            <li>00:00</li>
-                                            <li>01:00</li>
-                                            <li>02:00</li>
-                                            <li>03:00</li>
-                                            <li>04:00</li>
-                                            <li>05:00</li>
-                                            <li>06:00</li>
-                                            <li>07:00</li>
-                                            <li>08:00</li>
-                                            <li>09:00</li>
-                                            <li>10:00</li>
-                                            <li>11:00</li>
-                                            <li>12:00</li>
-                                            <li>13:00</li>
-                                            <li>14:00</li>
-                                            <li>15:00</li>
-                                            <li>16:00</li>
-                                            <li>17:00</li>
-                                            <li>18:00</li>
-                                            <li>19:00</li>
-                                            <li>20:00</li>
-                                            <li>21:00</li>
-                                            <li>22:00</li>
-                                            <li>23:00</li>
+                                            @foreach ($playingTimes as $playingTime)
+                                            <li>{{ $playingTime->time }}</li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </td>
@@ -67,8 +46,9 @@
                                     <div class="dropdown">
                                         <input type="text" id="fieldSoccerInput" placeholder="pilih lapangan" autocomplete="off">
                                         <ul class="dropdown-list" id="fieldSoccerDropdown">
-                                            <li>Lapangan 1</li>
-                                            <li>Lapangan 2</li>
+                                            @foreach ($fieldLists as $fieldList)
+                                            <li>{{ $fieldList->name }}</li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </td>

@@ -83,7 +83,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'id',
+    // 'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -163,6 +164,7 @@ return [
         /*
          * Application Service Providers...
          */
+        App\Providers\DataComposerServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,

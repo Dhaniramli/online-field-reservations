@@ -3,15 +3,14 @@
 use App\Http\Controllers\Admin\FieldListController;
 use App\Http\Controllers\Admin\FieldScheduleController;
 use App\Http\Controllers\Admin\PlayingTimeController;
+use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('user.home');
 });
 
-Route::get('/jadwal-lapangan', function () {
-    return view('user.fieldSchedule.index');
-});
+Route::get('/jadwal-lapangan', [UserFieldScheduleController::class, 'index']);
 
 Route::get('/admin', function () {
     return view('admin.home');
