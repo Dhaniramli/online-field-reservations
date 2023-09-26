@@ -4,7 +4,7 @@
 <div class="container content-schedule mb-5 mt-4">
     <h1 class="title-jadwal text-center mb-5">Jadwal Lapangan</h1>
     <!-- Tambahkan input pencarian di luar tabel -->
-    <div class="row">
+    <div class="row  mb-3">
         <div class="col-lg-3">
             <div class="form-group fitur-cari">
                 <input type="text" id="search" class="form-control" placeholder="Cari &#40Hari/Tanggal/Nama&#41">

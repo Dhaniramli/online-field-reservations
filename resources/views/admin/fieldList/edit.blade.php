@@ -14,9 +14,9 @@
                     @method('put')
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nama Lapangan</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                name="name" placeholder="contoh : Lapangan 1" value="{{ old('name', $itemField->name) }}" required>
+                            <label for="name" class="form-label">Lapangan ke :</label>
+                            <input type="number" class="form-control @error('name') is-invalid @enderror" id="name"
+                                name="name" placeholder="contoh : Lapangan ke : 1" value="{{ old('name', $itemField->name) }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="time_price" class="form-label">Jam & Biaya Perjam</label>

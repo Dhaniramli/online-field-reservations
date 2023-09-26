@@ -13,9 +13,9 @@
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nama Lapangan</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                                name="name" placeholder="contoh : Lapangan 1" value="{{ old('name') }}" required>
+                            <label for="name" class="form-label">Lapangan ke : </label>
+                            <input type="number" class="form-control @error('name') is-invalid @enderror" id="name"
+                                name="name" placeholder="contoh : Lapangan ke : 1" value="{{ old('name') }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="time_price" class="form-label">Jam & Biaya Perjam</label>
@@ -28,8 +28,7 @@
                                         <input type="hidden" name="time[]" value="{{ $item->id }}">
                                     </div>
                                     <div class="col">
-                                        <input type="number" class="form-control" name="price[]" placeholder="Harga"
-                                            value="{{ old('price') }}" required>
+                                        <input type="number" class="form-control" name="price[]" placeholder="Harga" required>
                                     </div>
                                 </div>
                             </div>

@@ -30,7 +30,7 @@ class FieldListController extends Controller
     {
         // Validasi input
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|numeric|unique:field_lists',
             'time' => 'required|array',
             'time.*' => 'required',
             'price' => 'required|array',
@@ -72,7 +72,7 @@ class FieldListController extends Controller
     {
         // Validasi input
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required||numeric|unique:field_lists',
             'time' => 'required|array',
             'time.*' => 'required',
             'price' => 'required|array',

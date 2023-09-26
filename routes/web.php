@@ -10,7 +10,7 @@ Route::get('/', function () {
     return view('user.home');
 });
 
-Route::get('/jadwal-lapangan', [UserFieldScheduleController::class, 'index']);
+Route::get('/jadwal-lapangan/{id}', [UserFieldScheduleController::class, 'index']);
 
 Route::get('/admin', function () {
     return view('admin.home');

@@ -47,7 +47,7 @@
                                         <input type="text" id="fieldSoccerInput" placeholder="pilih lapangan" autocomplete="off">
                                         <ul class="dropdown-list" id="fieldSoccerDropdown">
                                             @foreach ($fieldLists as $fieldList)
-                                            <li>{{ $fieldList->name }}</li>
+                                            <li>Lapangan {{ $fieldList->name }}</li>
                                             @endforeach
                                         </ul>
                                     </div>

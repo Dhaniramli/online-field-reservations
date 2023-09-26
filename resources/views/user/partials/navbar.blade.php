@@ -19,7 +19,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         @foreach ($fieldLists as $fieldList)
-                        <li><a class="dropdown-item" href="/jadwal-lapangan">{{ $fieldList->name }}</a></li>
+                        <li><a class="dropdown-item" href="/jadwal-lapangan/{{ $fieldList->name }}">Lapangan {{ $fieldList->name }}</a></li>
                         @endforeach
                     </ul>
                 </li>
