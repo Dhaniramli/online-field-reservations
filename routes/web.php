@@ -1,14 +1,18 @@
 <?php
 
+use App\Http\Controllers\Admin\DayDateController;
 use App\Http\Controllers\Admin\FieldListController;
 use App\Http\Controllers\Admin\FieldScheduleController;
 use App\Http\Controllers\Admin\PlayingTimeController;
+use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('user.home');
 });
+
+Route::post('/booking/store', [BookingController::class, 'store']);
 
 Route::get('/jadwal-lapangan/{id}', [UserFieldScheduleController::class, 'index']);
 
@@ -27,5 +31,8 @@ Route::get('/admin/jam-main', [PlayingTimeController::class, 'index']);
 Route::post('/admin/jam-main/create', [PlayingTimeController::class, 'store']);
 Route::get('/admin/jam-main/hapus/{id}', [PlayingTimeController::class, 'destroy']);
 Route::post('/admin/jam-main/edit/{id}', [PlayingTimeController::class, 'update']);
+
+Route::get('/admin/hari-tanggal', [DayDateController::class, 'index']);
+Route::post('/admin/hari-tanggal/create', [DayDateController::class, 'store']);
 
 Route::get('/admin/jadwal-lapangan', [FieldScheduleController::class, 'index']);

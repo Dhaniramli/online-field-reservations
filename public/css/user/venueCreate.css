@@ -39,7 +39,7 @@
     /* display: inline-block; */
 }
 
-#timeInput {
+#time {
     /* padding: 10px; */
     padding-left: 10px;
     padding-right: 10px;
@@ -51,7 +51,7 @@
     border-radius: 5px;
 }
 
-#fieldSoccerInput {
+#field_name {
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 6px;
@@ -88,11 +88,11 @@
 }
 
 /* Menampilkan dropdown saat input di-focus */
-#timeInput:focus+.dropdown-list {
+#time:focus+.dropdown-list {
     display: block;
 }
 
-#fieldSoccerInput:focus+.dropdown-list {
+#field_name:focus+.dropdown-list {
     display: block;
 }
 
@@ -102,7 +102,7 @@
     /* Atur z-index lebih tinggi daripada elemen input */
 }
 
-#fieldSoccerInput {
+#field_name {
     position: relative;
     z-index: 1;
     /* Atur z-index lebih rendah daripada dropdown */

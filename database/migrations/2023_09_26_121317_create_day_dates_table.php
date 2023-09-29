@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookeds', function (Blueprint $table) {
+        Schema::create('day_dates', function (Blueprint $table) {
             $table->id();
-            $table->String('user_name');
-            $table->String('field_name');
-            $table->String('date');
-            $table->String('time');
-            $table->String('price');
+            $table->string('max_year');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookeds');
+        Schema::dropIfExists('day_dates');
     }
 };

@@ -26,7 +26,7 @@
 
                 @foreach ($dates as $date)
                 <tr>
-                    <td style="text-align: center; width:20px;">{{ $date['day'] . ' ' . $date['dateNoFormats'] }}</td>
+                    <td style="text-align: center; width:20px;">{{ $date['day'] . ', ' . $date['date'] }}</td>
                     @foreach ($playingTimes as $playingTime)
                     @php
                     $booking = $bookeds->where('field_name', $field_id)->where('date', $date['dateNoFormats'])->where('time',
