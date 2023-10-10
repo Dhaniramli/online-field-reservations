@@ -9,5 +9,6 @@ class Booked extends Model
 {
     use HasFactory;
 
+    // protected $fillable = ['id', 'user_name', 'field_name', 'date', 'time', 'time_match', 'price'];
     protected $guarded = ['id'];
 }

@@ -6,9 +6,13 @@
                 <h1 class="modal-title" id="exampleModalLabel">Booking</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/booking/store" method="POST">
+            <form action="/booking/store" method="POST" id="bookingForm">
                 <div class="modal-body">
                     @csrf
+
+                    @if (auth()->user())
+                    <input type="hidden" name="user_name" value="{{ auth()->user()->first_name }}">
+                    @endif
                     <div class="mb-3">
                         <table>
                             <tr>
@@ -24,10 +28,11 @@
                                 <td></td>
                                 <td>
                                     <div class="dropdown">
-                                        <input name="time" type="text" id="time" placeholder="pilih waktu" autocomplete="off">
+                                        <input name="time" type="text" id="time" placeholder="pilih waktu"
+                                            autocomplete="off">
                                         <ul class="dropdown-list" id="timeDropdown">
                                             @foreach ($playingTimes as $playingTime)
-                                            <li>{{ $playingTime->time }}</li>
+                                            <li>{{ $playingTime->id }}</li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -46,24 +51,25 @@
                                 <td></td>
                                 <td>
                                     <div class="dropdown">
-                                        <input name="field_name" type="text" id="field_name" placeholder="pilih lapangan"
-                                            autocomplete="off">
+                                        <input name="field_name" type="text" id="field_name"
+                                            placeholder="pilih lapangan" autocomplete="off">
                                         <ul class="dropdown-list" id="fieldSoccerDropdown">
                                             @foreach ($fieldLists as $fieldList)
-                                            <li>Lapangan {{ $fieldList->name }}</li>
+                                            <li>Lapangan {{ $fieldList->id }}</li>
                                             @endforeach
                                         </ul>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="title">Harga</td>
-                                <td></td>
-                                <td>
-                                    <input type="text" name="price" class="form-control" id="price" placeholder="Harga"
-                                        disabled>
-                                </td>
-                            </tr>
+                            {{-- <tr> --}}
+                            {{-- <td class="title">Harga</td> --}}
+                            {{-- <td></td> --}}
+                            {{-- <td> --}}
+                            <input type="hidden" name="price" class="form-control" id="price" placeholder="Harga"
+                                value="0">
+                            {{-- </td> --}}
+                            {{-- </tr> --}}
+                            <input type="hidden" name="id" class="form-control" id="id" value="0">
 
                         </table>
                     </div>
@@ -175,4 +181,131 @@
             fieldSoccerDropdown.style.display = "none";
         }, 200);
     });
+
+</script>
+
+{{-- BOOKING --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const bookingForm = document.querySelector('form[action="/booking/store"]');
+
+        bookingForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Mencegah perilaku bawaan pengiriman formulir
+
+            // Cek apakah pengguna sudah login
+            @auth
+            const formData = new FormData(bookingForm);
+
+            let validationPassed = true;
+
+            for (const [name, value] of formData) {
+                if (value.trim() === '') {
+                    validationPassed = false;
+                    break;
+                }
+            }
+
+            if (!validationPassed) {
+                // Tampilkan pesan kesalahan dalam alert jika ada input yang masih kosong
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Lengkapi semua kolom input sebelum melanjutkan!',
+                });
+                return; // Hentikan pengiriman jika validasi gagal
+            }
+
+            // Mengambil nilai field_name dan time dari formulir
+            const fieldName = formData.get('field_name');
+            const time = formData.get('time');
+            const timeMatch = formData.get('time_match');
+
+            // Mengirimkan permintaan AJAX ke server untuk mengambil harga
+            fetch('/get-price', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    body: JSON.stringify({
+                        field_name: fieldName,
+                        time: time,
+                        time_match: timeMatch,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Mendapatkan harga dari respons server
+                        const price = data.price;
+
+                        // Mengatur nilai input harga dengan harga yang diterima dari server
+                        document.getElementById('price').value = price;
+
+                        // Buat pesan konfirmasi yang mencantumkan data yang diisi, termasuk harga
+                        const userName = formData.get('user_name');
+                        const date = formData.get('date');
+                        const parts = date.split('-');
+
+                        // Menghapus angka 0 di depan bulan dan hari jika ada
+                        const tahun = parts[0];
+                        const bulan = parts[1].replace(/^0+/,
+                        ''); // Menghapus angka 0 di depan bulan
+                        const hari = parts[2].replace(/^0+/, ''); // Menghapus angka 0 di depan hari
+
+                        // Menggabungkan kembali tahun, bulan, dan hari ke dalam format yang diinginkan
+                        const tanggalHasil = tahun + bulan + hari;
+
+                        // Menggabungkan tanggal dan waktu ke dalam satu string
+                        const combinedValue = tanggalHasil + time;
+
+                        // Mengisi nilai gabungan ke dalam elemen dengan id 'id'
+                        document.getElementById('id').value = combinedValue;
+
+                        const confirmationMessage = `
+                        Tanggal : ${date}<br>
+                        Jam : ${time}<br>
+                        Durasi : ${timeMatch} Jam<br>
+                        Lapangan : ${fieldName}<br>
+                        Harga : ${price}<br><br>
+
+                        Anda yakin ingin melanjutkan proses booking?
+                    `;
+
+                        Swal.fire({
+                            title: 'Konfirmasi Booking',
+                            html: confirmationMessage, // Menggunakan "html" untuk memungkinkan HTML di dalam pesan
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonText: 'Ya',
+                            cancelButtonText: 'Tidak',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Jika pengguna mengonfirmasi, lanjutkan dengan pengiriman formulir
+                                bookingForm.submit();
+                            }
+                        });
+                    } else {
+                        // Tampilkan pesan kesalahan jika harga tidak dapat diambil
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Terjadi kesalahan dalam mengambil harga. Silakan coba lagi nanti!',
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Terjadi kesalahan:', error);
+                });
+            @else
+            // Tampilkan pesan kesalahan dalam alert jika pengguna belum login
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Anda harus login terlebih dahulu!',
+            });
+            @endauth
+        });
+    });
+
 </script>

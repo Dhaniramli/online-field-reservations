@@ -17,6 +17,7 @@ return new class extends Migration
             $table->String('field_name');
             $table->String('date');
             $table->String('time');
+            $table->String('time_match');
             $table->String('price');
             $table->timestamps();
         });

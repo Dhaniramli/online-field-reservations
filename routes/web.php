@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/booking/store', [BookingController::class, 'store']);
 });
 
+// Route::post('/check-id', 'BookingController@checkId');
+Route::post('/get-price', [BookingController::class, 'getPrice'])->name('get-price');
 
 Route::get('/jadwal-lapangan/{id}', [UserFieldScheduleController::class, 'index']);
 

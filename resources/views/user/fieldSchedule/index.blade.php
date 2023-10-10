@@ -29,7 +29,15 @@
                     <td style="text-align: center; width:20px;">{{ $date['day'] . ', ' . $date['date'] }}</td>
                     @foreach ($playingTimes as $playingTime)
                     @php
-                    $booking = $bookeds->where('field_name', $field_id)->where('date', $date['dateNoFormats'])->where('time',
+                    // Misalnya, $date['dateNoFormats'] adalah dalam format "d/m/Y" seperti "10/10/2023"
+                    $dateString = $date['dateNoFormats'];
+                    $dateObj = date_create_from_format('d/m/Y', $dateString);
+
+                    // Konversi objek tanggal menjadi format "Y-m-d"
+                    $formattedDate = $dateObj ? $dateObj->format('Y-m-d') : null;
+
+                    $booking = $bookeds->where('field_name', $field_id)->where('date',
+                    $formattedDate)->where('time',
                     $playingTime->time)->first();
                     @endphp
                     <td style="text-align: center; width:30px; vertical-align: middle;"">
