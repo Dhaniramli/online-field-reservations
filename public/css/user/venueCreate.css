@@ -4,7 +4,7 @@
 
 .venue-create .modal-header {
     background-color: #FCA500;
-    color: black;
+    color: white;
     margin-bottom: 0px;
 }
 
@@ -15,7 +15,7 @@
 
 .venue-create .modal-body {
     background-color: #FCA500;
-    color: black;
+    color: white;
     margin: 0px;
 }
 
@@ -26,11 +26,15 @@
 
 .venue-create .modal-footer {
     background-color: #FCA500;
-    color: black;
+    color: white;
 }
 
 .venue-create input {
     font-size: 15px;
+}
+
+.venue-create ul li{
+    color: black;
 }
 
 /* JAM & LAPANGAN*/

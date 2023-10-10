@@ -4,15 +4,26 @@ use App\Http\Controllers\Admin\DayDateController;
 use App\Http\Controllers\Admin\FieldListController;
 use App\Http\Controllers\Admin\FieldScheduleController;
 use App\Http\Controllers\Admin\PlayingTimeController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('user.home');
+})->name('home');
+
+
+Route::middleware(['guest'])->group(function () {
+    Route::post('/login', [AuthController::class, 'authenticate']);
+    Route::post('/register', [AuthController::class, 'register']);
 });
 
-Route::post('/booking/store', [BookingController::class, 'store']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::post('/booking/store', [BookingController::class, 'store']);
+});
+
 
 Route::get('/jadwal-lapangan/{id}', [UserFieldScheduleController::class, 'index']);
 

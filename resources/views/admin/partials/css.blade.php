@@ -12,6 +12,7 @@
  <link href="/css/admin/sidebar.css" rel="stylesheet">
  <link href="/css/admin/topbar.css" rel="stylesheet">
  <link href="/css/admin/schedule.css" rel="stylesheet">
+ <link href="/css/loading.css" rel="stylesheet">
  
  <!-- Custom styles for this page -->
  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">

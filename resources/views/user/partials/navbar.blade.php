@@ -30,15 +30,34 @@
                 
             </ul>
             <ul class="navbar-nav navbar-btn ms-auto mb-2 mb-lg-0 mb-md-3 mb-sm-3">
+                @auth
+                 <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Pemberitahuan</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ auth()->user()->first_name }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/profile"><i class="fa fa-user" aria-hidden="true"></i> Profil</a></li>
+                        <li><hr class="dropdown-divider" style="margin: 0px"></li>
+                        <li><a id="logoutButton" class="dropdown-item" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                    </ul>
+                </li>
+                @else
                 <li class="nav-item mb-lg-0 mb-md-2 mb-sm-2">
-                    <button type="button" class="btn btn-login">Login</button>
+                    <button type="button" class="btn btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
                 </li>
                 <li class="nav-item">
-                    <button type="button" class="btn btn-register">Register</button>
+                    <button type="button" class="btn btn-register" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
                 </li>
+                @endauth
             </ul>
         </div>
     </div>
 </nav>
 
 @include('user.venue.create')
+@include('auth.login.index')
+@include('auth.register.index')

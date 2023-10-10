@@ -1,0 +1,46 @@
+.register-create table tr {
+    height: 50px;
+}
+
+.register-create .modal-header {
+    background-color: #FCA500;
+    color: white;
+    margin-bottom: 0px;
+}
+
+.register-create .modal-header h1 {
+    font-size: 1.5pc;
+    font-weight: 700;
+}
+
+.register-create .modal-body {
+    background-color: #FCA500;
+    color: white;
+    margin: 0px;
+}
+
+.register-create .title {
+    font-size: 1pc;
+    font-weight: 700;
+}
+
+.register-create .modal-footer {
+    background-color: #FCA500;
+    color: white;
+}
+
+.register-create input {
+    font-size: 15px;
+}
+
+#emailInput {
+    /* padding: 10px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+}

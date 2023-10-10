@@ -21,3 +21,72 @@
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        // ALERT
+        $(document).on('click', '#logoutButton', function (e) {
+            e.preventDefault();
+
+            var link = $(this).attr("href");
+
+            Swal.fire({
+                title: 'Apakah kamu yakin?',
+                text: "Kamu akan keluar dari aplikasi ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Verifikasi!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = link;
+                }
+            })
+        })
+
+        // ALERT DELETE
+        $(document).on('click', '#deleteButton', function (e) {
+            e.preventDefault();
+
+            var link = $(this).attr("href");
+
+            Swal.fire({
+                title: 'Apakah kamu yakin?',
+                text: "Anda tidak akan dapat mengembalikannya!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = link;
+                    Swal.fire(
+                        'Terhapus!',
+                        'Data berhasil dihapus!',
+                        'success'
+                    )
+                }
+            })
+        })
+
+        // ALERT SUCCESS
+        $(document).on('click', '#successAlert', function (e) {
+            e.preventDefault();
+
+            var link = $(this).attr("href");
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        })
+    })
+
+</script>
