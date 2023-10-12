@@ -3,50 +3,50 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\PlayingTime;
+use App\Models\FieldList;
+use App\Models\FieldSchedule;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 
 class FieldScheduleController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        $playingTimes = PlayingTime::all();
+        $fieldSchedules = FieldSchedule::where('field_list_id', $id)->get();
 
-        $minDate = now(); // Tanggal hari ini
-        $maxYear = 2023; // Tahun maksimum
-        $dates = [];
+        $fieldLists = FieldList::where('id', $id)->first();
 
-        $currentYear = $minDate->year;
-        $currentMonth = $minDate->month;
+        return view('admin.fieldSchedule.index', compact('fieldLists', 'fieldSchedules'));
+    }
 
-        // Set aplikasi Laravel ke bahasa Indonesia
-        App::setLocale('id');
+    public function store(Request $request)
+    {
+        $request->validate([
+            'field_list_id' => 'required',
+            'date' => 'required',
+            'time_start' => 'required',
+            'time_finish' => 'required',
+            'price' => 'required',
+        ], [
+            'field_list_id.required' => 'isi kolom yang masih kosong',
+            'date.required' => 'isi kolom yang masih kosong',
+            'time_start.required' => 'isi kolom yang masih kosong',
+            'time_finish.required' => 'isi kolom yang masih kosong',
+            'price.required' => 'isi kolom yang masih kosong',
+        ]);
 
-        while ($currentYear <= $maxYear) {
-            $daysInMonth = Carbon::create($currentYear, $currentMonth, 1)->daysInMonth;
-            $startDay = ($currentYear == $minDate->year && $currentMonth == $minDate->month) ? $minDate->day : 1;
+        $jadwal = new FieldSchedule([
+            'field_list_id' => $request->input('field_list_id'),
+            'date' => $request->input('date'),
+            'time_start' => $request->input('time_start'),
+            'time_finish' => $request->input('time_finish'),
+            'price' => $request->input('price'),
+        ]);
 
-            foreach (range($startDay, $daysInMonth) as $day) {
-                $date = Carbon::create($currentYear, $currentMonth, $day);
-                $dates[] = [
-                    'dateNoFormats' => $date->format('d/m/Y'),
-                    'date' => $date->format('d F Y'),
-                    'day' => $date->translatedFormat('l'),
-                ];
-            }
+        $jadwal->save();
 
-            // Pindah ke bulan berikutnya, atau jika sudah Desember, pindah ke tahun berikutnya dan mulai dari Januari
-            if ($currentMonth < 12) {
-                $currentMonth++;
-            } else {
-                $currentYear++;
-                $currentMonth = 1;
-            }
-        }
-
-
-        return view('admin.fieldSchedule.index', compact('playingTimes', 'dates'));
+        // return redirect('/admin/jadwal-lapangan/{id}')->with('success', 'Berhasil disimpan!');
+        return back()->with('success', 'Berhasil disimpan!');
     }
 }

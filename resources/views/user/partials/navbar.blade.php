@@ -10,18 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Booking</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Jadwal Lapangan
-                    </a>
-                    <ul class="dropdown-menu">
-                        @foreach ($fieldLists as $fieldList)
-                        <li><a class="dropdown-item" href="/jadwal-lapangan/{{ $fieldList->name }}">Lapangan {{ $fieldList->name }}</a></li>
-                        @endforeach
-                    </ul>
+                    <a class="nav-link" href="{{ Route('index-booking') }}">Sewa Lapangan</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Blog</a>
@@ -58,6 +47,6 @@
     </div>
 </nav>
 
-@include('user.venue.create')
+{{-- @include('user.venue.create') --}}
 @include('auth.login.index')
 @include('auth.register.index')

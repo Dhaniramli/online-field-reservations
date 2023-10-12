@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('field_lists', function (Blueprint $table) {
             $table->id();
-            $table->integer('name')->unique();
+            $table->string('name');
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@
 .content-schedule {
     height: 100vh;
 }
-
+/* 
 .table-responsive {
     overflow-x: auto;
     overflow-y: auto;
@@ -31,7 +31,7 @@
     top: 0;
     background-color: #FF7000;
     z-index: 2;
-}
+} */
 
 .dataTables_filter {
     display: none;

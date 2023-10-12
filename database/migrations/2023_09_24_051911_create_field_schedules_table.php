@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('field_schedules', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('field_list_id');
+            $table->string('date');
+            $table->string('time_start');
+            $table->string('time_finish');
+            $table->string('price');
+            $table->boolean('is_booked')->default(false);
             $table->timestamps();
+            
+            $table->foreign('field_list_id')->references('id')->on('field_lists')->onDelete('cascade');
         });
     }
 

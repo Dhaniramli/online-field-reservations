@@ -17,7 +17,7 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
-
+{{-- 
     <li class="nav-item {{ Request::is('admin/jam-main*') || Request::is('admin/hari-tanggal*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseOne">
@@ -30,9 +30,9 @@
                 <a class="collapse-item {{ Request::is('admin/hari-tanggal*') ? 'active' : ''}}" href="/admin/hari-tanggal">Hari & Tanggal</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
-    <li class="nav-item {{ Request::is('admin/daftar-lapangan*') || Request::is('admin/jadwal-lapangan*') ? 'active' : '' }}">
+    {{-- <li class="nav-item {{ Request::is('admin/daftar-lapangan*') || Request::is('admin/jadwal-lapangan*') ? 'active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fa fa-futbol"></i>
@@ -44,10 +44,10 @@
                 <a class="collapse-item {{ Request::is('admin/jadwal-lapangan*') ? 'active' : ''}}" href="/admin/jadwal-lapangan">Jadwal Lapangan</a>
             </div>
         </div>
-    </li>
+    </li> --}}
 
-    <li class="nav-item">
-        <a class="nav-link " href="/admin">
+    <li class="nav-item {{ Request::is('admin/lapangan') ? 'active' : '' }}">
+        <a class="nav-link " href="{{ Route('index-lapangan') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Lapangan</span></a>
     </li>

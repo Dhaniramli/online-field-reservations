@@ -11,7 +11,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex">
-            <a class="btn btn-success px-4 py-2 ml-auto" href="/admin/daftar-lapangan/create">Tambah Lapangan</a>
+            <a class="btn btn-success px-4 py-2 ml-auto" data-bs-toggle="modal" data-bs-target="#tambahLapanganModal">Tambah Lapangan</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -20,33 +20,22 @@
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">Lapangan</th>
-                            <th class="text-center">Jam</th>
-                            <th class="text-center">Biaya</th>
-                            <th class="text-center">Action</th>
+                            <th class="text-center">jadwal</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($items as $item)
                         <tr>
                             <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                            <td style="vertical-align: middle;">{{ $item->name }}</td>
                             <td>
-                                @if ($itemTwo = $itemsTwo->where('field_list_id', $item->id))
-                                @foreach ($itemTwo as $itemTwoo)
-                                {{ $itemTwoo->playingTime->time }} <br>
-                                @endforeach
-                                @else
-                                Data tidak ditemukan.
-                                @endif
+                                {{ $item->name }}
                             </td>
-                            <td>
-                                @if ($itemTwo = $itemsTwo->where('field_list_id', $item->id))
-                                @foreach ($itemTwo as $itemTwoo)
-                                Rp. {{ number_format($itemTwoo->price, 0, ',', '.') }} <br>
-                                @endforeach
-                                @else
-                                Data tidak ditemukan.
-                                @endif
+                            <td class="text-center" style="vertical-align: middle;">
+                                <a href="{{ url('/admin/lapangan/' . $item->id . '/jadwal') }}"
+                                    class="btn btn-info btn-icon-split btn-sm">
+                                    <span class="text">Lihat Jadwal</span>
+                                </a>
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
                                 <a href="/admin/daftar-lapangan/edit/{{ $item->id }}"
@@ -69,5 +58,7 @@
 </div>
 
 @endsection
+
+@include('admin.fieldList.create')
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
