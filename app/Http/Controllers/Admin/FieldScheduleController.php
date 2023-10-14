@@ -15,9 +15,9 @@ class FieldScheduleController extends Controller
     {
         $fieldSchedules = FieldSchedule::where('field_list_id', $id)->get();
 
-        $fieldLists = FieldList::where('id', $id)->first();
+        $items = FieldList::where('id', $id)->first();
 
-        return view('admin.fieldSchedule.index', compact('fieldLists', 'fieldSchedules'));
+        return view('admin.fieldSchedule.index', compact('items', 'fieldSchedules'));
     }
 
     public function store(Request $request)

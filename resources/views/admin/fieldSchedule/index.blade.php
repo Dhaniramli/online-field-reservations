@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container content-schedule mt-4">
-    <h1 class="title-jadwal text-center">Jadwal {{ $fieldLists->name }}</h1>
+    <h1 class="title-jadwal text-center">Jadwal {{ $items->name }}</h1>
     <!-- Tambahkan input pencarian di luar tabel -->
     <div class="card shadow">
         <div class="card-header">

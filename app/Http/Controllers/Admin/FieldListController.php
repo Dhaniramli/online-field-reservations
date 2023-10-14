@@ -29,7 +29,7 @@ class FieldListController extends Controller
         ]);
         $lapangan->save();
 
-        return redirect('/admin/sewa-lapangan')->with('success', 'Berhasil disimpan!');
+        return redirect('/admin/lapangan')->with('success', 'Berhasil disimpan!');
     }
 
     // public function update(Request $request, $id)

@@ -17,14 +17,14 @@
             <thead class="sticky-header">
                 <tr>
                     <th class="sticky-header-tanggal">Hari / Tanggal</th>
-                    @foreach ($playingTimes as $playingTime)
+                    {{-- @foreach ($playingTimes as $playingTime)
                     <th class="" style="text-align: center">{{ $playingTime->time }}</th>
-                    @endforeach
+                    @endforeach --}}
                 </tr>
             </thead>
             <tbody>
 
-                @foreach ($dates as $date)
+                {{-- @foreach ($dates as $date)
                 <tr>
                     <td style="text-align: center; width:20px;">{{ $date['day'] . ', ' . $date['date'] }}</td>
                     @foreach ($playingTimes as $playingTime)
@@ -47,7 +47,7 @@
                     </td>
                     @endforeach
                 </tr>
-                @endforeach
+                @endforeach --}}
 
             </tbody>
         </table>

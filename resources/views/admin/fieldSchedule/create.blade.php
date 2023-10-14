@@ -10,7 +10,7 @@
                 <div class="modal-body">
                     @csrf
 
-                    <input type="hidden" name="field_list_id" value="{{ $fieldLists->id }}">
+                    <input type="hidden" name="field_list_id" value="{{ $items->id }}">
 
                     <div class="mb-3">
                         <label for="date" class="form-label">Tanggal</label>

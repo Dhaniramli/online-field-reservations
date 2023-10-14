@@ -24,7 +24,7 @@ class DataComposerServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) {
             $data = [
-                // 'fieldLists' => FieldList::all(),
+                'fieldLists' => FieldList::all(),
                 // 'dataFields' => DataField::all(),
                 // 'bookeds' => Booked::all(),
             ];

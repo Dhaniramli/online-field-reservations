@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/css/user/footer.css">
 <link rel="stylesheet" href="/css/user/home.css">
 <link rel="stylesheet" href="/css/user/schedule.css">
+<link rel="stylesheet" href="/css/user/booking.css">
 <link rel="stylesheet" href="/css/login.css">
 <link rel="stylesheet" href="/css/register.css">
 
