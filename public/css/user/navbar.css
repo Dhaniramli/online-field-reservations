@@ -142,3 +142,15 @@ nav .dropdown-menu a {
     background-color: #FF6000;
     margin: 10px 0;
 }
+
+@media (max-width: 990px) {
+    .item-keranjang{
+        display: none;
+    }
+}
+
+@media (min-width: 991px) {
+    .button-keranjang{
+        display: none;
+    }
+}

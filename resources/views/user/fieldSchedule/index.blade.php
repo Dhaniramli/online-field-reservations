@@ -1,77 +1,94 @@
 @extends('user.layouts.main')
 
 @section('content')
-<div class="container content-schedule mb-5 mt-4">
-    <h1 class="title-jadwal text-center mb-5">Jadwal Lapangan</h1>
-    <!-- Tambahkan input pencarian di luar tabel -->
-    <div class="row  mb-3">
-        <div class="col-lg-3">
-            <div class="form-group fitur-cari">
-                <input type="text" id="search" class="form-control" placeholder="Cari &#40Hari/Tanggal/Nama&#41">
+<div class="container content-schedule">
+    <h1 class="title-jadwal text-center mb-5 mt-5">Jadwal Lapangan</h1>
+
+    <div class="row">
+        @foreach ($items as $item)
+        <div class="col-lg-3 col-md-4 col-6 p-2">
+            <div class="card card-jadwal d-flex flex-column justify-content-center align-items-center"
+                data-id="{{ $item->id }}" data-selected="false">
+                <h1 class="text-center">{{ $item->time_start . ' - ' . $item->time_finish }}</h1>
+                <h2 class="text-center">
+                    @if ($item->is_booked)
+                    Booked
+                    @else
+                    Rp. {{ $item->price }}
+                    @endif
+                </h2>
             </div>
         </div>
-    </div>
-
-    <div class="table-responsive">
-        <table id="myTable" class="table table-striped display" style="width:100%" border="0">
-            <thead class="sticky-header">
-                <tr>
-                    <th class="sticky-header-tanggal">Hari / Tanggal</th>
-                    {{-- @foreach ($playingTimes as $playingTime)
-                    <th class="" style="text-align: center">{{ $playingTime->time }}</th>
-                    @endforeach --}}
-                </tr>
-            </thead>
-            <tbody>
-
-                {{-- @foreach ($dates as $date)
-                <tr>
-                    <td style="text-align: center; width:20px;">{{ $date['day'] . ', ' . $date['date'] }}</td>
-                    @foreach ($playingTimes as $playingTime)
-                    @php
-                    // Misalnya, $date['dateNoFormats'] adalah dalam format "d/m/Y" seperti "10/10/2023"
-                    $dateString = $date['dateNoFormats'];
-                    $dateObj = date_create_from_format('d/m/Y', $dateString);
-
-                    // Konversi objek tanggal menjadi format "Y-m-d"
-                    $formattedDate = $dateObj ? $dateObj->format('Y-m-d') : null;
-
-                    $booking = $bookeds->where('field_name', $field_id)->where('date',
-                    $formattedDate)->where('time',
-                    $playingTime->time)->first();
-                    @endphp
-                    <td style="text-align: center; width:30px; vertical-align: middle;"">
-                        @if ($booking)
-                        {{ $booking->user_name}}
-                        @endif
-                    </td>
-                    @endforeach
-                </tr>
-                @endforeach --}}
-
-            </tbody>
-        </table>
+        @endforeach
     </div>
 </div>
+<div class="container-fluid box-pembayaran" style="display: none;">
+    <div class="container">
+        {{-- <a href="{{ Route('index-paymentConfirmation', ['ids' => 1]) }}" class="btn btn-pembayaran w-100">Lanjut Pembayaran</a> --}}
+        <a id="btn-lanjut-pembayaran" class="btn btn-pembayaran w-100" href="#">Lanjut Pembayaran</a>
+    </div>
+</div>
+@endsection
 
-<script>
-    // let table = new DataTable('#myTable');
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <script>
     $(document).ready(function () {
-        // Inisialisasi DataTables dengan konfigurasi pencarian
-        var table = $('#myTable').DataTable({
-            searching: true, // Hanya aktifkan fitur pencarian
-            paging: false, // Nonaktifkan paging (halaman)
-            info: false, // Nonaktifkan info jumlah data
-            ordering: false, // Nonaktifkan sorting
-        });
+        var selectedItems = [];
 
-        // Tambahkan event listener untuk input pencarian
-        $('#search').on('keyup', function () {
-            table.search(this.value).draw();
+        function updatePaymentButton() {
+            if (selectedItems.length > 0) {
+                $(".box-pembayaran").css("display", "block");
+            } else {
+                $(".box-pembayaran").css("display", "none");
+            }
+        }
+
+        $(".card.card-jadwal").click(function () {
+            var id = $(this).data("id");
+
+            if (selectedItems.includes(id)) {
+                selectedItems = selectedItems.filter(item => item !== id);
+                $(this).removeClass("selected");
+            } else {
+                selectedItems.push(id);
+                $(this).addClass("selected");
+            }
+
+            updatePaymentButton();
         });
     });
+</script> --}}
 
+<script>
+    $(document).ready(function () {
+        var selectedItems = [];
+
+        function updatePaymentButton() {
+            if (selectedItems.length > 0) {
+                $(".box-pembayaran").css("display", "block");
+            } else {
+                $(".box-pembayaran").css("display", "none");
+            }
+        }
+
+        $(".card.card-jadwal").click(function () {
+            var id = $(this).data("id");
+
+            if (selectedItems.includes(id)) {
+                selectedItems = selectedItems.filter(item => item !== id);
+                $(this).removeClass("selected");
+            } else {
+                selectedItems.push(id);
+                $(this).addClass("selected");
+            }
+
+            updatePaymentButton();
+        });
+
+        $("#btn-lanjut-pembayaran").click(function () {
+            var ids = selectedItems.join(','); // Menggabungkan id menjadi string dengan koma
+            var url = "/admin/payment-confirmation/" + ids;
+            window.location.href = url; // Mengarahkan ke URL dengan id yang dipilih
+        });
+    });
 </script>
-
-@endsection
