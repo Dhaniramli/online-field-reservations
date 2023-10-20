@@ -49,3 +49,6 @@
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
 <!-- Custom styles for this page -->
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+{{-- MIDTRANS --}}
+<script type="text/javascript" src="https://app.stg.midtrans.com/snap/snap.js" data-client-key="SB-Mid-server-a8DzWcJyPpn6NoW9oF6aIcps"></script>

@@ -53,7 +53,8 @@ Route::post('/admin/lapangan/store', [FieldListController::class, 'store'])->nam
 Route::get('/admin/lapangan/{id}/jadwal', [AdminFieldScheduleController::class, 'index'])->name('index-jadwalLapangan');
 Route::post('/admin/lapangan/store/jadwal', [AdminFieldScheduleController::class, 'store'])->name('store-jadwalLapangan');
 
-Route::get('/admin/payment-confirmation/{ids}', [PaymentConfirmationController::class, 'index'])->name('index-paymentConfirmation');
-Route::get('/admin/mount/{ids}', [PaymentConfirmationController::class, 'mount'])->name('mount-paymentConfirmation');
+Route::get('/payment-confirmation/{ids}', [PaymentConfirmationController::class, 'index'])->name('index-paymentConfirmation');
+Route::get('/payment/{ids}', [PaymentConfirmationController::class, 'mount'])->name('bayar');
 
-Route::get('/bayar', [TransactionController::class, 'render'])->name('index-bayar');
+// Route::get('/bayara', [TransactionController::class, 'render'])->name('index-bayar');
+// Route::get('/bayar/{ids}', [TransactionController::class, 'mount'])->name('bayar');

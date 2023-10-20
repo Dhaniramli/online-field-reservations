@@ -8,11 +8,13 @@
     @php
     $totalPrice = 0;
     $bannedIds = []; // ID yang akan dibanned
+    $unbannedIds = []; // ID yang belum dibanned
     @endphp
     @foreach ($items as $item)
     @if (!in_array($item->id, $bannedIds))
     @php
     $totalPrice += $item->price; // Tambahkan harga hanya jika item tidak dibatasi
+    array_push($unbannedIds, $item->id); // Tambahkan ID yang belum dibatasi
     @endphp
     <div class="card card-paymentC p-3 mb-3" data-id="{{ $item->id }}" data-selected="false">
         <div class="row">
@@ -23,9 +25,8 @@
             </div>
             <div class="col-5 content-kanan">
                 <h4>Rp. {{ $item->price }}</h4>
-                {{-- <button class="btn-tambah" data-item-id="{{ $item->id }}">Hapus</button> --}}
-                <button class="btn btn-tambah btn-danger" data-item-id="{{ $item->id }}"
-                    data-item-price="{{ $item->price }}">Hapus</button>
+                <button class="btn btn-tambah btn-success" data-item-id="{{ $item->id }}"
+                    data-item-price="{{ $item->price }}">Tambah</button>
             </div>
         </div>
     </div>
@@ -41,46 +42,61 @@
                 <h6>Total Rp. <span id="totalPrice">{{ $totalPrice }}</span></h6>
             </div>
         </div>
-        <a id="btn-konfirmasi-pemesanan" class="btn btn-konfirmasi-pemesanan w-100" href="/admin/mount/{{}}">Komfirmasi Pemesanan</a>
+        <a id="btn-konfirmasi-pemesanan" class="btn btn-konfirmasi-pemesanan w-100"
+            href="/payment/{{ implode(',', $unbannedIds) }}">Konfirmasi Pemesanan</a>
     </div>
+</div>
 </div>
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    var bannedIds = []; // Inisialisasi variabel bannedIds di luar fungsi
-
     $(document).ready(function () {
+        var bannedIds = [];
+
         $(".btn-tambah").click(function () {
             var itemId = $(this).data("item-id");
             bannedIds.push(itemId); // Tambahkan ID ke dalam bannedIds
-
-            // Hapus elemen HTML yang sesuai
             $(this).closest(".card-paymentC").remove();
-
-            // Perbarui totalPrice
             updateTotalPrice();
         });
-    });
 
-    function updateTotalPrice() {
-        var totalPrice = 0;
-        $(".btn-tambah").each(function () {
-            var itemId = $(this).data("item-id");
-            var itemPrice = $(this).data("item-price");
-            if (!bannedIds.includes(itemId)) {
-                totalPrice += itemPrice;
+        function updateTotalPrice() {
+            var totalPrice = 0;
+            var unbannedIds = [];
+
+            $(".btn-tambah").each(function () {
+                var itemId = $(this).data("item-id");
+                var itemPrice = $(this).data("item-price");
+                if (!bannedIds.includes(itemId)) {
+                    totalPrice += itemPrice;
+                    unbannedIds.push(itemId);
+                }
+            });
+
+            $("#totalPrice").text(totalPrice);
+            var konfirmasiLink = "/payment/" + unbannedIds.join(',');
+            $("#btn-konfirmasi-pemesanan").attr("href", konfirmasiLink);
+        }
+
+        $("#btn-konfirmasi-pemesanan").click(function (e) {
+            if (bannedIds.length === 0) {
+                e.preventDefault(); // Mencegah tautan jika tidak ada yang dipilih
             }
         });
-        $("#totalPrice").text(totalPrice);
-    }
-
-    $(document).ready(function () {
-        $("#btn-konfirmasi-pemesanan").click(function () {
-            var ids = selectedItems.join(','); // Menggabungkan id menjadi string dengan koma
-            var url = "/admin/mount/" + ids;
-            window.location.href = url; // Mengarahkan ke URL dengan id yang dipilih
-        });
     });
+
 </script>
+
+<script type="text/javascript">
+    // For example trigger on button clicked, or any time you need
+    var payButton = document.getElementById('pay-button');
+    payButton.addEventListener('click', function () {
+      // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token.
+      // Also, use the embedId that you defined in the div above, here.
+      window.snap.embed('YOUR_SNAP_TOKEN', {
+        embedId: 'snap-container'
+      });
+    });
+  </script>

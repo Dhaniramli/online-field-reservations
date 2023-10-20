@@ -20,6 +20,7 @@ class PaymentConfirmationController extends Controller
     }
 
     public $belanja;
+    public $snapToken;
     public function mount($ids)
     {
         if (!Auth::user()) {
@@ -53,5 +54,9 @@ class PaymentConfirmationController extends Controller
                 ),
             );
         }
+
+        $this->snapToken = Snap::getSnapToken($params);
+
+        return view('user.paymentConfirmation.mount');
     }
 }

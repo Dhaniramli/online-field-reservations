@@ -87,7 +87,7 @@
 
         $("#btn-lanjut-pembayaran").click(function () {
             var ids = selectedItems.join(','); // Menggabungkan id menjadi string dengan koma
-            var url = "/admin/payment-confirmation/" + ids;
+            var url = "/payment-confirmation/" + ids;
             window.location.href = url; // Mengarahkan ke URL dengan id yang dipilih
         });
     });
