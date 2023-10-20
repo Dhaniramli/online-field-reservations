@@ -19,12 +19,9 @@ class PaymentConfirmationController extends Controller
         return view('user.paymentConfirmation.index', compact('items'));
     }
 
-    public $belanja;
-    public $snapToken;
     public function mount($ids)
     {
         if (!Auth::user()) {
-            
         }
 
         // Set your Merchant Server Key
@@ -38,13 +35,20 @@ class PaymentConfirmationController extends Controller
 
         // Ambil data belanja
         $idsubah = explode(',', $ids);
-        $this->belanja = FieldSchedule::whereIn('id', $idsubah)->get();
+        $belanja = FieldSchedule::whereIn('id', $idsubah)->get();
 
-        if (!empty($this->belanja)) {
+        // Inisialisasi total harga
+        $totalPrice = 0;
+
+        foreach ($belanja as $item) {
+            $totalPrice += $item->price;
+        }
+
+        if (!empty($belanja)) {
             $params = array(
                 'transaction_details' => array(
                     'order_id' => rand(),
-                    'gross_amount' => 10000,
+                    'gross_amount' => $totalPrice,
                 ),
                 'customer_details' => array(
                     'first_name' => Auth::user()->first_name,
@@ -55,8 +59,8 @@ class PaymentConfirmationController extends Controller
             );
         }
 
-        $this->snapToken = Snap::getSnapToken($params);
+        $snapToken = Snap::getSnapToken($params);
 
-        return view('user.paymentConfirmation.mount');
+        return view('user.paymentConfirmation.mount', compact('belanja', 'snapToken'));
     }
 }
