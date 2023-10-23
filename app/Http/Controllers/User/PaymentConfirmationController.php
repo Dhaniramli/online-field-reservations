@@ -44,23 +44,92 @@ class PaymentConfirmationController extends Controller
             $totalPrice += $item->price;
         }
 
+        $totalDp = $totalPrice / 2;
+
+        $user = Auth::user();
+
         if (!empty($belanja)) {
-            $params = array(
+            $paramsFull = array(
                 'transaction_details' => array(
                     'order_id' => rand(),
-                    'gross_amount' => $totalPrice,
+                    'gross_amount' => intval($totalPrice),
                 ),
                 'customer_details' => array(
-                    'first_name' => Auth::user()->first_name,
-                    'last_name' => Auth::user()->last_name,
-                    'email' => Auth::user()->email,
-                    'phone' => Auth::user()->phone_number,
+                    'first_name' => $user->first_name,
+                    'last_name' => $user->last_name,
+                    'email' => $user->email,
+                    'phone' => $user->phone_number,
+                ),
+            );
+
+            $paramsDp = array(
+                'transaction_details' => array(
+                    'order_id' => rand(),
+                    'gross_amount' => intval($totalDp),
+                ),
+                'customer_details' => array(
+                    'first_name' => $user->first_name,
+                    'last_name' => $user->last_name,
+                    'email' => $user->email,
+                    'phone' => $user->phone_number,
                 ),
             );
         }
 
-        $snapToken = Snap::getSnapToken($params);
+        $snapTokenFull = Snap::getSnapToken($paramsFull);
+        $snapTokenDp = Snap::getSnapToken($paramsDp);
 
-        return view('user.paymentConfirmation.mount', compact('belanja', 'snapToken'));
+        return view('user.paymentConfirmation.mount', compact('belanja', 'snapTokenFull', 'snapTokenDp', 'totalPrice', 'totalDp', 'ids', 'user'));
+    }
+
+    public function updateTrue($ids)
+    {
+        $idsubah = explode(',', $ids);
+        $bookingToUpdate = []; // Array untuk menyimpan jadwal yang ingin di-update
+
+        foreach ($idsubah as $id) {
+            $booking = FieldSchedule::find($id);
+
+            // Periksa apakah data ditemukan
+            if (!$booking) {
+                return response()->json(['message' => 'Data tidak ditemukan'], 404);
+            }
+
+            // Pengecekan apakah sudah di-booking
+            if ($booking->is_booked) {
+                return response()->json(['message' => 'Jadwal sudah di-booking oleh orang lain.'], 400);
+            } else {
+                // Tambahkan jadwal ke dalam array untuk di-update
+                $bookingToUpdate[] = $booking;
+            }
+        }
+
+        // Jika semua jadwal dapat di-booking, lakukan pembaruan
+        foreach ($bookingToUpdate as $booking) {
+            $booking->is_booked = true;
+            $booking->save();
+        }
+
+        return response()->json(['message' => 'Data berhasil diupdate']);
+    }
+
+
+    public function updateFalse($ids)
+    {
+        $idsubah = explode(',', $ids);
+        foreach ($idsubah as $id) {
+            $booking = FieldSchedule::find($id);
+
+            // Periksa apakah data ditemukan
+            if (!$booking) {
+                return response()->json(['message' => 'Data tidak ditemukan'], 404);
+            }
+
+            // Update kolom is_booked menjadi true
+            $booking->is_booked = false;
+            $booking->save();
+        }
+
+        return response()->json(['message' => 'Data berhasil diupdate']);
     }
 }

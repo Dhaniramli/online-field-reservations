@@ -2,52 +2,157 @@
 
 @section('content')
 <div class="container content-paymentConfirmation">
-    <div class="card mt-5 p-4">
-        <h1 class="title-jadwal text-center">Detail Pembayaran</h1>
-        {{-- <p class="text-center sub-title-paymentConfir">Pastikan detail pemesanan sudah sesuai dan benar.</p> --}}
 
-        <button id="pay-button">Pay! {{ $snapToken }}</button>
+    <h1 class="title-jadwal text-center">Detail Pembayaran</h1>
+    {{-- <p class="text-center sub-title-paymentConfir">Pastikan detail pemesanan sudah sesuai dan benar.</p> --}}
+
+    <div class="row mt-5 mb-5">
+        <div class="col-lg-6">
+            <div class="card">
+                <h1 class="title-pelanggan mt-4 text-center">Detail Pelanggan</h1>
+                <table class="table table-borderless">
+                    <tr>
+                        <td class="h-12">Nama Tim</td>
+                        <td>: Belum ada</td>
+                    </tr>
+                    <tr>
+                        <td>Nama Pelanggan</td>
+                        <td>: {{ $user->first_name }} {{ $user->last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>: {{ $user->email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nomor Telpon</td>
+                        <td>: {{ $user->phone_number }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <h1 class="title-pelanggan mt-4 text-center">Detail Pembayaran</h1>
+                <table class="table">
+                    @foreach ($belanja as $item)
+                    <tr>
+                        <td class="h-12">
+                            {{ $item->fieldList->name }}<br>
+                            {{ \Carbon\Carbon::parse($item->date)->format('d F Y') }}<br>
+                            {{ $item->time_start . ' - ' . $item->time_finish }}
+                        </td>
+                        <td class="text-right align-bottom" style="text-align: right;">Rp. {{ number_format($item->price, 0, ',', '.') }}</td>
+                    </tr>
+                    @endforeach
+                </table>
+                <table class="table table-borderless">
+                    <h2 class="title-total text-center">Total Bayar</h2>
+                    <tr>
+                        <td class="h-12 text-center">
+                            Bayar Penuh<br>
+                            Rp. {{ number_format($totalPrice, 0, ',', '.') }}
+                        </td>
+                        <td class="text-center">
+                            Bayar DP<br>
+                            Rp. {{ number_format($totalDp, 0, ',', '.') }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="h-12 text-center">
+                            <button id="pay-button-full" class="btn btn-success">Bayar Penuh</button>
+                        </td>
+                        <td class="text-center">
+                            <button id="pay-button-dp" class="btn btn-success">Bayar DP</button>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
     </div>
-
-
+</div>
 </div>
 
-{{-- <div class="container-fluid box-pembayaran">
-    <div class="container">
-        <a id="pay-button" class="btn btn-konfirmasi-pembayaran w-100"
-            href="#">Konfirmasi Pembayaran</a>
-    </div>
-</div> --}}
-</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script type="text/javascript">
-    // For example trigger on button clicked, or any time you need
-    var payButton = document.getElementById('pay-button');
-    payButton.addEventListener('click', function () {
-        // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-        window.snap.pay('{{ $snapToken }}');
-        // customer will be redirected after completing payment pop-up
+    var payButtonFull = document.getElementById('pay-button-full');
+    var payButtonDP = document.getElementById('pay-button-dp');
 
-        snap.pay(paymentData, {
-            onSuccess: function (result) {
-                // Tindakan jika pembayaran berhasil
-                console.log('Pembayaran berhasil: ' + JSON.stringify(result));
-            },
-            onPending: function (result) {
-                // Tindakan jika pembayaran masih tertunda
-                console.log('Pembayaran tertunda: ' + JSON.stringify(result));
-            },
-            onError: function (result) {
-                // Tindakan jika pembayaran gagal
-                console.log('Pembayaran gagal: ' + JSON.stringify(result));
-            },
-            onClose: function () {
-                // Tindakan jika pengguna menutup pop-up pembayaran
-                console.log('Pop-up pembayaran ditutup');
-            },
-        });
+    payButtonFull.addEventListener('click', function () {
+        var bookingId = {!! json_encode($ids) !!};
+        handlePayment(bookingId, 'full');
     });
 
+    payButtonDP.addEventListener('click', function () {
+        var bookingId = {!! json_encode($ids) !!};
+        handlePayment(bookingId, 'dp');
+    });
+
+    function handlePayment(bookingId, paymentType) {
+        axios.put('/updateSchedule/' + bookingId)
+            .then(function (response) {
+                console.log('Data berhasil diupdate');
+                
+                if (paymentType === 'full') {
+                    // Gantilah dengan Snap Token untuk pembayaran penuh
+                    var snapToken = '{{ $snapTokenFull }}';
+                } else if (paymentType === 'dp') {
+                    // Gantilah dengan Snap Token untuk pembayaran DP
+                    var snapToken = '{{ $snapTokenDp }}';
+                }
+
+                window.snap.pay(snapToken, {
+                    onSuccess: function (result) {
+                        console.log('Pembayaran berhasil: ' + JSON.stringify(result));
+                    },
+                    onPending: function (result) {
+                        console.log('Pembayaran tertunda: ' + JSON.stringify(result));
+                        axios.put('/updateScheduleFalse/' + bookingId)
+                            .then(function (response) {
+                                console.log('Data berhasil diupdate ke false');
+                                location.reload();
+                            })
+                            .catch(function (error) {
+                                console.log('Gagal mengupdate data false: ' + error);
+                                location.reload();
+                            });
+                    },
+                    onError: function (result) {
+                        console.log('Pembayaran gagal: ' + JSON.stringify(result));
+                        axios.put('/updateScheduleFalse/' + bookingId)
+                            .then(function (response) {
+                                console.log('Data berhasil diupdate ke false');
+                                location.reload();
+                            })
+                            .catch(function (error) {
+                                console.log('Gagal mengupdate data false: ' + error);
+                                location.reload();
+                            });
+                    },
+                    onClose: function () {
+                        axios.put('/updateScheduleFalse/' + bookingId)
+                            .then(function (response) {
+                                console.log('Data berhasil diupdate ke false');
+                                location.reload();
+                            })
+                            .catch(function (error) {
+                                console.log('Gagal mengupdate data false: ' + error);
+                                location.reload();
+                            });
+                        console.log('Pop-up pembayaran ditutup');
+                    },
+                });
+            })
+            .catch(function (error) {
+                console.log('Gagal mengupdate data: ' + error);
+
+                if (error.response && error.response.status === 400) {
+        // Jika status code adalah 400 (Bad Request), kembali ke halaman sebelumnya
+        window.history.go(-2);
+    }
+            });
+    }
 </script>
 @endsection
 

@@ -55,6 +55,8 @@ Route::post('/admin/lapangan/store/jadwal', [AdminFieldScheduleController::class
 
 Route::get('/payment-confirmation/{ids}', [PaymentConfirmationController::class, 'index'])->name('index-paymentConfirmation');
 Route::get('/payment/{ids}', [PaymentConfirmationController::class, 'mount'])->name('bayar');
+Route::put('/updateSchedule/{ids}', [PaymentConfirmationController::class, 'updateTrue']);
+Route::put('/updateScheduleFalse/{ids}', [PaymentConfirmationController::class, 'updateFalse']);
 
 // Route::get('/bayara', [TransactionController::class, 'render'])->name('index-bayar');
 // Route::get('/bayar/{ids}', [TransactionController::class, 'mount'])->name('bayar');
