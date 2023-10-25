@@ -6,6 +6,7 @@ use Midtrans\Snap;
 use Midtrans\Config;
 use App\Http\Controllers\Controller;
 use App\Models\FieldSchedule;
+use App\Models\TransactionDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,20 +25,14 @@ class PaymentConfirmationController extends Controller
         if (!Auth::user()) {
         }
 
-        // Set your Merchant Server Key
-        Config::$serverKey = 'SB-Mid-server-a8DzWcJyPpn6NoW9oF6aIcps';
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        Config::$serverKey = config('midtrans.server_key');
         Config::$isProduction = false;
-        // Set sanitization on (default)
         Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
         Config::$is3ds = true;
 
-        // Ambil data belanja
         $idsubah = explode(',', $ids);
         $belanja = FieldSchedule::whereIn('id', $idsubah)->get();
 
-        // Inisialisasi total harga
         $totalPrice = 0;
 
         foreach ($belanja as $item) {
@@ -52,7 +47,7 @@ class PaymentConfirmationController extends Controller
             $paramsFull = array(
                 'transaction_details' => array(
                     'order_id' => rand(),
-                    'gross_amount' => intval($totalPrice),
+                    'gross_amount' => $totalPrice == 0 ? 1 : $totalPrice,
                 ),
                 'customer_details' => array(
                     'first_name' => $user->first_name,
@@ -65,7 +60,7 @@ class PaymentConfirmationController extends Controller
             $paramsDp = array(
                 'transaction_details' => array(
                     'order_id' => rand(),
-                    'gross_amount' => intval($totalDp),
+                    'gross_amount' => $totalDp == 0 ? 1 : $totalDp,
                 ),
                 'customer_details' => array(
                     'first_name' => $user->first_name,
@@ -85,28 +80,25 @@ class PaymentConfirmationController extends Controller
     public function updateTrue($ids)
     {
         $idsubah = explode(',', $ids);
-        $bookingToUpdate = []; // Array untuk menyimpan jadwal yang ingin di-update
+        $bookingToUpdate = [];
 
         foreach ($idsubah as $id) {
             $booking = FieldSchedule::find($id);
 
-            // Periksa apakah data ditemukan
             if (!$booking) {
                 return response()->json(['message' => 'Data tidak ditemukan'], 404);
             }
 
-            // Pengecekan apakah sudah di-booking
             if ($booking->is_booked) {
                 return response()->json(['message' => 'Jadwal sudah di-booking oleh orang lain.'], 400);
             } else {
-                // Tambahkan jadwal ke dalam array untuk di-update
                 $bookingToUpdate[] = $booking;
             }
         }
 
-        // Jika semua jadwal dapat di-booking, lakukan pembaruan
         foreach ($bookingToUpdate as $booking) {
-            $booking->is_booked = true;
+            $booking->is_booked = false;
+            // $booking->is_booked = true;
             $booking->save();
         }
 
@@ -131,5 +123,52 @@ class PaymentConfirmationController extends Controller
         }
 
         return response()->json(['message' => 'Data berhasil diupdate']);
+    }
+
+    // public function onPending(Request $request)
+    // {
+    //     try {
+    //         $transaction = TransactionDetails::create([
+    //             'status_code' => $request['status_code'],
+    //             'status_message' => $request['status_message'],
+    //             'transaction_id' => $request['transaction_id'],
+    //             'order_id' => $request['order_id'],
+    //             'gross_amount' => $request['gross_amount'],
+    //             'payment_type' => $request['payment_type'],
+    //             'transaction_time' => $request['transaction_time'],
+    //             'transaction_status' => $request['transaction_status'],
+    //             'fraud_status' => $request['fraud_status'],
+    //             'payment_code' => $request['payment_code'],
+    //             'pdf_url' => $request['pdf_url'],
+    //             'finish_redirect_url' => $request['finish_redirect_url'],
+    //         ]);
+
+    //         // Informasi sukses disimpan
+    //         return "Data transaksi berhasil disimpan";
+    //     } catch (\Exception $e) {
+    //         // Tangani kesalahan
+    //         return "Gagal menyimpan data transaksi: " . $e->getMessage();
+    //     }
+    // }
+
+    public function onPending(Request $request)
+    {
+        try {
+            $requestData = $request->all();
+
+            // Menggabungkan data 'result' dan 'bookingId' ke dalam satu array
+            $transactionData = array_merge($requestData['result'], [
+                'booking_id' => $requestData['bookingId']
+            ]);
+
+            // Membuat dan menyimpan data transaksi
+            $transaction = TransactionDetails::create($transactionData);
+
+            // Informasi sukses disimpan
+            return "Data transaksi berhasil disimpan";
+        } catch (\Exception $e) {
+            // Tangani kesalahan
+            return "Gagal menyimpan data transaksi: " . $e->getMessage();
+        }
     }
 }

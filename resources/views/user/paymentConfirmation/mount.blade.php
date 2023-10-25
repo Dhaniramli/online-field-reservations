@@ -95,10 +95,8 @@
                 console.log('Data berhasil diupdate');
                 
                 if (paymentType === 'full') {
-                    // Gantilah dengan Snap Token untuk pembayaran penuh
                     var snapToken = '{{ $snapTokenFull }}';
                 } else if (paymentType === 'dp') {
-                    // Gantilah dengan Snap Token untuk pembayaran DP
                     var snapToken = '{{ $snapTokenDp }}';
                 }
 
@@ -108,15 +106,18 @@
                     },
                     onPending: function (result) {
                         console.log('Pembayaran tertunda: ' + JSON.stringify(result));
-                        axios.put('/updateScheduleFalse/' + bookingId)
-                            .then(function (response) {
-                                console.log('Data berhasil diupdate ke false');
-                                location.reload();
-                            })
-                            .catch(function (error) {
-                                console.log('Gagal mengupdate data false: ' + error);
-                                location.reload();
-                            });
+                        const requestData = {
+                                    result: result,
+                                    bookingId: bookingId
+                                };
+
+                        axios.post('/transaction/pending', requestData)
+                        .then(response => {
+                            console.log(response.data);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
                     },
                     onError: function (result) {
                         console.log('Pembayaran gagal: ' + JSON.stringify(result));
@@ -134,11 +135,11 @@
                         axios.put('/updateScheduleFalse/' + bookingId)
                             .then(function (response) {
                                 console.log('Data berhasil diupdate ke false');
-                                location.reload();
+                                // location.reload();
                             })
                             .catch(function (error) {
                                 console.log('Gagal mengupdate data false: ' + error);
-                                location.reload();
+                                // location.reload();
                             });
                         console.log('Pop-up pembayaran ditutup');
                     },
@@ -148,9 +149,9 @@
                 console.log('Gagal mengupdate data: ' + error);
 
                 if (error.response && error.response.status === 400) {
-        // Jika status code adalah 400 (Bad Request), kembali ke halaman sebelumnya
-        window.history.go(-2);
-    }
+                // Jika status code adalah 400 (Bad Request), kembali ke halaman sebelumnya
+                window.history.go(-2);
+                }
             });
     }
 </script>

@@ -9,6 +9,15 @@ class Booked extends Model
 {
     use HasFactory;
 
-    // protected $fillable = ['id', 'user_name', 'field_name', 'date', 'time', 'time_match', 'price'];
     protected $guarded = ['id'];
+
+    public function fieldSchedule()
+    {
+        return $this->hasMany(FieldSchedule::class, 'field_schedule_id');
+    }
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'booked_id');
+    }
 }

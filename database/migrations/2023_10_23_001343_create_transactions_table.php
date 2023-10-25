@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookeds', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->String('user_name');
-            $table->String('field_name');
-            $table->String('date');
-            $table->String('time');
-            $table->String('time_match');
-            $table->String('price');
+            $table->unsignedBigInteger('user_id');
+            $table->string('order_id');
+            $table->string('total_price');
+            $table->string('dp_price');
+            $table->enum('status', ['']);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookeds');
+        Schema::dropIfExists('transactions');
     }
 };

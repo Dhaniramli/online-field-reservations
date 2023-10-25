@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\FieldScheduleController as AdminFieldScheduleCont
 use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleController;
 use App\Http\Controllers\Admin\PlayingTimeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\User\BookingController as UserBookingController;
 use App\Http\Controllers\User\PaymentConfirmationController;
 use App\Http\Controllers\User\TransactionController;
@@ -57,6 +58,4 @@ Route::get('/payment-confirmation/{ids}', [PaymentConfirmationController::class,
 Route::get('/payment/{ids}', [PaymentConfirmationController::class, 'mount'])->name('bayar');
 Route::put('/updateSchedule/{ids}', [PaymentConfirmationController::class, 'updateTrue']);
 Route::put('/updateScheduleFalse/{ids}', [PaymentConfirmationController::class, 'updateFalse']);
-
-// Route::get('/bayara', [TransactionController::class, 'render'])->name('index-bayar');
-// Route::get('/bayar/{ids}', [TransactionController::class, 'mount'])->name('bayar');
+Route::post('/transaction/pending', [PaymentConfirmationController::class, 'onPending']);

@@ -51,4 +51,4 @@
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 {{-- MIDTRANS --}}
-<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-QfN3uWzhHju1Ax2T"></script>
+<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
