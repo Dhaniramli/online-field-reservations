@@ -3,7 +3,7 @@
 @section('content')
 <div class="container content-paymentConfirmation">
 
-    <h1 class="title-jadwal text-center">Detail Pembayaran</h1>
+    <h1 class="title-jadwal text-center mt-4">Detail Pembayaran</h1>
     {{-- <p class="text-center sub-title-paymentConfir">Pastikan detail pemesanan sudah sesuai dan benar.</p> --}}
 
     <div class="row mt-5 mb-5">
@@ -48,21 +48,24 @@
                 <table class="table table-borderless">
                     <h2 class="title-total text-center">Total Bayar</h2>
                     <tr>
-                        <td class="h-12 text-center">
-                            Bayar Penuh<br>
-                            Rp. {{ number_format($totalPrice, 0, ',', '.') }}
+                        <td class="h-12">
+                            Total Harga<br>
                         </td>
-                        <td class="text-center">
-                            Bayar DP<br>
-                            Rp. {{ number_format($totalDp, 0, ',', '.') }}
+                        <td class="h-12 " style="text-align: right;">
+                            Rp. {{ number_format($totalPrice, 0, ',', '.') }}
                         </td>
                     </tr>
                     <tr>
-                        <td class="h-12 text-center">
-                            <button id="pay-button-full" class="btn btn-success">Bayar Penuh</button>
+                        <td class="h-12">
+                            Bayar
                         </td>
-                        <td class="text-center">
-                            <button id="pay-button-dp" class="btn btn-success">Bayar DP</button>
+                        <td class="h-12 " style="text-align: right;">
+                            Rp. {{ number_format($gross_amount, 0, ',', '.') }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="h-12 text-center">
+                            <button id="pay-button-full" class="btn btn-success">Konfirmasi Bayar</button>
                         </td>
                     </tr>
                 </table>
@@ -93,12 +96,8 @@
         axios.put('/updateSchedule/' + bookingId)
             .then(function (response) {
                 console.log('Data berhasil diupdate');
-                
-                if (paymentType === 'full') {
-                    var snapToken = '{{ $snapTokenFull }}';
-                } else if (paymentType === 'dp') {
-                    var snapToken = '{{ $snapTokenDp }}';
-                }
+
+                var snapToken = '{{ $snapToken }}';
 
                 window.snap.pay(snapToken, {
                     onSuccess: function (result) {

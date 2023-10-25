@@ -20,10 +20,12 @@ class PaymentConfirmationController extends Controller
         return view('user.paymentConfirmation.index', compact('items'));
     }
 
-    public function mount($ids)
+    public function mount(Request $request, $ids)
     {
         if (!Auth::user()) {
         }
+
+        $metode = $request->query('metode');
 
         Config::$serverKey = config('midtrans.server_key');
         Config::$isProduction = false;
@@ -41,26 +43,23 @@ class PaymentConfirmationController extends Controller
 
         $totalDp = $totalPrice / 2;
 
+        if ($metode == 'bayar_penuh') {
+            if ($totalPrice != 0) {
+                $gross_amount = $totalPrice;
+            }
+        } elseif ($metode == 'bayar_dp') {
+            if ($totalDp != 0) {
+                $gross_amount = $totalDp;
+            }
+        }
+
         $user = Auth::user();
 
         if (!empty($belanja)) {
             $paramsFull = array(
                 'transaction_details' => array(
                     'order_id' => rand(),
-                    'gross_amount' => $totalPrice == 0 ? 1 : $totalPrice,
-                ),
-                'customer_details' => array(
-                    'first_name' => $user->first_name,
-                    'last_name' => $user->last_name,
-                    'email' => $user->email,
-                    'phone' => $user->phone_number,
-                ),
-            );
-
-            $paramsDp = array(
-                'transaction_details' => array(
-                    'order_id' => rand(),
-                    'gross_amount' => $totalDp == 0 ? 1 : $totalDp,
+                    'gross_amount' => $gross_amount,
                 ),
                 'customer_details' => array(
                     'first_name' => $user->first_name,
@@ -71,10 +70,9 @@ class PaymentConfirmationController extends Controller
             );
         }
 
-        $snapTokenFull = Snap::getSnapToken($paramsFull);
-        $snapTokenDp = Snap::getSnapToken($paramsDp);
+        $snapToken = Snap::getSnapToken($paramsFull);
 
-        return view('user.paymentConfirmation.mount', compact('belanja', 'snapTokenFull', 'snapTokenDp', 'totalPrice', 'totalDp', 'ids', 'user'));
+        return view('user.paymentConfirmation.mount', compact('belanja', 'snapToken', 'totalPrice', 'gross_amount', 'ids', 'user'));
     }
 
     public function updateTrue($ids)

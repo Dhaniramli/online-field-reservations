@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('order_id');
             $table->string('total_price');
             $table->string('dp_price');
-            $table->enum('status', ['']);
+            $table->enum('status', ['unpaid', 'paid', 'pending']);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -6,7 +6,7 @@
     <div class="card mt-5 p-4">
         <h1 class="title-jadwal text-center">Periksa Pemesanan Anda</h1>
         <p class="text-center sub-title-paymentConfir">Pastikan detail pemesanan sudah sesuai dan benar.</p>
-    
+
         @php
         $bannedIds = []; // ID yang akan dibanned
         $unbannedIds = []; // ID yang belum dibanned
@@ -32,16 +32,26 @@
         </div>
         @endif
         @endforeach
+
+
+        {{-- <a id="btn-konfirmasi-pemesanan" class="btn btn-konfirmasi-pemesanan btn-success mt-5 w-100"
+        href="/payment/{{ implode(',', $unbannedIds) }}?metode=">Konfirmasi Pemesanan</a> --}}
+    </div>
+
+    <div class="card mt-5 p-4">
+        <form>
+                <label class="btn" for="metode-bayar-dp">Bayar DP</label>
+                <input class="btn-check" autocomplete="off" type="radio" id="metode-bayar-dp" name="metode" value="bayar_dp">
+                <label class="btn" for="metode-bayar-penuh">Bayar Penuh</label>
+                <input class="btn-check" type="radio" id="metode-bayar-penuh" name="metode" value="bayar_penuh">
+            <br>
+            <a id="btn-konfirmasi-pemesanan" class="btn btn-konfirmasi-pemesanan btn-success mt-3 w-100"
+                href="/payment/{{ implode(',', $unbannedIds) }}?metode=">Konfirmasi Pemesanan</a>
+        </form>
     </div>
 
 </div>
 
-<div class="container-fluid box-pembayaran">
-    <div class="container">
-        <a id="btn-konfirmasi-pemesanan" class="btn btn-konfirmasi-pemesanan w-100"
-            href="/payment/{{ implode(',', $unbannedIds) }}">Konfirmasi Pemesanan</a>
-    </div>
-</div>
 </div>
 @endsection
 
@@ -50,6 +60,7 @@
 <script>
     $(document).ready(function () {
         var bannedIds = [];
+        var konfirmasiButton = $("#btn-konfirmasi-pemesanan");
 
         $(".btn-tambah").click(function () {
             var itemId = $(this).data("item-id");
@@ -57,6 +68,19 @@
             $(this).closest(".card-paymentC").remove();
             updateTotalPrice();
         });
+
+        // Menangani perubahan pada radio button
+        $("input[type=radio][name=metode]").change(function () {
+            updateTotalPrice();
+        });
+
+        konfirmasiButton.click(function (e) {
+            // Periksa apakah salah satu radio button dipilih
+            if ($("input[type=radio][name=metode]:checked").length === 0) {
+                e.preventDefault(); // Mencegah tindakan default tombol jika tidak ada radio button yang dipilih
+                alert("Pilih metode pembayaran terlebih dahulu.");
+            }
+        }); 
 
         function updateTotalPrice() {
             var totalPrice = 0;
@@ -72,7 +96,14 @@
             });
 
             $("#totalPrice").text(totalPrice);
-            var konfirmasiLink = "/payment/" + unbannedIds.join(',');
+
+            // Ambil nilai radio button yang dipilih
+            var metode = $("input[type=radio][name=metode]:checked").val();
+
+            // Membuat URL dengan parameter metode
+            var konfirmasiLink = "/payment/" + unbannedIds.join(',') + "?metode=" + metode;
+
+            // var konfirmasiLink = "/payment/" + unbannedIds.join(',');
             $("#btn-konfirmasi-pemesanan").attr("href", konfirmasiLink);
         }
     });
