@@ -6,6 +6,7 @@ use Midtrans\Snap;
 use Midtrans\Config;
 use App\Http\Controllers\Controller;
 use App\Models\FieldSchedule;
+use App\Models\Transaction;
 use App\Models\TransactionDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,9 @@ class PaymentConfirmationController extends Controller
 
     public function mount(Request $request, $ids)
     {
-        if (!Auth::user()) {
+        $user = Auth::user();
+
+        if (!$user) {
         }
 
         $metode = $request->query('metode');
@@ -53,12 +56,19 @@ class PaymentConfirmationController extends Controller
             }
         }
 
-        $user = Auth::user();
+
+        $order = Transaction::create([
+            'user_id' => $user->id,
+            'order_id' => 'hapus saja',
+            'total_price' => $totalPrice,
+            'dp_price' => $gross_amount,
+            'status' => 'unpaid',
+        ]);
 
         if (!empty($belanja)) {
             $paramsFull = array(
                 'transaction_details' => array(
-                    'order_id' => rand(),
+                    'order_id' => $order->id,
                     'gross_amount' => $gross_amount,
                 ),
                 'customer_details' => array(

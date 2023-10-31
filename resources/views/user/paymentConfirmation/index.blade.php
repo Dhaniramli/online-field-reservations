@@ -32,18 +32,18 @@
         </div>
         @endif
         @endforeach
-
-
-        {{-- <a id="btn-konfirmasi-pemesanan" class="btn btn-konfirmasi-pemesanan btn-success mt-5 w-100"
-        href="/payment/{{ implode(',', $unbannedIds) }}?metode=">Konfirmasi Pemesanan</a> --}}
     </div>
 
     <div class="card mt-5 p-4">
         <form>
-                <label class="btn" for="metode-bayar-dp">Bayar DP</label>
-                <input class="btn-check" autocomplete="off" type="radio" id="metode-bayar-dp" name="metode" value="bayar_dp">
-                <label class="btn" for="metode-bayar-penuh">Bayar Penuh</label>
-                <input class="btn-check" type="radio" id="metode-bayar-penuh" name="metode" value="bayar_penuh">
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" for="metode-bayar-dp">Bayar DP</label>
+                <input class="form-check-input" autocomplete="off" type="radio" id="metode-bayar-dp" name="metode" value="bayar_dp">
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" for="metode-bayar-penuh">Bayar Penuh</label>
+                <input class="form-check-input" type="radio" id="metode-bayar-penuh" name="metode" value="bayar_penuh">
+            </div>
             <br>
             <a id="btn-konfirmasi-pemesanan" class="btn btn-konfirmasi-pemesanan btn-success mt-3 w-100"
                 href="/payment/{{ implode(',', $unbannedIds) }}?metode=">Konfirmasi Pemesanan</a>

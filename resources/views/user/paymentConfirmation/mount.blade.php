@@ -65,7 +65,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="h-12 text-center">
-                            <button id="pay-button-full" class="btn btn-success">Konfirmasi Bayar</button>
+                            <button id="pay-button-full" class="btn btn-success">Bayar</button>
                         </td>
                     </tr>
                 </table>
@@ -80,16 +80,10 @@
 
 <script type="text/javascript">
     var payButtonFull = document.getElementById('pay-button-full');
-    var payButtonDP = document.getElementById('pay-button-dp');
 
     payButtonFull.addEventListener('click', function () {
         var bookingId = {!! json_encode($ids) !!};
         handlePayment(bookingId, 'full');
-    });
-
-    payButtonDP.addEventListener('click', function () {
-        var bookingId = {!! json_encode($ids) !!};
-        handlePayment(bookingId, 'dp');
     });
 
     function handlePayment(bookingId, paymentType) {
