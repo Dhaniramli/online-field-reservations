@@ -16,40 +16,29 @@ class AuthController extends Controller
 
     public function authenticate(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $credentials = $request->validate([
             'email' => 'required|email:dns',
             'password' => 'required|min:6'
         ], [
             'email.email' => 'Format email tidak valid.',
             'email.required' => 'Kolom email harus diisi.',
-            'password.required' => 'Kolom password harus diisi.',
+            'password.required' => 'Kolom kata sandi harus diisi.',
             'password.min' => 'Password harus memiliki setidaknya 6 karakter atau lebih.'
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ], 422);
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (!$user) {
+            return back()->with('loginError', 'Email tidak terdaftar.');
         }
 
-        $emailToCheck = $request->input('email');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        $existingUser = User::where('email', $emailToCheck)->first();
-
-        if ($existingUser) {
-            $credentials = $request->only('email', 'password');
-
-            if (Auth::attempt($credentials)) {
-                $request->session()->regenerate();
-
-                return response()->json(['success' => true]);
-            } else {
-                return response()->json(['success' => false, 'message' => 'Email atau Password salah.'], 401);
-            }
-        } else {
-            return response()->json(['success' => false, 'message' => 'Email tidak terdaftar.'], 401);
+            return redirect()->intended('/');
         }
+
+        return back()->with('loginError', 'Login failed!');
     }
 
     public function logout(Request $request)

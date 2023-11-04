@@ -1,46 +1,33 @@
-.login-create table tr {
-    height: 50px;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--primary-100);
 }
 
-.login-create .modal-header {
-    background-color: #FCA500;
-    color: white;
-    margin-bottom: 0px;
-}
-
-.login-create .modal-header h1 {
-    font-size: 1.5pc;
-    font-weight: 700;
-}
-
-.login-create .modal-body {
-    background-color: #FCA500;
-    color: white;
-    margin: 0px;
-}
-
-.login-create .title {
-    font-size: 1pc;
-    font-weight: 700;
-}
-
-.login-create .modal-footer {
-    background-color: #FCA500;
+.btn-login{
+    background-color: var(--primary-100);
     color: white;
 }
 
-.login-create input {
-    font-size: 15px;
+.btn-login:hover{
+    background-color: var(--primary-200);
+    color: var(--text-300);
 }
 
-#emailInput {
-    /* padding: 10px; */
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    width: 100%;
-    border-radius: 5px;
+.btn-toRegister{
+    color: var(--primary-100);
+}
+
+.btn-toRegister:hover{
+    color: var(--primary-200);
+}
+.teks-buatAkun{
+    font-size: 13px;
+    color: var(--text-100);
+}
+
+.content-login .form-control:focus {
+    box-shadow: 0 0 5px 0 #019b98;
 }

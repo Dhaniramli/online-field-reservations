@@ -1,48 +1,37 @@
 nav {
-    background-color: #00AA9F;
+    background-color: var(--bg-100);
 }
 
-.navbar a {
-    color: white;
+.navbar a.navbar-brand {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--primary-100);
+}
+
+@media (max-width: 767.98px) {
+    .navbar a.navbar-brand {
+        font-size: 25px;
+    }
+}
+
+.navbar a.active {
+    color: var(--primary-200);
 }
 
 nav .nav-link {
-    font-size: 1pc;
     font-weight: 500;
+    font-size: 17px;
+    color: var(--primary-100);
 }
 
 
 .navbar .nav-link:hover {
-    color: #FF7000;
+    color: var(--primary-200);
 }
 
-.navbar .nav-link.active {
-    color: #FF7000;
-}
-
-nav .btn-login {
-    background-color: #FF7000;
-    font-weight: 500;
-    color: #00AA9F;
-    margin-right: 10px;
-}
-
-nav .btn-login:hover {
-    background-color: #FCA500;
-}
-
-.navbar-btn .btn-register {
-    color: #FF7000;
-    font-weight: 500;
-    border: 1px solid #FF6000;
-}
-
-nav .btn-register:hover {
-    background-color: #FCA500;
-}
 
 nav .dropdown-menu {
-    background-color: #FCA500;
+    background-color: var(--primary-100);
     padding: 0px;
 }
 
@@ -59,8 +48,6 @@ nav .dropdown-menu a {
     font-weight: 500;
     color: black;
 }
-
-
 
 /* Remove border from toggler */
 .navbar-toggler {
@@ -79,7 +66,7 @@ nav .dropdown-menu a {
 .toggler-icon {
     width: 30px;
     height: 3px;
-    background-color: #FF6000;
+    background-color: var(--primary-100);
     display: block;
     transition: all 0.2s;
 }
@@ -125,7 +112,7 @@ nav .dropdown-menu a {
 
 /* Color of Toggler when collapsed */
 .navbar-toggler.collapsed .toggler-icon {
-    background-color: #FF6000;
+    background-color: var(--primary-100);
 }
 
 
@@ -135,15 +122,16 @@ nav .dropdown-menu a {
     }
 }
 
-
 .navbar hr {
     border: none;
     height: 2px;
-    background-color: #FF6000;
+    background-color: var(--primary-100);
     margin: 10px 0;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
-@media (max-width: 990px) {
+/* @media (max-width: 990px) {
     .item-keranjang{
         display: none;
     }
@@ -152,5 +140,31 @@ nav .dropdown-menu a {
 @media (min-width: 991px) {
     .button-keranjang{
         display: none;
+    }
+} */
+
+.navbar .btn-register {
+    color: white;
+    background-color: var(--primary-100);
+    text-transform: capitalize;
+}
+
+.navbar .btn-register:hover{
+    background-color: var(--primary-200);
+    color: white;
+}
+
+@media (max-width: 991px) {
+    .navbar .btn-register {
+        margin: 5px;
+    }
+
+    .navbar .btn-login {
+        text-align: center;
+    }
+
+    nav .nav-link {
+        text-align: center;
+        margin: 5px;
     }
 }

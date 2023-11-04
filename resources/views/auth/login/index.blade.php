@@ -1,145 +1,137 @@
-<div class="modal login-create fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title" id="loginModalLabel">Login</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="loginForm" action="/login" method="POST">
-                <div class="modal-body">
-                    @csrf
-                    <div class="mb-3">
-                        <table>
+<!DOCTYPE html>
+<html lang="en">
 
-                            <tr>
-                                <td class="loginIni">Email</td>
-                                <td></td>
-                                <td width="100%">
-                                    <input type="email" name="email"
-                                        class="form-control" id="emailInput"
-                                        placeholder="name@example.com" autofocus>
-                                </td>
-                            </tr>
+<head>
 
-                            <tr>
-                                <td class="loginIni">Password</td>
-                                <td></td>
-                                <td width="100%">
-                                    <input type="password" name="password" class="form-control" id="password"
-                                        placeholder="password">
-                                </td>
-                            </tr>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-                        </table>
+    <title>Karsa Mini Soccer | Login</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/login.css">
+
+
+</head>
+
+<body class="d-flex align-items-center">
+
+    <div class="container content-login">
+        @if(session('loginError'))
+        <script>
+            $(document).ready(function () {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: '{!! session('loginError ') !!}',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            });
+        </script>
+        @endif
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block"
+                                style="background-image: url('{{ asset('/img/login_img.jpeg') }}'); background-size: cover;">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Silahkan Login</h1>
+                                    </div>
+                                    <form class="user" action="/login" method="POST">
+                                        @csrf
+
+                                        <div class="form-group">
+                                            <input name="email" type="email"
+                                                class="form-control form-control-user @error('email') is-invalid @enderror"
+                                                id="email" aria-describedby="emailHelp"
+                                                placeholder="Masukkan Alamat Email...">
+                                            @error('email')
+                                            <div class="invalid-feedback ml-4">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <input name="password" type="password"
+                                                class="form-control form-control-user @error('password') is-invalid @enderror"
+                                                id="password" placeholder="Kata Sandi">
+                                            @error('password')
+                                            <div class="invalid-feedback ml-4">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            {{-- <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck">Ingat Saya</label>
+                                            </div> --}}
+                                        </div>
+                                        <button type="submit" class="btn btn-login btn-user btn-block mt-5">
+                                            Masuk
+                                        </button>
+                                        {{-- <hr>
+                                        <a href="index.html" class="btn btn-google btn-user btn-block">
+                                            <i class="fab fa-google fa-fw"></i> Login with Google
+                                        </a>
+                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                        </a> --}}
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        {{-- <a class="small" href="forgot-password.html">Forgot Password?</a> --}}
+                                    </div>
+                                    <div class="text-center teks-buatAkun">
+                                        Belum punya akun? <a class="btn-toRegister" href="/register">Daftar!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success">Login</button>
-                </div>
-            </form>
+
+            </div>
+
         </div>
+
     </div>
-</div>
-{{-- 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const loginForm = document.getElementById('loginForm');
 
-        loginForm.addEventListener('submit', function (event) {
-            event.preventDefault();
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            const formData = new FormData(loginForm);
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            fetch('/login', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    },
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        $('#loginModal').modal('hide');
-                    } else {
-                        let errorMessages = '';
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-                        if (data.errors) {
-                            errorMessages = Object.values(data.errors).join('\n');
-                        } else if (data.message) {
-                            errorMessages = data.message;
-                        } else {
-                            errorMessages = 'Login failed.';
-                        }
 
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: errorMessages,
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Terjadi kesalahan:', error);
-                });
-        });
-    });
+</body>
 
-</script> --}}
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const loginForm = document.getElementById('loginForm');
-
-        loginForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            const formData = new FormData(loginForm);
-
-            fetch('/login', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Tutup modal
-                    $('#loginModal').modal('hide');
-
-                    // Me-refresh halaman
-                    window.location.reload();
-
-                    // Tampilkan pesan "Login berhasil"
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Login Berhasil',
-                    });
-                } else {
-                    let errorMessages = '';
-
-                    if (data.errors) {
-                        errorMessages = Object.values(data.errors).join('\n');
-                    } else if (data.message) {
-                        errorMessages = data.message;
-                    } else {
-                        errorMessages = 'Login failed.';
-                    }
-
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: errorMessages,
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Terjadi kesalahan:', error);
-            });
-        });
-    });
-
-</script>
+</html>

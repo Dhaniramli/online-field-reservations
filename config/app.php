@@ -187,4 +187,25 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'colors' => [
+        'primary' => [
+            '100' => '#019b98',
+            '200' => '#55ccc9',
+            '300' => '#c1ffff',
+        ],
+        'accent' => [
+            '100' => '#dd0025',
+            '200' => '#ffbfab',
+        ],
+        'text' => [
+            '100' => '#014e60',
+            '200' => '#3f7a8d',
+        ],
+        'bg' => [
+            '100' => '#fbfbfb',
+            '200' => '#f1f1f1',
+            '300' => '#c8c8c8',
+        ],
+    ]
+
 ];
