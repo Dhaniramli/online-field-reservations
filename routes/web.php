@@ -56,6 +56,11 @@ Route::post('/admin/lapangan/store/jadwal', [AdminFieldScheduleController::class
 
 Route::get('/payment-confirmation/{ids}', [PaymentConfirmationController::class, 'index'])->name('index-paymentConfirmation');
 Route::get('/payment/{ids}', [PaymentConfirmationController::class, 'mount'])->name('bayar');
+
+Route::get('/invoice', [PaymentConfirmationController::class, 'invoice'])->name('invoice');
+Route::get('/invoice/{id}', [PaymentConfirmationController::class, 'invoiceDetail'])->name('invoiceDetail');
+Route::put('/generate-snap-token/{id}', [PaymentConfirmationController::class, 'generateSnapToken']);
+
 Route::put('/updateSchedule/{ids}', [PaymentConfirmationController::class, 'updateTrue']);
 Route::put('/updateScheduleFalse/{ids}', [PaymentConfirmationController::class, 'updateFalse']);
 Route::post('/transaction/pending', [PaymentConfirmationController::class, 'onPending']);

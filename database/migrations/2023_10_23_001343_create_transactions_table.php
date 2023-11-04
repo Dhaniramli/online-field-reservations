@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,11 +14,14 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('final_id')->unique();
             $table->unsignedBigInteger('user_id');
-            $table->string('order_id');
+            $table->string('schedule_ids');
             $table->string('total_price');
-            $table->string('dp_price');
-            $table->enum('status', ['unpaid', 'paid', 'pending', 'expire']);
+            $table->string('pay_early');
+            $table->enum('status_pay_early', ['unpaid', 'paid', 'pending', 'expire', 'paid_final']);
+            $table->string('pay_final');
+            $table->enum('status_pay_final', ['unpaid', 'paid', 'pending', 'expire', 'paid_final']);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

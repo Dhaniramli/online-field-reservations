@@ -96,6 +96,7 @@
                 window.snap.pay(snapToken, {
                     onSuccess: function (result) {
                         console.log('Pembayaran berhasil: ' + JSON.stringify(result));
+                        window.location.href = '/invoice'
                     },
                     onPending: function (result) {
                         console.log('Pembayaran tertunda: ' + JSON.stringify(result));
