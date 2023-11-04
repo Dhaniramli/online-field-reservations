@@ -21,8 +21,6 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/login.css">
-
-
 </head>
 
 <body class="d-flex align-items-center">
@@ -30,14 +28,23 @@
     <div class="container content-login">
         @if(session('loginError'))
         <script>
-            $(document).ready(function () {
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'error',
-                    title: '{!! session('loginError ') !!}',
-                    showConfirmButton: false,
-                    timer: 1000
-                });
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: '{!! session('loginError') !!}',
+                showConfirmButton: false,
+                timer: 1000
+            });
+        </script>
+        @endif
+        @if(session('success'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '{!! session('success') !!}',
+                showConfirmButton: false,
+                timer: 1000
             });
         </script>
         @endif
@@ -66,7 +73,7 @@
                                             <input name="email" type="email"
                                                 class="form-control form-control-user @error('email') is-invalid @enderror"
                                                 id="email" aria-describedby="emailHelp"
-                                                placeholder="Masukkan Alamat Email...">
+                                                placeholder="Masukkan Alamat Email..." value="{{ old('email') }}">
                                             @error('email')
                                             <div class="invalid-feedback ml-4">
                                                 {{ $message }}
@@ -129,9 +136,8 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
 </body>
 
 </html>

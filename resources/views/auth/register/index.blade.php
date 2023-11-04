@@ -1,192 +1,142 @@
-<div class="modal register-create fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title" id="registerModalLabel">Register</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="/register" method="POST" id="registerForm">
-                <div class="modal-body">
-                    @csrf
-                    <div class="mb-3">
-                        <table>
+<!DOCTYPE html>
+<html lang="en">
 
-                            <tr>
-                                <td class="registerIni"><i class="fa fa-user" aria-hidden="true"></i></td>
-                                <td></td>
-                                <td width="100%">
-                                    <input type="text" name="first_name" class="form-control" id="first_name"
-                                        placeholder="Nama Depan">
-                                    @error('first_name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="registerIni"><i class="fa fa-user" aria-hidden="true"></i></td>
-                                <td></td>
-                                <td width="100%">
-                                    <input type="text" name="last_name" class="form-control" id="last_name"
-                                        placeholder="Nama Belakang">
-                                    @error('last_name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="registerIni"><i class="fa fa-phone" aria-hidden="true"></i></td>
-                                <td></td>
-                                <td width="100%">
-                                    <input type="number" name="phone_number" class="form-control" id="phone_number"
-                                        placeholder="Nomor HP">
-                                    @error('phone_number')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </td>
-                            </tr>
+<head>
 
-                            <tr>
-                                <td class="registerIni"><i class="fa fa-envelope" aria-hidden="true"></i></td>
-                                <td></td>
-                                <td width="100%">
-                                    <input type="email" name="email" class="form-control" id="emailInput"
-                                        placeholder="Email">
-                                    @error('email')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </td>
-                            </tr>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-                            <tr>
-                                <td class="registerIni"><i class="fa fa-unlock-alt" aria-hidden="true"></i></td>
-                                <td></td>
-                                <td width="100%">
-                                    <input type="password" name="password" class="form-control" id="password"
-                                        placeholder="Password">
-                                    @error('password')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="registerIni"><i class="fa fa-unlock-alt" aria-hidden="true"></i></td>
-                                <td></td>
-                                <td width="100%">
-                                    <input type="password" name="password_confirm" class="form-control"
-                                        id="password_confirm" placeholder="Konfirmasi Password">
-                                    @error('password_confirm')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </td>
-                            </tr>
+    <title>Karsa Mini Soccer | Register</title>
 
-                        </table>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/colors.css">
+    <link rel="stylesheet" href="/css/register.css">
+
+</head>
+
+<body class="d-flex align-items-center">
+
+    <div class="container content-register">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block" style="background-image: url('{{ asset('/img/login_img.jpeg') }}'); background-size: cover;"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Buat akun!</h1>
+                            </div>
+                            <form class="user" action="/register" method="POST">
+                                @csrf
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input name="first_name" type="text" class="form-control form-control-user @error('first_name') is-invalid @enderror" id="first_name"
+                                            placeholder="Nama Depan" value="{{ old('first_name') }}">
+                                            @error('first_name')
+                                            <div class="invalid-feedback ml-4">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input name="last_name" type="text" class="form-control form-control-user @error('last_name') is-invalid @enderror" id="last_name"
+                                            placeholder="Nama Belakang" value="{{ old('last_name') }}">
+                                            @error('last_name')
+                                            <div class="invalid-feedback ml-4">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input name="phone_number" type="number" class="form-control form-control-user @error('phone_number') is-invalid @enderror" id="phone_number"
+                                            placeholder="Nomor Telpon" value="{{ old('phone_number') }}">
+                                            @error('phone_number')
+                                            <div class="invalid-feedback ml-4">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input name="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" id="email"
+                                            placeholder="Email" value="{{ old('email') }}">
+                                            @error('email')
+                                            <div class="invalid-feedback ml-4">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input name="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror"
+                                            id="password" placeholder="Kata Sandi">
+                                            @error('password')
+                                            <div class="invalid-feedback ml-4">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input name="password_confirm" type="password" class="form-control form-control-user @error('password_confirm') is-invalid @enderror"
+                                            id="password_confirm" placeholder="Konfirmasi Kata Sandi">
+                                            @error('password_confirm')
+                                            <div class="invalid-feedback ml-4">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-register btn-user btn-block mt-5">
+                                    Daftar
+                                </button>
+                                {{-- <hr>
+                                <a href="index.html" class="btn btn-google btn-user btn-block">
+                                    <i class="fab fa-google fa-fw"></i> Register with Google
+                                </a>
+                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                </a> --}}
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                {{-- <a class="small" href="forgot-password.html">Forgot Password?</a> --}}
+                            </div>
+                            <div class="text-center teks-toLogin">
+                                Sudah punya akun? <a class="btn-toLogin" href="/login">Login!</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-success">Register</button>
-                </div>
-            </form>
+            </div>
         </div>
+
     </div>
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const registerForm = document.getElementById('registerForm');
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        registerForm.addEventListener('submit', function (event) {
-            event.preventDefault(); // Mencegah perilaku bawaan pengiriman formulir
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            const formData = new FormData(registerForm);
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
-            let validationPassed = true;
+</body>
 
-            for (const [name, value] of formData) {
-                if (value.trim() === '') {
-                    validationPassed = false;
-                    break;
-                }
-            }
-
-            const password = formData.get('password');
-            const passwordConfirm = formData.get('password_confirm');
-            if (password !== passwordConfirm) {
-                validationPassed = false;
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Konfirmasi password tidak sesuai!',
-                });
-                return; // Hentikan pengiriman jika validasi gagal
-            }
-
-            if (!validationPassed) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Lengkapi data!',
-                });
-                return; // Hentikan pengiriman jika validasi gagal
-            }
-
-
-            fetch('/register', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    },
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-
-                        // Menutup modal
-                        $('#registerModal').modal('hide');
-
-                        // Me-refresh halaman
-                        window.location.reload();
-
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Registrasi berhasil!',
-                        })
-                    } else {
-                        if (data.errors) {
-                            const errorMessages = Object.values(data.errors).join('\n');
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: errorMessages,
-                            });
-                        } else if (data.message) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: data.message,
-                            });
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('Terjadi kesalahan:', error);
-                });
-        });
-    });
-
-</script>
+</html>

@@ -23,6 +23,7 @@ body {
 .btn-toRegister:hover{
     color: var(--primary-200);
 }
+
 .teks-buatAkun{
     font-size: 13px;
     color: var(--text-100);

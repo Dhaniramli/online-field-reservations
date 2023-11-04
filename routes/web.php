@@ -18,6 +18,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/login', [AuthController::class, 'indexLogin'])->name('login');
+Route::get('/register', [AuthController::class, 'indexRegister'])->name('register');
 
 Route::middleware(['guest'])->group(function () {
     Route::post('/login', [AuthController::class, 'authenticate']);

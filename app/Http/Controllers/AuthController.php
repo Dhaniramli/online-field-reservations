@@ -14,6 +14,11 @@ class AuthController extends Controller
         return view('auth.login.index');
     }
 
+    public function indexRegister()
+    {
+        return view('auth.register.index');
+    }
+
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
@@ -54,7 +59,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validateData = $request->validate([
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'phone_number' => 'required|max:255',
@@ -68,19 +73,10 @@ class AuthController extends Controller
             'password.min' => 'Password harus memiliki setidaknya 6 karakter atau lebih.'
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ], 422);
-        }
+        $validateData['password'] = bcrypt($validateData['password']);
 
-        $validatedData = $validator->validated(); // Ambil data yang telah divalidasi
+        User::create($validateData);
 
-        $validatedData['password'] = bcrypt($validatedData['password']);
-
-        User::create($validatedData);
-
-        return response()->json(['success' => true]);
+        return redirect('/login')->with('success', 'Registrasi berhasil!');
     }
 }
