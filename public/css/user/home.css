@@ -1,4 +1,4 @@
-.main-carousel{
+/* .main-carousel{
     background-color: #FCA500;
 }
 
@@ -8,14 +8,11 @@
     margin: 0;
     background: #00AA9F;
     border-radius: 5px;
-    /* counter-increment: gallery-cell; */
 }
 
-/* cell number */
 .main-carousel .carousel-cell:before {
     display: block;
     text-align: center;
-    /* content: counter(gallery-cell); */
     line-height: 200px;
     font-size: 80px;
     color: white;
@@ -49,14 +46,12 @@
     height: 550px;
 }
 
-/* big buttons, no circle */
 .main-carousel .flickity-prev-next-button {
     width: 70px;
     height: 70px;
     background: transparent;
 }
 
-/* arrow color */
 .main-carousel .flickity-prev-next-button .arrow {
     fill: #FF7000;
 }
@@ -69,7 +64,224 @@
     background: transparent;
 }
 
-/* hide disabled button */
 .main-carousel .flickity-prev-next-button:disabled {
     display: none;
+} */
+
+/* HOME NEW */
+.content-home {
+    /* height: 100vh; */
+    padding-top: 180px;
+    padding-bottom: 140px;
 }
+
+.content-home h1 {
+    font-size: 60px;
+    font-weight: 700;
+    color: white;
+}
+
+.content-home .icon-home {
+    width: 70px;
+    height: 70px;
+}
+
+.content-home .icon-home svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    color: white;
+}
+
+.content-home .card-icon {
+    margin-top: 120px;
+}
+
+.content-home h2 {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--primary-300);
+}
+
+.content-home h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .content-home h1 {
+        font-size: 40px;
+    }
+
+    .content-home h2 {
+        font-size: 30px;
+    }
+
+    .content-home h3 {
+        font-size: 17px;
+        margin-bottom: 25px;
+    }
+
+    .content-home .icon-home {
+        width: 50px;
+        height: 50px;
+    }
+
+    .content-home {
+        padding-top: 180px;
+    }
+
+}
+
+@media (min-width: 769px) and (max-width: 991px) {
+    .content-home .icon-home {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* AKHIR HOME NEW */
+
+/* LAYANAN */
+.layanan-kami {
+    padding-top: 100px;
+}
+
+.layanan-kami h1 {
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--primary-100);
+}
+
+.layanan-kami h2 {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text-200);
+}
+
+.layanan-kami .content-layanan-kami {
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.layanan-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.layanan-kami .card{
+    box-shadow: none;
+    border: none;
+    padding-top: 20px;
+}
+
+.layanan-kami .card:hover {
+    box-shadow: 0 0 10px rgba(1, 155, 152, 0.3);
+    background-color: var(--text-100);
+    color: white;
+}
+
+.layanan-kami .card:hover .card-icon svg {
+    color: var(--text-100);
+}
+
+.layanan-kami .card:hover .card-icon {
+    background-color: white;
+}
+
+.layanan-kami .card:hover .card-body h5{
+    color: white;
+}
+
+
+.layanan-kami .card-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--text-100);
+}
+
+.layanan-kami .card-icon svg {
+    color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.layanan-kami .card-body h5 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-100);
+}
+
+.layanan-kami .card-body p {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-200);
+}
+
+@media (max-width: 991px) {
+    .layanan-kami .card {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .layanan-kami h1 {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    .layanan-kami h2 {
+        font-size: 17px;
+        font-weight: 400;
+    }
+
+
+    .layanan-kami .card-body h5 {
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    .layanan-kami .card-body p {
+        font-size: 12px;
+        font-weight: 400;
+    }
+}
+
+/* AKHIR LAYANAN */
+
+/* LOKASI */
+.lokasi-kami {
+    padding-top: 100px;
+    background-color: var(--bg-100);
+    padding-bottom: 100px;
+}
+
+.lokasi-kami h1 {
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--primary-100);
+}
+
+.lokasi-kami .card-lokasi {
+    margin-top: 50px;
+}
+
+.lokasi-kami .card-lokasi iframe {
+    width: 100%;
+    height: 50vh;
+}
+
+@media (max-width: 768px) {
+    .lokasi-kami h1 {
+        font-size: 30px;
+        font-weight: 600;
+    }
+}
+
+/* AKHIR LOKASI */
