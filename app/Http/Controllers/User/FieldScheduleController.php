@@ -11,41 +11,29 @@ use App\Models\FieldSchedule;
 
 class FieldScheduleController extends Controller
 {
-    public function index($id)
+    public function index(Request $request, $id)
     {
-        $items = FieldSchedule::where('field_list_id', $id)->get();
+        $items = FieldSchedule::where('field_list_id', $id);
 
-        $minDate = now(); // Tanggal hari ini
-        $maxYear = 2023; // Tahun maksimum
+        // Inisialisasi variabel $dates jika Anda ingin menggunakannya
         $dates = [];
 
-        $currentYear = $minDate->year;
-        $currentMonth = $minDate->month;
-
-        // Set aplikasi Laravel ke bahasa Indonesia
-        App::setLocale('id');
-
-        while ($currentYear <= $maxYear) {
-            $daysInMonth = Carbon::create($currentYear, $currentMonth, 1)->daysInMonth;
-            $startDay = ($currentYear == $minDate->year && $currentMonth == $minDate->month) ? $minDate->day : 1;
-
-            foreach (range($startDay, $daysInMonth) as $day) {
-                $date = Carbon::create($currentYear, $currentMonth, $day);
-                $dates[] = [
-                    'dateNoFormats' => $date->format('Y-m-d'),
-                    'date' => $date->format('d F Y'),
-                    'day' => $date->translatedFormat('l'),
-                ];
-            }
-
-            if ($currentMonth < 12) {
-                $currentMonth++;
-            } else {
-                $currentYear++;
-                $currentMonth = 1;
-            }
+        // Filter data berdasarkan tanggal jika ada dalam permintaan
+        if ($request->has('date')) {
+            $selectedDate = $request->input('date');
+            $items->where('date', 'like', '%' . $selectedDate . '%');
+            $dates = [$selectedDate]; // Menambahkan tanggal yang difilter ke $dates
+        } else {
+            // Jika permintaan tidak memiliki tanggal, gunakan tanggal saat ini
+            $currentDate = Carbon::now();
+            $selectedDate = $currentDate->format('Y-m-d');
+            $items->where('date', 'like', '%' . $selectedDate . '%');
+            $dates = [$selectedDate];
         }
 
-        return view('user.fieldSchedule.index', compact('items', 'dates'));
+        // Mengambil data FieldSchedule
+        $items = $items->get();
+        
+        return view('user.fieldSchedule.index', compact('items', 'dates', 'id'));
     }
 }

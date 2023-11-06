@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container content-booking">
-    <h1 class="text-center title-booking">Pilih Lapangan</h1>
+    <h1 class="text-center title-booking">Lapangan Tersedia</h1>
 
     <div class="row">
         @foreach ($fieldLists as $item)

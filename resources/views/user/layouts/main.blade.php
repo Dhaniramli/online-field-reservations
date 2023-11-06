@@ -12,7 +12,6 @@
     @include('user.partials.navbar')
 
     @yield('content')
-    @include('user.partials.cart')
 
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up" style="margin-top: 12px;"></i>

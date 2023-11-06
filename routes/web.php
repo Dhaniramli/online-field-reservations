@@ -27,16 +27,12 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']);
-    // Route::post('/booking/store', [BookingController::class, 'store']);
 });
 
 Route::get('/sewa-lapangan', [UserBookingController::class, 'index'])->name('index-booking');
 
 Route::get('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'index'])->name('index-jadwal');
-
-
-// Route::post('/check-id', 'BookingController@checkId');
-// Route::post('/get-price', [BookingController::class, 'getPrice'])->name('get-price');
+Route::post('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'index'])->name('index-jadwal');
 
 Route::get('/jadwal-lapangan/{id}', [UserAdminFieldScheduleController::class, 'index']);
 
