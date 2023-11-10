@@ -8,10 +8,13 @@
 
     <div class="scrollable-tabs-container mt-5">
         <a href="/pembelian" class="btn btn-tabs {{ ($status === 'semua') ? 'active' : '' }}">Semua</a>
-        <a href="/pembelian?status=pending" class="btn btn-tabs {{ ($status === 'pending') ? 'active' : '' }}">Berlangsung</a>
+        <a href="/pembelian?status=pending"
+            class="btn btn-tabs {{ ($status === 'pending') ? 'active' : '' }}">Berlangsung</a>
         <a href="/pembelian?status=paid" class="btn btn-tabs {{ ($status === 'paid') ? 'active' : '' }}">Selesai</a>
-        <a href="/pembelian?status=paid_final" class="btn btn-tabs {{ ($status === 'paid_final') ? 'active' : '' }}">Belum Selesai</a>
-        <a href="/pembelian?status=expire" class="btn btn-tabs {{ ($status === 'expire') ? 'active' : '' }}">Tidak Selesai</a>
+        <a href="/pembelian?status=paid_final"
+            class="btn btn-tabs {{ ($status === 'paid_final') ? 'active' : '' }}">Belum Selesai</a>
+        <a href="/pembelian?status=expire" class="btn btn-tabs {{ ($status === 'expire') ? 'active' : '' }}">Tidak
+            Selesai</a>
     </div>
 
     <div class="isi-content mt-5">
@@ -20,11 +23,39 @@
                 @if (!$transaction->count())
                 <div class="icon-not d-flex justify-content-center">
                     <img src="{{ asset('/img/data_not.png') }}" alt="">
-                </div>                    
+                </div>
                 @endif
                 @foreach ($transaction as $item)
                 <div class="card shadow p-3 border-0 mb-3">
                     <h2 class="mb-3 text-center">Sewa Lapangan</h2>
+
+                    <table>
+                        <tr>
+                            <td>Total Harga</td>
+                            <td style="text-align: right">Rp. {{ number_format($item->total_price, 0, ',', '.') }}</td>
+                        </tr>
+                        @if ($item->status_pay_early != 'paid_final')
+                        <tr>
+                            <td>Pembayaran Dp</td>
+                            <td style="text-align: right">Rp. {{ number_format($item->pay_early, 0, ',', '.') }}</td>
+                        </tr>
+                        <tr>
+                            <td>Pembayaran Akhir</td>
+                            <td style="text-align: right">Rp. {{ number_format($item->pay_final, 0, ',', '.') }}</td>
+                        </tr>
+                        @else
+                        <tr>
+                            <td>Pembayaran</td>
+                            <td style="text-align: right">Rp. {{ number_format($item->pay_final, 0, ',', '.') }}</td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td colspan="2">
+                                <hr>
+                            </td>
+                        </tr>
+                    </table>
+
                     @if ($item->status_pay_early != 'paid_final')
                     <div class="header-content d-flex">
                         <h3 class="mb-3">Pembayaran DP</h3>
@@ -38,7 +69,6 @@
                         <div class="teks-3">Belum Selesai</div>
                         @endif
                     </div>
-                    @endif
                     <div class="header-content d-flex">
                         <h3 class="mb-3">Pembayaran Akhir</h3>
                         @if ($item->status_pay_final === 'pending')
@@ -51,35 +81,38 @@
                         <div class="teks-3">Belum Selesai</div>
                         @endif
                     </div>
-                    <table>
-                        <tr>
-                            <td colspan="2">
-                                <hr>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Total Harga</td>
-                            <td style="text-align: right">Rp. {{ $item->total_price }}</td>
-                        </tr>
-                        <tr>
-                            <td>Total Pembayaran</td>
-                            <td style="text-align: right">Rp. {{ $item->pay_final }}</td>
-                        </tr>
-                    </table>
-                    <div class="tombol mt-3 d-flex">
-                        <button class="btn btn-invoice-utama">Detail</button>
-                        @if ($item->status_pay_early != 'paid_final' && $item->status_pay_final != 'paid' && $item->status_pay_early === 'paid' && $item->status_pay_early != 'expire' && $item->status_pay_final != 'expire')
-                        @if ($item->status_pay_early === 'pending' && $item->status_pay_final === 'pending')
-                            
+                    @else
+                    <div class="header-content d-flex">
+                        <h3 class="mb-3">Pembayaran</h3>
+                        @if ($item->status_pay_final === 'pending')
+                        <div class="teks-4">Tertunda</div>
+                        @elseif ($item->status_pay_final === 'paid')
+                        <div class="teks-2">Selesai</div>
+                        @elseif ($item->status_pay_final === 'expire' )
+                        <div class="teks-3">Tidak Selesai</div>
                         @else
-                        <button class="btn btn-invoice-utama">Bayar</button>
+                        <div class="teks-3">Belum Selesai</div>
                         @endif
+                    </div>
+                    @endif
+
+                    <div class="tombol mt-3 d-flex">
+                        <a href="/pembelian/{{ $item->id }}" class="btn btn-invoice-utama">Detail</a>
+                        @if ($item->status_pay_early != 'paid_final' && $item->status_pay_final != 'paid' &&
+                        $item->status_pay_early === 'paid' && $item->status_pay_early != 'expire' &&
+                        $item->status_pay_final != 'expire' && $item->status_pay_early != 'pending' &&
+                        $item->status_pay_final != 'pending')
+                        <button id="pay-button" data-item-id="{{ $item->id }}"
+                            class="btn btn-invoice-utama">Bayar</button>
                         @endif
 
                         @if ($item->status_pay_early != 'expire' && $item->status_pay_final != 'expire')
                         <button class="btn btn-invoice-utama btn bg-danger">Batal</button>
                         @endif
                     </div>
+
+                    <a class="text-center cek-email mt-4 mb-2" href="mailto:{{ Auth::user()->email }}">Cek email untuk
+                        info pembayaran</a>
                 </div>
                 @endforeach
             </div>
@@ -89,4 +122,75 @@
 </div>
 
 <script src="/js/user/invoice.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var payButtonFull = document.getElementById('pay-button');
+        var itemId = payButtonFull.getAttribute('data-item-id');
+
+        payButtonFull.addEventListener('click', function () {
+            console.log('testing');
+
+            axios.put('/generate-snap-token/' + itemId)
+                .then(function (response) {
+                    var snapToken = response.data.snapToken;
+                    handlePayment(snapToken);
+                })
+                .catch(function (error) {
+                    console.error('Gagal mendapatkan Snap Token:', error.response.data);
+                    location.reload();
+                });
+        });
+
+        function handlePayment(snapToken) {
+            // Membuka popup pembayaran Snap
+            window.snap.pay(snapToken, {
+                onSuccess: function (result) {
+                    console.log('Pembayaran berhasil: ' + JSON.stringify(result));
+                    window.location.href = '/pembelian'
+                },
+                onPending: function (result) {
+                    console.log('Pembayaran tertunda: ' + JSON.stringify(result));
+
+                    window.location.href = '/pembelian'
+
+                    // axios.post('/transaction/pending', requestData)
+                    // .then(response => {
+                    //     console.log(response.data);
+                    // })
+                    // .catch(error => {
+                    //     console.error(error);
+                    // });
+                },
+                onError: function (result) {
+                    console.log('Pembayaran gagal: ' + JSON.stringify(result));
+                    // axios.put('/updateScheduleFalse/' + bookingId)
+                    //     .then(function (response) {
+                    //         console.log('Data berhasil diupdate ke false');
+                    //         location.reload();
+                    //     })
+                    //     .catch(function (error) {
+                    //         console.log('Gagal mengupdate data false: ' + error);
+                    //         location.reload();
+                    //     });
+                },
+                onClose: function () {
+                    // axios.put('/updateScheduleFalse/' + bookingId)
+                    //     .then(function (response) {
+                    //         console.log('Data berhasil diupdate ke false');
+                    //         // location.reload();
+                    //     })
+                    //     .catch(function (error) {
+                    //         console.log('Gagal mengupdate data false: ' + error);
+                    //         // location.reload();
+                    //     });
+                    console.log('Pop-up pembayaran ditutup');
+                },
+            });
+        }
+    });
+
+</script>
 @endsection

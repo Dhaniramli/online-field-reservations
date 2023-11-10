@@ -55,13 +55,12 @@ Route::post('/admin/lapangan/store/jadwal', [AdminFieldScheduleController::class
 
 Route::middleware(['auth', 'onlyPengguna'])->group(function () {
     Route::get('/payment-confirmation/{ids}', [PaymentConfirmationController::class, 'index'])->name('index-paymentConfirmation');
-    Route::get('/payment/{ids}', [PaymentConfirmationController::class, 'mount'])->name('bayar');
+    Route::get('/payment/{ids}', [PaymentConfirmationController::class, 'paymentDetail'])->name('paymentDetail');
+    Route::post('/pay', [PaymentConfirmationController::class, 'payNow'])->name('payNow');
+    Route::get('/deleteTransaction/{id}', [PaymentConfirmationController::class, 'destroy']);
 
     Route::put('/generate-snap-token/{id}', [PaymentConfirmationController::class, 'generateSnapToken']);
     
     Route::get('/pembelian', [InvoiceController::class, 'index'])->name('pembelian');
-
-    Route::put('/updateSchedule/{ids}', [PaymentConfirmationController::class, 'updateTrue']);
-    Route::put('/updateScheduleFalse/{ids}', [PaymentConfirmationController::class, 'updateFalse']);
-    Route::post('/transaction/pending', [PaymentConfirmationController::class, 'onPending']);
+    Route::get('/pembelian/{id}', [InvoiceController::class, 'show'])->name('show-pembelian');
 });

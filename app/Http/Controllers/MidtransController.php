@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
-use App\Models\TransactionDetails;
 use Illuminate\Http\Request;
+use App\Models\FieldSchedule;
+use App\Models\TransactionDetails;
 
 class MidtransController extends Controller
 {
@@ -33,11 +34,45 @@ class MidtransController extends Controller
                 if ($order) {
                     if ($order->status_pay_early === 'paid_final') {
                         $order->update(['status_pay_final' => 'expire']);
+
+                        //Ubah Status Jadwal Yang diPesan
+                        $idsubah = explode(',', $order->schedule_ids);
+                        $bookingToUpdate = [];
+
+                        foreach ($idsubah as $item_id) {
+                            $booking = FieldSchedule::find($item_id);
+                            $bookingToUpdate[] = $booking;
+                        }
+
+                        foreach ($bookingToUpdate as $booking) {
+                            $booking->is_booked = false;
+                            $booking->save();
+                        }
+                        //AKHIR Ubah Status Jadwal Yang diPesan
+
+                    } else if ($order->status_pay_final === 'unpaid') {
+                        $order->update(['status_pay_early' => 'expire']);
+
+                        //Ubah Status Jadwal Yang diPesan
+                        $idsubah = explode(',', $order->schedule_ids);
+                        $bookingToUpdate = [];
+
+                        foreach ($idsubah as $item_id) {
+                            $booking = FieldSchedule::find($item_id);
+                            $bookingToUpdate[] = $booking;
+                        }
+
+                        foreach ($bookingToUpdate as $booking) {
+                            $booking->is_booked = false;
+                            $booking->save();
+                        }
+                        //AKHIR Ubah Status Jadwal Yang diPesan
+
                     } else {
                         $order->update(['status_pay_final' => 'expire']);
-                        $order->update(['status_pay_early' => 'expire']);
                     }
                 } else if ($order2) {
+                    $order2->update(['status_pay_final' => 'unpaid']);
                     $order2->update(['final_id' => $order_id]);
                 }
             } else if ($request->transaction_status == 'settlement') {

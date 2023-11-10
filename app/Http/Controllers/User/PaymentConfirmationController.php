@@ -22,19 +22,11 @@ class PaymentConfirmationController extends Controller
         return view('user.paymentConfirmation.index', compact('items'));
     }
 
-    public function mount(Request $request, $ids)
+    public function paymentDetail(Request $request, $ids)
     {
         $user = Auth::user();
 
-        if (!$user) {
-        }
-
         $metode = $request->query('metode');
-
-        Config::$serverKey = config('midtrans.server_key');
-        Config::$isProduction = false;
-        Config::$isSanitized = true;
-        Config::$is3ds = true;
 
         $idsubah = explode(',', $ids);
         $belanja = FieldSchedule::whereIn('id', $idsubah)->get();
@@ -47,68 +39,60 @@ class PaymentConfirmationController extends Controller
 
         $totalDp = $totalPrice / 2;
 
-        $order_id = time() . mt_rand(1000, 9999);
-
-        $order_id_final = $order_id + 1;
-
         if ($metode == 'bayar_penuh') {
             if ($totalPrice != 0) {
                 $gross_amount = $totalPrice;
             }
-
-            $order = Transaction::create([
-                'id' => $order_id,
-                'final_id' => $order_id_final,
-                'schedule_ids' => $ids,
-                'user_id' => $user->id,
-                'total_price' => $totalPrice,
-                'pay_early' => $gross_amount,
-                'status_pay_early' => 'paid_final',
-                'pay_final' => $gross_amount,
-                'status_pay_final' => 'unpaid',
-            ]);
-        } elseif ($metode == 'bayar_dp') {
-            if ($totalDp != 0) {
+        } else {
+            if ($totalPrice != 0) {
                 $gross_amount = $totalDp;
             }
+        }
 
-            $order = Transaction::create([
+        return view('user.paymentConfirmation.mount', compact('belanja', 'totalPrice', 'ids', 'user', 'gross_amount'));
+    }
+
+    public function payNow(Request $request)
+    {
+        Config::$serverKey = config('midtrans.server_key');
+        Config::$isProduction = false;
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
+
+        $user = Auth::user();
+
+        $order_id = time() . mt_rand(1000, 9999);
+
+        $order_id_final = $order_id + 1;
+
+        if ($request->totalPrice === $request->gross_amount) {
+            $dataTransaksi = Transaction::create([
                 'id' => $order_id,
                 'final_id' => $order_id_final,
-                'schedule_ids' => $ids,
+                'schedule_ids' => $request->ids,
                 'user_id' => $user->id,
-                'total_price' => $totalPrice,
-                'pay_early' => $gross_amount,
+                'total_price' => $request->totalPrice,
+                'pay_early' => $request->gross_amount,
+                'status_pay_early' => 'paid_final',
+                'pay_final' => $request->gross_amount,
+                'status_pay_final' => 'unpaid',
+            ]);
+        } else {
+            $dataTransaksi = Transaction::create([
+                'id' => $order_id,
+                'final_id' => $order_id_final,
+                'schedule_ids' => $request->ids,
+                'user_id' => $user->id,
+                'total_price' => $request->totalPrice,
+                'pay_early' => $request->gross_amount,
                 'status_pay_early' => 'unpaid',
-                'pay_final' => $gross_amount,
+                'pay_final' => $request->gross_amount,
                 'status_pay_final' => 'unpaid',
             ]);
         }
 
-
-        if (!empty($belanja)) {
-            $paramsFull = array(
-                'transaction_details' => array(
-                    'order_id' => $order_id,
-                    'gross_amount' => $gross_amount,
-                ),
-                'customer_details' => array(
-                    'first_name' => $user->first_name,
-                    'last_name' => $user->last_name,
-                    'email' => $user->email,
-                    'phone' => $user->phone_number,
-                ),
-            );
-        }
-
-        $snapToken = Snap::getSnapToken($paramsFull);
-
-        return view('user.paymentConfirmation.mount', compact('belanja', 'snapToken', 'totalPrice', 'gross_amount', 'ids', 'user'));
-    }
-
-    public function updateTrue($ids)
-    {
-        $idsubah = explode(',', $ids);
+        //Ubah Status Jadwal Yang diPesan
+        $idsubah = explode(',', $request->ids);
         $bookingToUpdate = [];
 
         foreach ($idsubah as $id) {
@@ -126,63 +110,28 @@ class PaymentConfirmationController extends Controller
         }
 
         foreach ($bookingToUpdate as $booking) {
-            $booking->is_booked = false;
-            // $booking->is_booked = true;
+            $booking->is_booked = true;
             $booking->save();
         }
+        //AKHIR Ubah Status Jadwal Yang diPesan
 
-        return response()->json(['message' => 'Data berhasil diupdate']);
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $order_id,
+                'gross_amount' => $request->gross_amount,
+            ),
+            'customer_details' => array(
+                'first_name' => $user->first_name,
+                'last_name' => $user->last_name,
+                'email' => $user->email,
+                'phone' => $user->phone_number,
+            ),
+        );
+
+        $snapToken = Snap::getSnapToken($params);
+
+        return response()->json(['snapToken' => $snapToken, 'dataTransaksi' => $dataTransaksi]);
     }
-
-
-    public function updateFalse($ids)
-    {
-        $idsubah = explode(',', $ids);
-        foreach ($idsubah as $id) {
-            $booking = FieldSchedule::find($id);
-
-            // Periksa apakah data ditemukan
-            if (!$booking) {
-                return response()->json(['message' => 'Data tidak ditemukan'], 404);
-            }
-
-            // Update kolom is_booked menjadi true
-            $booking->is_booked = false;
-            $booking->save();
-        }
-
-        return response()->json(['message' => 'Data berhasil diupdate']);
-    }
-
-    public function onPending(Request $request)
-    {
-        try {
-            $requestData = $request->all();
-
-            // Menggabungkan data 'result' dan 'bookingId' ke dalam satu array
-            $transactionData = array_merge($requestData['result'], [
-                'booking_id' => $requestData['bookingId']
-            ]);
-
-            // Membuat dan menyimpan data transaksi
-            $transaction = TransactionDetails::create($transactionData);
-
-            // Informasi sukses disimpan
-            return "Data transaksi berhasil disimpan";
-        } catch (\Exception $e) {
-            // Tangani kesalahan
-            return "Gagal menyimpan data transaksi: " . $e->getMessage();
-        }
-    }
-
-    // public function invoiceDetail($id)
-    // {
-    //     $transactionDetail = Transaction::find($id);
-    //     $idsubah = explode(',', $transactionDetail->schedule_ids);
-    //     $belanja = FieldSchedule::whereIn('id', $idsubah)->get();
-
-    //     return view('user.paymentConfirmation.detail', compact('transactionDetail', 'belanja'));
-    // }
 
     public function generateSnapToken($id)
     {
@@ -210,5 +159,29 @@ class PaymentConfirmationController extends Controller
         $snapToken = Snap::getSnapToken($paramsFull);
 
         return response()->json(['snapToken' => $snapToken]);
+    }
+
+    public function destroy($id)
+    {
+        $transaksi = Transaction::find($id);
+
+        //Ubah Status Jadwal Yang diPesan
+        $idsubah = explode(',', $transaksi->schedule_ids);
+        $bookingToUpdate = [];
+
+        foreach ($idsubah as $item_id) {
+            $booking = FieldSchedule::find($item_id);
+            $bookingToUpdate[] = $booking;
+        }
+
+        foreach ($bookingToUpdate as $booking) {
+            $booking->is_booked = false;
+            $booking->save();
+        }
+        //AKHIR Ubah Status Jadwal Yang diPesan
+
+        $transaksi->delete();
+
+        return response()->json(['message' => 'Data berhasil dihapus']);
     }
 }

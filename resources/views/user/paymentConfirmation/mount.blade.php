@@ -41,7 +41,8 @@
                             {{ \Carbon\Carbon::parse($item->date)->format('d F Y') }}<br>
                             {{ $item->time_start . ' - ' . $item->time_finish }}
                         </td>
-                        <td class="text-right align-bottom" style="text-align: right;">Rp. {{ number_format($item->price, 0, ',', '.') }}</td>
+                        <td class="text-right align-bottom" style="text-align: right;">Rp.
+                            {{ number_format($item->price, 0, ',', '.') }}</td>
                     </tr>
                     @endforeach
                 </table>
@@ -65,7 +66,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="h-12 text-center">
-                            <button id="pay-button-full" class="btn btn-success btn-myprimary btn-block">Bayar</button>
+                            <button id="pay-button" class="btn btn-success btn-myprimary btn-block">Bayar</button>
                         </td>
                     </tr>
                 </table>
@@ -77,78 +78,82 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <script type="text/javascript">
-    var payButtonFull = document.getElementById('pay-button-full');
+    document.addEventListener('DOMContentLoaded', function () {
+        var payButtonFull = document.getElementById('pay-button');
+        var pdfLink = document.getElementById('pdf-link');
+        var dataTransaksi;
 
-    payButtonFull.addEventListener('click', function () {
-        var bookingId = {!! json_encode($ids) !!};
-        handlePayment(bookingId, 'full');
+        payButtonFull.addEventListener('click', function () {
+            console.log('testing');
+
+            axios.post('/pay', {
+                    belanja: '{{ $belanja }}',
+                    totalPrice: '{{ $totalPrice }}',
+                    ids: '{{ $ids }}',
+                    user: '{{ $user }}',
+                    gross_amount: '{{ $gross_amount }}'
+                })
+                .then(function (response) {
+                    var snapToken = response.data.snapToken;
+                    dataTransaksi = response.data.dataTransaksi;
+                    handlePayment(snapToken);
+                })
+                .catch(function (error) {
+                    console.error('Gagal mendapatkan Snap Token:', error.response.data);
+                });
+        });
+
+        function handlePayment(snapToken) {
+            // Membuka popup pembayaran Snap
+            window.snap.pay(snapToken, {
+                onSuccess: function (result) {
+                    console.log('Pembayaran berhasil: ' + JSON.stringify(result));
+                    window.location.href = '/pembelian'
+                },
+                onPending: function (result) {
+                    console.log('Pembayaran tertunda: ' + JSON.stringify(result));
+                    window.location.href = '/pembelian'
+
+                    console.log('data transaksi :' + dataTransaksi);
+                },
+                onError: function (result) {
+                    console.log('Pembayaran gagal: ' + JSON.stringify(result));
+                    
+                    axios.get('/deleteTransaction/' + dataTransaksi.id)
+                        .then(function (response) {
+                            console.log('Data dihapus');
+                        })
+                        .catch(function (error) {
+                            console.log('Data gagal dihapus: ' + error);
+                        });
+                },
+                onClose: function () {
+                    // axios.put('/updateScheduleFalse/' + bookingId)
+                    //     .then(function (response) {
+                    //         console.log('Data berhasil diupdate ke false');
+                    //         // location.reload();
+                    //     })
+                    //     .catch(function (error) {
+                    //         console.log('Gagal mengupdate data false: ' + error);
+                    //         // location.reload();
+                    //     });
+
+                    console.log('Pop-up pembayaran ditutup');
+                    axios.get('/deleteTransaction/' + dataTransaksi.id)
+                        .then(function (response) {
+                            console.log('Data dihapus');
+                        })
+                        .catch(function (error) {
+                            console.log('Data gagal dihapus: ' + error);
+                        });
+                },
+            });
+        }
     });
 
-    function handlePayment(bookingId, paymentType) {
-        axios.put('/updateSchedule/' + bookingId)
-            .then(function (response) {
-                console.log('Data berhasil diupdate');
-
-                var snapToken = '{{ $snapToken }}';
-
-                window.snap.pay(snapToken, {
-                    onSuccess: function (result) {
-                        console.log('Pembayaran berhasil: ' + JSON.stringify(result));
-                        window.location.href = '/invoice'
-                    },
-                    onPending: function (result) {
-                        console.log('Pembayaran tertunda: ' + JSON.stringify(result));
-                        const requestData = {
-                                    result: result,
-                                    bookingId: bookingId
-                                };
-
-                        axios.post('/transaction/pending', requestData)
-                        .then(response => {
-                            console.log(response.data);
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
-                    },
-                    onError: function (result) {
-                        console.log('Pembayaran gagal: ' + JSON.stringify(result));
-                        axios.put('/updateScheduleFalse/' + bookingId)
-                            .then(function (response) {
-                                console.log('Data berhasil diupdate ke false');
-                                location.reload();
-                            })
-                            .catch(function (error) {
-                                console.log('Gagal mengupdate data false: ' + error);
-                                location.reload();
-                            });
-                    },
-                    onClose: function () {
-                        axios.put('/updateScheduleFalse/' + bookingId)
-                            .then(function (response) {
-                                console.log('Data berhasil diupdate ke false');
-                                // location.reload();
-                            })
-                            .catch(function (error) {
-                                console.log('Gagal mengupdate data false: ' + error);
-                                // location.reload();
-                            });
-                        console.log('Pop-up pembayaran ditutup');
-                    },
-                });
-            })
-            .catch(function (error) {
-                console.log('Gagal mengupdate data: ' + error);
-
-                if (error.response && error.response.status === 400) {
-                // Jika status code adalah 400 (Bad Request), kembali ke halaman sebelumnya
-                window.history.go(-2);
-                }
-            });
-    }
 </script>
 @endsection
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -91,3 +91,20 @@
     border: 1px solid var(--primary-100);
     color: white;
 }
+
+.cek-email{
+    text-decoration: none;
+    color: var(--text-100);
+    font-size: 17px;
+}
+
+.cek-email:hover{
+    text-decoration: underline;
+    color: var(--text-100);
+}
+
+/* SHOW INVOICE */
+.show-invoice{
+    padding-top: 100px;
+}
+/* AKHIR SHOW INVOICE */

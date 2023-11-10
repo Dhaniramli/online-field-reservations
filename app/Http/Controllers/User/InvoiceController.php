@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\FieldSchedule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,5 +56,14 @@ class InvoiceController extends Controller
 
             return view('user.invoice.index', compact('transaction', 'status'));
         }
+    }
+
+     public function show($id)
+    {
+        $transactionDetail = Transaction::find($id);
+        $idsubah = explode(',', $transactionDetail->schedule_ids);
+        $belanja = FieldSchedule::whereIn('id', $idsubah)->get();
+
+        return view('user.invoice.show', compact('transactionDetail', 'belanja'));
     }
 }
