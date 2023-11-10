@@ -175,23 +175,14 @@ class PaymentConfirmationController extends Controller
         }
     }
 
-    public function invoice()
-    {
-        $user = Auth::user();
+    // public function invoiceDetail($id)
+    // {
+    //     $transactionDetail = Transaction::find($id);
+    //     $idsubah = explode(',', $transactionDetail->schedule_ids);
+    //     $belanja = FieldSchedule::whereIn('id', $idsubah)->get();
 
-        $transaction = Transaction::where('user_id', $user->id)->get();
-
-        return view('user.paymentConfirmation.invoice', compact('transaction'));
-    }
-
-    public function invoiceDetail($id)
-    {
-        $transactionDetail = Transaction::find($id);
-        $idsubah = explode(',', $transactionDetail->schedule_ids);
-        $belanja = FieldSchedule::whereIn('id', $idsubah)->get();
-
-        return view('user.paymentConfirmation.detail', compact('transactionDetail', 'belanja'));
-    }
+    //     return view('user.paymentConfirmation.detail', compact('transactionDetail', 'belanja'));
+    // }
 
     public function generateSnapToken($id)
     {

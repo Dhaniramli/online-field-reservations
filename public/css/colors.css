@@ -10,3 +10,11 @@
     --bg-200:#f1f1f1;
     --bg-300:#c8c8c8;
 }
+
+.btn-myprimary{
+    background-color: #019b98;
+}
+
+.btn-myprimary:hover{
+    background-color: #048684;
+}

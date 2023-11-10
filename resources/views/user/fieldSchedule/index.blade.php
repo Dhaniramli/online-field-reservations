@@ -20,8 +20,10 @@
 
     <div class="row">
         @if (!$items->count())
-        <div class="col-lg-3 col-md-4 col-6 p-2 my-auto mx-auto">
-            <h1 class="text-center">Tidak Ada data</h1>
+        <div class="col-lg-6 col-md-4 col-6 p-2 my-auto mx-auto">
+            <div class="icon-not d-flex justify-content-center">
+                <img src="{{ asset('/img/jadwal_not.png') }}" alt="">
+            </div>
         </div>
         @else
         @foreach ($items as $item)

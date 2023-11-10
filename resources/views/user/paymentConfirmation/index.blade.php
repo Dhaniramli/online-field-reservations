@@ -4,7 +4,7 @@
 <div class="container content-paymentConfirmation">
 
     <div class="card mt-5 p-4">
-        <h1 class="title-jadwal text-center">Periksa Pemesanan Anda</h1>
+        <h1 class="title-payment text-center">Periksa Pemesanan Anda</h1>
         <p class="text-center sub-title-paymentConfir">Pastikan detail pemesanan sudah sesuai dan benar.</p>
 
         @php
@@ -25,8 +25,8 @@
                 </div>
                 <div class="col-5 content-kanan">
                     <h4>Rp. {{ $item->price }}</h4>
-                    <button class="btn btn-tambah btn-success" data-item-id="{{ $item->id }}"
-                        data-item-price="{{ $item->price }}">Tambah</button>
+                    <button class="btn btn-tambah btn-danger" data-item-id="{{ $item->id }}"
+                        data-item-price="{{ $item->price }}">Hapus</button>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                 <input class="form-check-input" type="radio" id="metode-bayar-penuh" name="metode" value="bayar_penuh">
             </div>
             <br>
-            <a id="btn-konfirmasi-pemesanan" class="btn btn-konfirmasi-pemesanan btn-success mt-3 w-100"
+            <a id="btn-konfirmasi-pemesanan" class="btn btn-konfirmasi-pemesanan btn-info btn-myprimary mt-3 w-100"
                 href="/payment/{{ implode(',', $unbannedIds) }}?metode=">Konfirmasi Pemesanan</a>
         </form>
     </div>

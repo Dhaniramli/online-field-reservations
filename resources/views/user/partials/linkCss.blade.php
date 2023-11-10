@@ -1,8 +1,6 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-<link rel="stylesheet" href="/css/colors.css">
-<link rel="stylesheet" href="/css/user/navbar.css">
+{{-- <link href="css/sb-admin-2.min.css" rel="stylesheet"> --}}
+
 <link rel="stylesheet" href="/css/user/body.css">
 <link rel="stylesheet" href="/css/user/venueCreate.css">
 <link rel="stylesheet" href="/css/user/footer.css">
@@ -10,6 +8,7 @@
 <link rel="stylesheet" href="/css/user/schedule.css">
 <link rel="stylesheet" href="/css/user/booking.css">
 <link rel="stylesheet" href="/css/user/cart.css">
+<link rel="stylesheet" href="/css/user/mount.css">
 <link rel="stylesheet" href="/css/user/paymentConfirmation.css">
 
 <!-- Font Awesome -->
@@ -45,9 +44,13 @@
 {{-- <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script> --}}
 
 <!-- Custom styles for this template-->
-<link href="css/sb-admin-2.min.css" rel="stylesheet">
 <!-- Custom styles for this page -->
-<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+{{-- <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"> --}}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<link rel="stylesheet" href="/css/colors.css">
 
 {{-- MIDTRANS --}}
 <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>

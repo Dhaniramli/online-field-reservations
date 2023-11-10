@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PlayingTimeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\User\BookingController as UserBookingController;
+use App\Http\Controllers\User\InvoiceController;
 use App\Http\Controllers\User\PaymentConfirmationController;
 use App\Http\Controllers\User\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -52,13 +53,15 @@ Route::post('/admin/lapangan/store', [FieldListController::class, 'store'])->nam
 Route::get('/admin/lapangan/{id}/jadwal', [AdminFieldScheduleController::class, 'index'])->name('index-jadwalLapangan');
 Route::post('/admin/lapangan/store/jadwal', [AdminFieldScheduleController::class, 'store'])->name('store-jadwalLapangan');
 
-Route::get('/payment-confirmation/{ids}', [PaymentConfirmationController::class, 'index'])->name('index-paymentConfirmation');
-Route::get('/payment/{ids}', [PaymentConfirmationController::class, 'mount'])->name('bayar');
+Route::middleware(['auth', 'onlyPengguna'])->group(function () {
+    Route::get('/payment-confirmation/{ids}', [PaymentConfirmationController::class, 'index'])->name('index-paymentConfirmation');
+    Route::get('/payment/{ids}', [PaymentConfirmationController::class, 'mount'])->name('bayar');
 
-Route::get('/invoice', [PaymentConfirmationController::class, 'invoice'])->name('invoice');
-Route::get('/invoice/{id}', [PaymentConfirmationController::class, 'invoiceDetail'])->name('invoiceDetail');
-Route::put('/generate-snap-token/{id}', [PaymentConfirmationController::class, 'generateSnapToken']);
+    Route::put('/generate-snap-token/{id}', [PaymentConfirmationController::class, 'generateSnapToken']);
+    
+    Route::get('/pembelian', [InvoiceController::class, 'index'])->name('pembelian');
 
-Route::put('/updateSchedule/{ids}', [PaymentConfirmationController::class, 'updateTrue']);
-Route::put('/updateScheduleFalse/{ids}', [PaymentConfirmationController::class, 'updateFalse']);
-Route::post('/transaction/pending', [PaymentConfirmationController::class, 'onPending']);
+    Route::put('/updateSchedule/{ids}', [PaymentConfirmationController::class, 'updateTrue']);
+    Route::put('/updateScheduleFalse/{ids}', [PaymentConfirmationController::class, 'updateFalse']);
+    Route::post('/transaction/pending', [PaymentConfirmationController::class, 'onPending']);
+});

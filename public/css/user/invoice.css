@@ -1,0 +1,93 @@
+.content-pembelian {
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.content-pembelian h1 {
+    color: var(--primary-100);
+    font-size: 40px;
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+.content-pembelian .scrollable-tabs-container {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+}
+
+.content-pembelian .btn-tabs{
+    border: 1px solid var(--primary-100);
+    color: var(--primary-100);
+    margin: 5px;
+    transition: 0.9;
+    font-size: 15px;
+}
+
+.content-pembelian .btn-tabs.active{
+    background-color: var(--primary-100);
+    color: white;
+}
+
+.content-pembelian .btn-tabs:hover{
+    background-color: var(--primary-200);
+    color: white;
+}
+
+.isi-content h2{
+    font-size: 18px;
+}
+.isi-content h3{
+    font-size: 15px;
+    font-weight: 500;
+}
+.isi-content .teks-2{
+    font-size: 13px;
+    margin-left: 10px;
+    background-color: rgb(145, 245, 145);
+    color: green;
+    height: fit-content;
+    width: fit-content;
+    padding: 2px 5px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+.isi-content .teks-3{
+    font-size: 13px;
+    margin-left: 10px;
+    background-color: rgb(245, 145, 145);
+    color: rgb(128, 0, 0);
+    height: fit-content;
+    width: fit-content;
+    padding: 2px 5px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+.isi-content .teks-4{
+    font-size: 13px;
+    margin-left: 10px;
+    background-color: rgb(238, 245, 145);
+    color: rgb(126, 128, 0);
+    height: fit-content;
+    width: fit-content;
+    padding: 2px 5px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.content-pembelian .btn-invoice-utama{
+    background-color: var(--primary-100);
+    color: white;
+    width: 100%;
+    margin: 10px;
+}
+
+.content-pembelian .btn-invoice-utama:hover{
+    opacity: calc(0.91);
+}
+
+.content-pembelian .btn-invoice-utama:active{
+    background-color: var(--primary-200);
+    border: 1px solid var(--primary-100);
+    color: white;
+}

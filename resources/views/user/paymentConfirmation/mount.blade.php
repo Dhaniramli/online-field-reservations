@@ -1,7 +1,7 @@
 @extends('user.layouts.main')
 
 @section('content')
-<div class="container content-paymentConfirmation">
+<div class="container content-mount">
 
     <h1 class="title-jadwal text-center mt-4">Detail Pembayaran</h1>
     {{-- <p class="text-center sub-title-paymentConfir">Pastikan detail pemesanan sudah sesuai dan benar.</p> --}}
@@ -65,7 +65,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="h-12 text-center">
-                            <button id="pay-button-full" class="btn btn-success">Bayar</button>
+                            <button id="pay-button-full" class="btn btn-success btn-myprimary btn-block">Bayar</button>
                         </td>
                     </tr>
                 </table>
