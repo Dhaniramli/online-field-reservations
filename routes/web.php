@@ -63,4 +63,5 @@ Route::middleware(['auth', 'onlyPengguna'])->group(function () {
     
     Route::get('/pembelian', [InvoiceController::class, 'index'])->name('pembelian');
     Route::get('/pembelian/{id}', [InvoiceController::class, 'show'])->name('show-pembelian');
+    Route::post('/cancel/{id}', [InvoiceController::class, 'cancel'])->name('cancel-pembelian');
 });

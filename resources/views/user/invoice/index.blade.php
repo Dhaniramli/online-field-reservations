@@ -107,7 +107,7 @@
                         @endif
 
                         @if ($item->status_pay_early != 'expire' && $item->status_pay_final != 'expire')
-                        <button class="btn btn-invoice-utama btn bg-danger">Batal</button>
+                        <button class="btn btn-invoice-utama btn bg-danger" data-bs-toggle="modal" data-bs-target="#cancelModal{{ $item->id }}">Batal</button>
                         @endif
                     </div>
 
@@ -124,6 +124,11 @@
 <script src="/js/user/invoice.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+@foreach ($transaction as $item)
+@include('user.invoice.cancel')
+@endforeach
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
@@ -193,4 +198,5 @@
     });
 
 </script>
+
 @endsection
