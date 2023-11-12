@@ -17,12 +17,12 @@ class OnlyPengguna
      */
     public function handle(Request $request, Closure $next)
     {
-        // if(!Auth::user()->is_admin){
-        //     return redirect('/');
-        // }
-        if(!auth()->check() || !auth()->user()->is_admin){
+        if(Auth::user()->is_admin === false){
             return redirect('/');
         }
+        // if(!auth()->check() || !auth()->user()->is_admin){
+        //     return redirect('/');
+        // }
         return $next($request);
     }
 }
