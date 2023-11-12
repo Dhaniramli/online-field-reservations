@@ -8,7 +8,7 @@
 /* NEW SCHEDULE */
 .content-schedule {
     min-height: 100vh;
-    padding-top: 130px;
+    padding-top: 100px;
 }
 
 .content-schedule .btn-filter {
@@ -62,10 +62,15 @@
     .content-schedule .card-jadwal h3 {
         font-size: 15px;
     }
+
+    .content-schedule .isi-list-jadwal{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }
 
 .content-schedule .selected {
-    background-color: var(--text-100);
+    background-color: var(--primary-100);
 }
 
 .content-schedule .selected:active {
@@ -74,6 +79,10 @@
 
 .content-schedule .card-jadwal:active {
     transform: scale(0.96);
+}
+
+.content-schedule .card.card-jadwal.booked{
+    background-color: var(--text-100);
 }
 
 .box-pembayaran {
@@ -88,8 +97,13 @@
 }
 
 .box-pembayaran .btn-pembayaran {
-    background-color: #00AA9F;
+    background-color: var(--primary-100);
     color: white;
+}
+.box-pembayaran .btn-pembayaran:active{
+    background-color: var(--primary-200);
+    color: white;
+    border: none;
 }
 
 @media (max-width: 768px) {

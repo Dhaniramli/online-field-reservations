@@ -1,6 +1,8 @@
 @extends('user.layouts.main')
 
 @section('content')
+<link rel="stylesheet" href="/css/user/booking.css">
+
 <div class="container content-booking">
     <h1 class="text-center title-booking">Lapangan Tersedia</h1>
 

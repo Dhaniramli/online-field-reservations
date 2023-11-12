@@ -1,3 +1,42 @@
 .content-mount{
     padding-top: 100px;
 }
+
+.content-mount h1{
+    color: var(--primary-100);
+    font-size: 30px;
+    font-weight: 600;
+}
+.content-mount h2{
+    color: var(--primary-100);
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.content-mount .card-mount{
+    padding: 10px;
+}
+
+.content-mount .card-mount-2{
+    padding: 10px;
+}
+
+.content-mount .btn-bayar:active{
+    background-color: var(--primary-200);
+    color: white;
+}
+
+@media (max-width: 991px) {
+    .content-mount .card-mount-2{
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-mount h1{
+        font-size: 25px;
+    }
+    .content-mount h2{
+        font-size: 25px;
+    }
+}

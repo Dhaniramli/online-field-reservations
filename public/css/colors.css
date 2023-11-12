@@ -13,8 +13,16 @@
 
 .btn-myprimary{
     background-color: #019b98;
+    color: white;
 }
 
 .btn-myprimary:hover{
     background-color: #048684;
+    color: white;
+}
+
+.btn-myprimary:active{
+    background-color: #55ccc9;
+    color: white;
+    border: none;
 }

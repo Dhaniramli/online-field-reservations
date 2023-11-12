@@ -1,6 +1,8 @@
 @extends('user.layouts.main')
 
 @section('content')
+<link rel="stylesheet" href="/css/user/schedule.css">
+
 <div class="container content-schedule">
     <h1 class="title-jadwal text-center">Jadwal Lapangan</h1>
 
@@ -18,7 +20,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row isi-list-jadwal">
         @if (!$items->count())
         <div class="col-lg-6 col-md-4 col-6 p-2 my-auto mx-auto">
             <div class="icon-not d-flex justify-content-center">
@@ -28,14 +30,14 @@
         @else
         @foreach ($items as $item)
         <div class="col-lg-3 col-md-4 col-6 p-2">
-            <div class="card card-jadwal d-flex flex-column justify-content-center align-items-center"
-                data-id="{{ $item->id }}" data-selected="false">
+            <div class="card card-jadwal d-flex flex-column justify-content-center align-items-center {{ $item->is_booked ? 'booked' : '' }}"
+                data-id="{{ $item->id }}" data-selected="false" data-is-booked="{{ $item->is_booked }}">
                 <h1 class="text-center">{{ $item->time_start . ' - ' . $item->time_finish }}</h1>
                 <h2 class="text-center">
                     @if ($item->is_booked)
                     Booked
                     @else
-                    Rp. {{ $item->price }}
+                    Rp. {{ number_format($item->price, 0, ',', '.') }}
                     @endif
                 </h2>
             </div>
@@ -49,9 +51,10 @@
         <a id="btn-lanjut-pembayaran" class="btn btn-pembayaran w-100" href="#">Lanjut Pembayaran</a>
     </div>
 </div>
-@endsection
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     $(document).ready(function () {
         var selectedItems = [];
@@ -66,6 +69,15 @@
 
         $(".card.card-jadwal").click(function () {
             var id = $(this).data("id");
+            var isBooked = $(this).data("is-booked");
+
+            // Menambahkan kondisi untuk mencegah klik jika item sudah dibooking
+            if (isBooked) {
+                // Menghapus item dari selectedItems jika sudah terpilih sebelumnya
+                selectedItems = selectedItems.filter(item => item !== id);
+                $(this).removeClass("selected");
+                return;
+            }
 
             if (selectedItems.includes(id)) {
                 selectedItems = selectedItems.filter(item => item !== id);
@@ -79,10 +91,10 @@
         });
 
         $("#btn-lanjut-pembayaran").click(function () {
-            var ids = selectedItems.join(','); // Menggabungkan id menjadi string dengan koma
+            var ids = selectedItems.join(','); 
             var url = "/payment-confirmation/" + ids;
-            window.location.href = url; // Mengarahkan ke URL dengan id yang dipilih
+            window.location.href = url; 
         });
     });
-
 </script>
+@endsection
