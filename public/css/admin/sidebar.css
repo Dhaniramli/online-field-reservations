@@ -1,11 +1,12 @@
 .sidebar{
-    background-color: #00AA9F;
+    background-color: #019b98;
 }
 
 .sidebar-brand-text{
-    color: #FCA500;
+    color: white;
+    font-size: 12px;
 }
 
 .sidebar .collapse-inner a .active{
-    color: #FCA500;
+    color: white;
 }
