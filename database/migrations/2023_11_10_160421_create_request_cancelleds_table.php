@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('transaction_id');
             $table->string('bank_name');
             $table->string('account_number');
+            $table->string('status')->default('pending');
             $table->text('reason');
             $table->timestamps();
 

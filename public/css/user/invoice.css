@@ -7,16 +7,18 @@
     color: var(--primary-100);
     font-size: 40px;
     font-weight: 600;
-    margin-top: 50px;
 }
 
 .content-pembelian .scrollable-tabs-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Perubahan ke flex-start agar tombol tetap berada di kiri */
     overflow-x: auto;
+    white-space: nowrap;
+    /* Tombol tetap dalam satu baris */
 }
 
-.content-pembelian .btn-tabs{
+.content-pembelian .btn-tabs {
     border: 1px solid var(--primary-100);
     color: var(--primary-100);
     margin: 5px;
@@ -24,24 +26,26 @@
     font-size: 15px;
 }
 
-.content-pembelian .btn-tabs.active{
+.content-pembelian .btn-tabs.active {
     background-color: var(--primary-100);
     color: white;
 }
 
-.content-pembelian .btn-tabs:hover{
+.content-pembelian .btn-tabs:hover {
     background-color: var(--primary-200);
     color: white;
 }
 
-.isi-content h2{
+.isi-content h2 {
     font-size: 18px;
 }
-.isi-content h3{
+
+.isi-content h3 {
     font-size: 15px;
     font-weight: 500;
 }
-.isi-content .teks-2{
+
+.isi-content .teks-2 {
     font-size: 13px;
     margin-left: 10px;
     background-color: rgb(145, 245, 145);
@@ -52,7 +56,8 @@
     font-weight: 700;
     border-radius: 5px;
 }
-.isi-content .teks-3{
+
+.isi-content .teks-3 {
     font-size: 13px;
     margin-left: 10px;
     background-color: rgb(245, 145, 145);
@@ -63,7 +68,8 @@
     font-weight: 700;
     border-radius: 5px;
 }
-.isi-content .teks-4{
+
+.isi-content .teks-4 {
     font-size: 13px;
     margin-left: 10px;
     background-color: rgb(238, 245, 145);
@@ -75,36 +81,89 @@
     border-radius: 5px;
 }
 
-.content-pembelian .btn-invoice-utama{
+.content-pembelian .btn-invoice-utama {
     background-color: var(--primary-100);
     color: white;
     width: 100%;
     margin: 10px;
 }
 
-.content-pembelian .btn-invoice-utama:hover{
+.content-pembelian .btn-invoice-utama:hover {
     opacity: calc(0.91);
 }
 
-.content-pembelian .btn-invoice-utama:active{
+.content-pembelian .btn-invoice-utama:active {
     background-color: var(--primary-200);
     border: 1px solid var(--primary-100);
     color: white;
 }
 
-.cek-email{
+.cek-email {
     text-decoration: none;
     color: var(--text-100);
     font-size: 17px;
 }
 
-.cek-email:hover{
+.cek-email:hover {
     text-decoration: underline;
     color: var(--text-100);
 }
 
+.content-pembelian h4 {
+    color: red;
+    font-size: 17px;
+}
+.show-invoice h4 {
+    color: red;
+    font-size: 17px;
+}
+
+.header-content p {
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+    .content-pembelian h1 {
+        font-size: 30px;
+    }
+
+    .content-pembelian .btn-tabs {
+        font-size: 5px;
+    }
+}
+
+@media (max-width: 991px) {
+    .content-pembelian .btn-tabs {
+        font-size: 15px;
+    }
+}
+
 /* SHOW INVOICE */
-.show-invoice{
+.show-invoice {
     padding-top: 100px;
 }
+
+.show-invoice h1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--primary-100);
+}
+
+.show-invoice h2 {
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--primary-100);
+}
+
+@media (max-width: 768px) {
+    .show-invoice h1 {
+        font-size: 20px;
+    }
+
+    .show-invoice h2 {
+        font-size: 20px;
+    }
+}
+
 /* AKHIR SHOW INVOICE */

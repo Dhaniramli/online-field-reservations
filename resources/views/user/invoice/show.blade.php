@@ -8,7 +8,8 @@
     <div class="row">
         <div class="col-lg-6 mx-auto my-auto">
             <div class="card p-2">
-                <h1 class="title-pelanggan mt-2 text-center">Detail Transaksi</h1>
+                <h1 class="title-pelanggan mt-2 text-center">Detail Sewa Lapangan</h1>
+
                 <table class="table">
                     @foreach ($belanja as $item)
                     <tr>
@@ -23,7 +24,7 @@
                     @endforeach
                 </table>
                 <table class="table table-borderless">
-                    <h2 class="title-total text-center">Total</h2>
+                    <h2 class="title-total text-center">Total Pembayaran</h2>
                     <tr>
                         <td class="h-12">
                             Total Harga<br>
@@ -51,19 +52,24 @@
                         </td>
                     </tr>
 
-                    @if (!($transactionDetail->status_pay_early === 'expire' || $transactionDetail->status_pay_final ===
+                    @if (!($transactionDetail->status_pay_early === 'expire' || $transactionDetail->status_pay_early === 'pending' || $transactionDetail->status_pay_final === 'pending' || $transactionDetail->status_pay_final ===
                     'paid' || $transactionDetail->status_pay_final === 'expire'))
                     <tr>
                         <td colspan="2" class="h-12 text-center">
-                            <button id="pay-button" class="btn btn-success">Bayar</button>
+                            @if (!$cancel->where('transaction_id', $transactionDetail->id)->first())
+                            <button id="pay-button" class="btn btn-myprimary btn-block mt-3">Bayar</button>
+                            @endif
                         </td>
                     </tr>
                     @endif
 
                 </table>
 
-                <a class="text-center cek-email mt-4 mb-2" href="mailto:{{ Auth::user()->email }}">Cek email untuk info
-                    pembayaran</a>
+                @if ($cancel->where('transaction_id', $transactionDetail->id)->first())
+                    <h4 class="text-center mt-4 mb-2">Pembatalan menunggu konfirmasi dari admin</h4>
+                @else
+                <a class="text-center cek-email mt-4 mb-2" href="mailto:{{ Auth::user()->email }}">Cek email untuk info pembayaran</a>
+                @endif
             </div>
         </div>
     </div>

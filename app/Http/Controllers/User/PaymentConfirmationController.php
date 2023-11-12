@@ -103,7 +103,7 @@ class PaymentConfirmationController extends Controller
             }
 
             if ($booking->is_booked) {
-                return response()->json(['message' => 'Jadwal sudah di-booking oleh orang lain.'], 400);
+                return response()->json(['message' => 'Jadwal sudah tidak tersedia, silahkan pilih jadwal lain yang masih tersedia!'], 400);
             } else {
                 $bookingToUpdate[] = $booking;
             }

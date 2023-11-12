@@ -7,13 +7,13 @@
     <h1 class="text-center">Daftar Transaksi</h1>
 
     <div class="scrollable-tabs-container mt-5">
-        <a href="/pembelian" class="btn btn-tabs {{ ($status === 'semua') ? 'active' : '' }}">Semua</a>
+        <a href="/pembelian" class="btn btn-tabs btn-block {{ ($status === 'semua') ? 'active' : '' }}">Semua</a>
         <a href="/pembelian?status=pending"
-            class="btn btn-tabs {{ ($status === 'pending') ? 'active' : '' }}">Berlangsung</a>
-        <a href="/pembelian?status=paid" class="btn btn-tabs {{ ($status === 'paid') ? 'active' : '' }}">Selesai</a>
-        <a href="/pembelian?status=paid_final"
-            class="btn btn-tabs {{ ($status === 'paid_final') ? 'active' : '' }}">Belum Selesai</a>
-        <a href="/pembelian?status=expire" class="btn btn-tabs {{ ($status === 'expire') ? 'active' : '' }}">Tidak
+            class="btn btn-tabs btn-block {{ ($status === 'pending') ? 'active' : '' }}">Berlangsung</a>
+        <a href="/pembelian?status=paid" class="btn btn-tabs btn-block {{ ($status === 'paid') ? 'active' : '' }}">Selesai</a>
+        <a href="/pembelian?status=unpaid"
+            class="btn btn-tabs btn-block {{ ($status === 'unpaid') ? 'active' : '' }}">Belum Selesai</a>
+        <a href="/pembelian?status=expire" class="btn btn-tabs btn-block {{ ($status === 'expire') ? 'active' : '' }}">Tidak
             Selesai</a>
     </div>
 
@@ -27,7 +27,10 @@
                 @endif
                 @foreach ($transaction as $item)
                 <div class="card shadow p-3 border-0 mb-3">
-                    <h2 class="mb-3 text-center">Sewa Lapangan</h2>
+                    <div class="header-content d-flex">
+                        <h2 class="mb-3">Sewa Lapangan</h2>
+                        <p>{{ \Carbon\Carbon::parse($item->created_at)->format('d F Y') }}</p>
+                    </div>
 
                     <table>
                         <tr>
@@ -98,21 +101,30 @@
 
                     <div class="tombol mt-3 d-flex">
                         <a href="/pembelian/{{ $item->id }}" class="btn btn-invoice-utama">Detail</a>
-                        @if ($item->status_pay_early != 'paid_final' && $item->status_pay_final != 'paid' &&
-                        $item->status_pay_early === 'paid' && $item->status_pay_early != 'expire' &&
-                        $item->status_pay_final != 'expire' && $item->status_pay_early != 'pending' &&
-                        $item->status_pay_final != 'pending')
-                        <button id="pay-button" data-item-id="{{ $item->id }}"
-                            class="btn btn-invoice-utama">Bayar</button>
+
+                        @if (!$cancel->where('transaction_id', $item->id)->first())
+                            
+                            @if ($item->status_pay_early != 'paid_final' && $item->status_pay_final != 'paid' &&
+                                $item->status_pay_early === 'paid' && $item->status_pay_early != 'expire' &&
+                                $item->status_pay_final != 'expire' && $item->status_pay_early != 'pending' &&
+                                $item->status_pay_final != 'pending')
+                                <button id="pay-button" data-item-id="{{ $item->id }}" class="btn btn-invoice-utama">Bayar</button>
+                            @endif
+                            
+                            @if ($item->status_pay_early != 'expire' && $item->status_pay_final != 'expire')
+                            <button class="btn btn-invoice-utama btn bg-danger" data-bs-toggle="modal" data-bs-target="#cancelModal{{ $item->id }}">Batal</button>
+                            @endif
+
                         @endif
 
-                        @if ($item->status_pay_early != 'expire' && $item->status_pay_final != 'expire')
-                        <button class="btn btn-invoice-utama btn bg-danger" data-bs-toggle="modal" data-bs-target="#cancelModal{{ $item->id }}">Batal</button>
-                        @endif
+
                     </div>
 
-                    <a class="text-center cek-email mt-4 mb-2" href="mailto:{{ Auth::user()->email }}">Cek email untuk
-                        info pembayaran</a>
+                    @if ($cancel->where('transaction_id', $item->id)->first())
+                    <h4 class="text-center mt-4 mb-2">Pembatalan menunggu konfirmasi dari admin</h4>
+                    @else
+                    <a class="text-center cek-email mt-4 mb-2" href="mailto:{{ Auth::user()->email }}">Cek email untuk info pembayaran</a>
+                    @endif
                 </div>
                 @endforeach
             </div>

@@ -18,8 +18,11 @@ class OnlyAdmin
     public function handle(Request $request, Closure $next)
     {
 
-        if(Auth::user()->is_admin === true){
-            return redirect('/login');
+        // if(Auth::user()->is_admin){
+        //     return redirect('/admin');
+        // }
+        if(!auth()->check() || !auth()->user()->is_admin){
+            return redirect('/');
         }
         return $next($request);
     }

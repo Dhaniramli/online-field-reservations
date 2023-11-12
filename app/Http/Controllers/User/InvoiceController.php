@@ -16,44 +16,50 @@ class InvoiceController extends Controller
     {
         $user = Auth::user();
 
+        $cancel = RequestCancelled::all();
+
         if ($request->status === 'paid') {
-            $transaction = Transaction::where('user_id', $user->id)->where('status_pay_final', 'paid')->get();
+            $transaction = Transaction::where('user_id', $user->id)->where('status_pay_final', 'paid')->latest('created_at')->get();
             $status = 'paid';
 
-            return view('user.invoice.index', compact('transaction', 'status'));
+            return view('user.invoice.index', compact('transaction', 'status', 'cancel'));
         } else if ($request->status === 'pending') {
             $transaction = Transaction::where('user_id', $user->id)->where(function ($query) {
                 $query->where('status_pay_early', 'pending')
                     ->orWhere('status_pay_final', 'pending');
-            })->get();
+            })->latest('created_at')->get();
             $status = 'pending';
 
-            return view('user.invoice.index', compact('transaction', 'status'));
+            return view('user.invoice.index', compact('transaction', 'status', 'cancel'));
         } else if ($request->status === 'expire') {
             $transaction = Transaction::where('user_id', $user->id)->where(function ($query) {
                 $query->where('status_pay_early', 'expire')
                     ->orWhere('status_pay_final', 'expire');
-            })->get();
+            })->latest('created_at')->get();
             $status = 'expire';
 
-            return view('user.invoice.index', compact('transaction', 'status'));
-        } else if ($request->status === 'paid_final') {
+            return view('user.invoice.index', compact('transaction', 'status', 'cancel'));
+        } else if ($request->status === 'unpaid') {
             $transaction = Transaction::where('user_id', $user->id)->where(function ($query) {
-                $query->where('status_pay_early', 'paid')
+                $query->where('status_pay_early', 'unpaid')
+                    ->orWhere('status_pay_early', 'pending')
+                    ->orWhere('status_pay_final', 'unpaid')
                     ->orWhere('status_pay_final', 'pending');
-            })->get();
-            $status = 'paid_final';
+            })->latest('created_at')->get();
+            $status = 'expire';             
 
-            return view('user.invoice.index', compact('transaction', 'status'));
+            $status = 'unpaid';
+
+            return view('user.invoice.index', compact('transaction', 'status', 'cancel'));
         } else if ($request->status) {
             $transaction = [];
 
             return view('user.invoice.index', compact('transaction'));
         } else {
-            $transaction = Transaction::where('user_id', $user->id)->get();
+            $transaction = Transaction::where('user_id', $user->id)->latest('created_at')->get();
             $status = 'semua';
 
-            return view('user.invoice.index', compact('transaction', 'status'));
+            return view('user.invoice.index', compact('transaction', 'status', 'cancel'));
         }
     }
 
@@ -62,14 +68,19 @@ class InvoiceController extends Controller
         $transactionDetail = Transaction::find($id);
         $idsubah = explode(',', $transactionDetail->schedule_ids);
         $belanja = FieldSchedule::whereIn('id', $idsubah)->get();
+        $cancel = RequestCancelled::all();
 
-        return view('user.invoice.show', compact('transactionDetail', 'belanja'));
+        return view('user.invoice.show', compact('transactionDetail', 'belanja', 'cancel'));
     }
 
     public function cancel(Request $request, $id)
     {
         $user = Auth::user();
-        $requestCancelled = RequestCancelled::find($id);
+        $requestCancelled = RequestCancelled::where('transaction_id', $id)->first();
+
+        if ($requestCancelled) {
+            return response()->json(['success' => false, 'done' => ['common' => ['Silahkan tunggu proses pembatalan anda di periksa oleh admin']]], 422);
+        }
 
         $validator = Validator::make($request->all(), [
             'bank_name' => 'required|string',
@@ -82,13 +93,9 @@ class InvoiceController extends Controller
         ]);
 
         if ($validator->fails()) {
-            // Jika validasi gagal, kembalikan respons JSON dengan pesan kesalahan
             return response()->json(['success' => false, 'errors' => ['common' => ['Isi Semua Kolom']]], 422);
         }
-        //  else if ($requestCancelled->transaction_id === $id) {
-        //     return response()->json(['success' => false, 'done' => 'sudahAda']);
-        // }
-         else {
+        else {
 
             $cancel = RequestCancelled::create([
                 'user_id' => $user->id,

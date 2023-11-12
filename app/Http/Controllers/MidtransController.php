@@ -52,6 +52,7 @@ class MidtransController extends Controller
 
                     } else if ($order->status_pay_final === 'unpaid') {
                         $order->update(['status_pay_early' => 'expire']);
+                        $order->update(['status_pay_final' => 'expire']);
 
                         //Ubah Status Jadwal Yang diPesan
                         $idsubah = explode(',', $order->schedule_ids);

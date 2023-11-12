@@ -37,21 +37,21 @@ Route::post('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, '
 
 Route::get('/jadwal-lapangan/{id}', [UserAdminFieldScheduleController::class, 'index']);
 
-Route::get('/admin', function () {
-    return view('admin.home');
+Route::middleware(['auth', 'onlyAdmin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin.home');
+    });
+    
+    Route::get('/admin/hari-tanggal', [DayDateController::class, 'index']);
+    Route::post('/admin/hari-tanggal/create', [DayDateController::class, 'store']);
+    
+    Route::get('/admin/lapangan', [FieldListController::class, 'index'])->name('index-lapangan');
+    Route::post('/admin/lapangan/store', [FieldListController::class, 'store'])->name('store-lapangan');
+    
+    Route::get('/admin/lapangan/{id}/jadwal', [AdminFieldScheduleController::class, 'index'])->name('index-jadwalLapangan');
+    Route::post('/admin/lapangan/store/jadwal', [AdminFieldScheduleController::class, 'store'])->name('store-jadwalLapangan');
+
 });
-
-Route::get('/admin/hari-tanggal', [DayDateController::class, 'index']);
-Route::post('/admin/hari-tanggal/create', [DayDateController::class, 'store']);
-
-// Route::get('/admin/jadwal-lapangan', [AdminFieldScheduleController::class, 'index']);
-
-//route sewa lapangan
-Route::get('/admin/lapangan', [FieldListController::class, 'index'])->name('index-lapangan');
-Route::post('/admin/lapangan/store', [FieldListController::class, 'store'])->name('store-lapangan');
-
-Route::get('/admin/lapangan/{id}/jadwal', [AdminFieldScheduleController::class, 'index'])->name('index-jadwalLapangan');
-Route::post('/admin/lapangan/store/jadwal', [AdminFieldScheduleController::class, 'store'])->name('store-jadwalLapangan');
 
 Route::middleware(['auth', 'onlyPengguna'])->group(function () {
     Route::get('/payment-confirmation/{ids}', [PaymentConfirmationController::class, 'index'])->name('index-paymentConfirmation');

@@ -103,6 +103,7 @@
                 })
                 .catch(function (error) {
                     console.error('Gagal mendapatkan Snap Token:', error.response.data);
+                    alert(error.response.data.message);
                 });
         });
 

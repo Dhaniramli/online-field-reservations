@@ -32,7 +32,7 @@
     </div>
 </div>
 
-{{-- <script>
+<script>
     function submitForm(itemId) {
         var form = document.getElementById('cancelForm' + itemId);
         var formData = new FormData(form);
@@ -49,57 +49,22 @@
                 $('#cancelModal' + itemId).modal('hide');
                 alert(data.message);
                 location.reload();
-            } else {
-                // If validation fails, display an alert with the error messages
-                var errors = Object.values(data.errors).flat();
-                var errorMessage = errors.join('\n');
+            } else if (data.done && data.done.common) {
+                // Jika ada kondisi spesifik 'done' (atau kondisi lain yang sesuai)
+                var doneMessage = data.done.common.join('\n');
+                alert(doneMessage);
+                location.reload();
+            } else if (data.errors && data.errors.common) {
+                // Jika terjadi kesalahan umum (common errors)
+                var errorMessage = data.errors.common.join('\n');
                 alert(errorMessage);
+            } else {
+                // Kondisi lainnya, misalnya jika ada kesalahan yang tidak dapat diatasi di sisi klien
+                alert('Terjadi kesalahan. Silakan coba lagi nanti.');
             }
         })
         .catch(error => {
             console.error('Error:', error);
         });
     }
-</script> --}}
-
-
-<script>
-    function submitForm(itemId) {
-        var form = document.getElementById('cancelForm' + itemId);
-        var formData = new FormData(form);
-
-        fetch(form.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                try {
-                    if (data.success) {
-                        // Close the modal
-                        $('#cancelModal' + itemId).modal('hide');
-                        alert(data.message);
-                        location.reload();
-                    } else {
-                        // If validation fails or cancellation is being processed, display an alert with the appropriate message
-                        if (data.done === 'sudahAda') {
-                            // Display specific alert for the processing case
-                            console.log('Pembatalan anda sedang di proses, mohon bersabar menunggu respon balik dari admin');
-                            alert('Pembatalan anda sedang di proses, mohon bersabar menunggu respon balik dari admin');
-                        } else {
-                            // Display generic alert for validation errors or other failure cases
-                            var errors = Object.values(data.errors).flat();
-                            var errorMessage = errors.join('\n');
-                            alert(errorMessage);
-                        }
-                    }
-                } catch (error) {
-                    console.error('Error parsing JSON:', error);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
-
 </script>
