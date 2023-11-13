@@ -10344,7 +10344,7 @@ a:focus {
 }
 
 .sidebar .nav-item.active .nav-link {
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .sidebar .nav-item .collapse {
@@ -10399,16 +10399,16 @@ a:focus {
   background-color: #eaecf4;
 }
 
-.sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
+/* .sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:active {
   background-color: #dddfeb;
-}
+} */
 
-.sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
+/* .sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
-  color: #4e73df;
+  color: #014e60;
   font-weight: 700;
-}
+} */
 
 .sidebar #sidebarToggle {
   width: 2.5rem;

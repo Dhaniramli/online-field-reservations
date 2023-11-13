@@ -1,5 +1,6 @@
 .sidebar{
     background-color: #019b98;
+    color: white;
 }
 
 .sidebar-brand-text{
@@ -7,6 +8,13 @@
     font-size: 12px;
 }
 
-.sidebar .collapse-inner a .active{
-    color: white;
+.sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item:active {
+  background-color: var(--primary-200);
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
+  color: var(--text-100);
+  font-weight: 700;
 }

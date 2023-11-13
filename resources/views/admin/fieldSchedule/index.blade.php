@@ -13,9 +13,12 @@
                         <input type="text" id="search" class="form-control" placeholder="Cari">
                     </div>
                 </div>
+                <div class="col-lg-9 d-flex">
+                    <div class="tombol-tambah ms-auto">
+                        <a class="btn btn-success px-4 py-2" data-bs-toggle="modal" data-bs-target="#tambahJadwalModal">Tambah Jadwal</a>
+                    </div>
+                </div>                
             </div>
-            <a class="btn btn-success px-4 py-2 mr-auto" data-bs-toggle="modal"
-                data-bs-target="#tambahJadwalModal">Tambah Jadwal</a>
         </div>
 
         <div class="card-body">

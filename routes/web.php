@@ -1,19 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\BookingController as AdminBookingController;
-use App\Http\Controllers\Admin\DayDateController;
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\FieldListController;
 use App\Http\Controllers\Admin\FieldScheduleController as AdminFieldScheduleController;
 use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleController;
-use App\Http\Controllers\Admin\PlayingTimeController;
 use App\Http\Controllers\Admin\RequestCancelledController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\MidtransController;
-use App\Http\Controllers\User\BookingController as UserBookingController;
 use App\Http\Controllers\User\InvoiceController;
 use App\Http\Controllers\User\PaymentConfirmationController;
 use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\User\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,26 +32,28 @@ Route::get('/sewa-lapangan', [UserFieldScheduleController::class, 'field'])->nam
 Route::get('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'index'])->name('index-jadwal');
 Route::post('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'index'])->name('index-jadwal');
 
-Route::get('/jadwal-lapangan/{id}', [UserAdminFieldScheduleController::class, 'index']);
-
 Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     Route::get('/admin', function () {
         return view('admin.home');
     });
-    
-    Route::get('/admin/hari-tanggal', [DayDateController::class, 'index']);
-    Route::post('/admin/hari-tanggal/create', [DayDateController::class, 'store']);
-    
+
     Route::get('/admin/lapangan', [FieldListController::class, 'index'])->name('index-lapangan');
     Route::post('/admin/lapangan/store', [FieldListController::class, 'store'])->name('store-lapangan');
-    
+
     Route::get('/admin/lapangan/{id}/jadwal', [AdminFieldScheduleController::class, 'index'])->name('index-jadwalLapangan');
     Route::post('/admin/lapangan/store/jadwal', [AdminFieldScheduleController::class, 'store'])->name('store-jadwalLapangan');
-    
+
     Route::get('/admin/permintaan-pembatalan', [RequestCancelledController::class, 'index'])->name('index-cancel');
     Route::get('/admin/permintaan-pembatalan/hapus/{id}', [RequestCancelledController::class, 'destroy']);
     Route::get('/admin/permintaan-pembatalan/konfir/{id}', [RequestCancelledController::class, 'confirm']);
     Route::get('/admin/permintaan-pembatalan/tolak/{id}', [RequestCancelledController::class, 'reject']);
+    
+    //route kontak kami
+    Route::get('/admin/kontak-kami', [ContactUsController::class, 'index'])->name('index-contact');
+    Route::post('/admin/kontak-kami', [ContactUsController::class, 'store'])->name('store-contact');
+    Route::put('/admin/kontak-kami/update', [ContactUsController::class, 'update'])->name('update-contact');
+    Route::get('/admin/kontak-kami/hapus/{id}', [ContactUsController::class, 'destroy'])->name('destroy-contact');
+
 });
 
 Route::middleware(['auth', 'onlyPengguna'])->group(function () {
@@ -66,7 +63,7 @@ Route::middleware(['auth', 'onlyPengguna'])->group(function () {
     Route::get('/deleteTransaction/{id}', [PaymentConfirmationController::class, 'destroy']);
 
     Route::put('/generate-snap-token/{id}', [PaymentConfirmationController::class, 'generateSnapToken']);
-    
+
     Route::get('/pembelian', [InvoiceController::class, 'index'])->name('pembelian');
     Route::get('/pembelian/{id}', [InvoiceController::class, 'show'])->name('show-pembelian');
     Route::post('/cancel/{id}', [InvoiceController::class, 'cancel'])->name('cancel-pembelian');

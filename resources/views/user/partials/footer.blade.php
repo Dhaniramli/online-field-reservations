@@ -5,10 +5,7 @@
         <a href="#" class="brand">Karsa Mini Soccer</a>
         <ul class="menu">
             <li>
-                <a href="#">Tentang Kami</a>
-            </li>
-            <li>
-                <a href="#">Kontak</a>
+                <a href="#">Kontak Kami</a>
             </li>
             <li>
                 <a href="#">Kebijakan Privasi</a>
