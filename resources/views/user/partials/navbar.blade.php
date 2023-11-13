@@ -12,6 +12,9 @@
         <div class="collapse navbar-collapse" id="navbarKarsa">
             <ul class="navbar-nav ms-auto mb-lg-0">
                 <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ Route('index-booking') }}">Lapangan</a>
                 </li>
                 <li class="nav-item">

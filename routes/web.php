@@ -12,6 +12,7 @@ use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\User\BookingController as UserBookingController;
 use App\Http\Controllers\User\InvoiceController;
 use App\Http\Controllers\User\PaymentConfirmationController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\TransactionController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,4 +70,8 @@ Route::middleware(['auth', 'onlyPengguna'])->group(function () {
     Route::get('/pembelian', [InvoiceController::class, 'index'])->name('pembelian');
     Route::get('/pembelian/{id}', [InvoiceController::class, 'show'])->name('show-pembelian');
     Route::post('/cancel/{id}', [InvoiceController::class, 'cancel'])->name('cancel-pembelian');
+
+    //route profile
+    Route::get('/profile', [ProfileController::class, 'index'])->name('index-profile');
+    Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('update-profile');
 });

@@ -1,0 +1,38 @@
+.content-profile {
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.content-profile h1 {
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--primary-100);
+}
+
+.content-profile .card-isi {
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.btn-simpan {
+    background-color: var(--primary-100);
+    color: white;
+}
+
+.btn-simpan:hover {
+    background-color: var(--primary-200);
+    color: white;
+}
+
+.btn-simpan:active {
+    background-color: var(--text-100);
+    color: white;
+}
+
+.btn-simpan:disabled{
+    background-color: white;
+    color: white;
+    border: none;
+    box-shadow: none;
+}
