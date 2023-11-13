@@ -1,30 +1,7 @@
 @extends('user.layouts.main')
 
 @section('content')
-{{-- <div class="container-fluid px-0">
-    <div class="main-carousel" data-flickity='{"autoPlay": 1500, "contain": true ,"prevNextButtons": true, "pageDots": false}'>
-        <div class="carousel-cell">
-            <div class="overlay">
-                <img src="/img/c1.png" alt="Blue Lock">
-            </div>
-        </div>
-        <div class="carousel-cell">
-            <div class="overlay">
-                <img src="/img/c2.png" alt="Blue Lock">
-            </div>
-        </div>
-        <div class="carousel-cell">
-            <div class="overlay">
-                <img src="/img/c3.png" alt="Blue Lock">
-            </div>
-        </div>
-        <div class="carousel-cell">
-            <div class="overlay">
-                <img src="/img/c4.jpeg" alt="Blue Lock">
-            </div>
-        </div>
-    </div>
-</div> --}}
+<link rel="stylesheet" href="/css/user/home.css">
 
 <div class="container-fluid content-home"
     style="background-image: linear-gradient(rgba(1, 78, 96, 1), rgba(1, 78, 96, 0.5)), url('{{ asset('/img/bg-home.jpg') }}'); background-size: cover;">
@@ -123,8 +100,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title text-center">Event Turnamen</h5>
-                    <p class="card-text text-center">Menyediakan layanan booking lapangan mini soccer untuk kegiatan
-                        berolahraga anda</p>
+                    <p class="card-text text-center">Memberikan layanan dan harga terbaik untuk anda yang akan mengadakan acara serta turnamen</p>
                 </div>
             </div>
         </div>
@@ -137,8 +113,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title text-center">Perlengkapan Olahraga</h5>
-                    <p class="card-text text-center">Menyediakan layanan booking lapangan mini soccer untuk kegiatan
-                        berolahraga anda</p>
+                    <p class="card-text text-center">Menyediakan perlengkapan olahraga dengan kualitas terbaik demi kenyamanan anda</p>
                 </div>
             </div>
         </div>

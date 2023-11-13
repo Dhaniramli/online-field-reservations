@@ -8,7 +8,7 @@
     rel="stylesheet">
 
 <!-- Custom styles for this template-->
-<link href="/css/sb-admin-2.min.css" rel="stylesheet">
+{{-- <link href="/css/sb-admin-2.min.css" rel="stylesheet"> --}}
 <link href="/css/admin/schedule.css" rel="stylesheet">
 <link href="/css/loading.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/colors.css">

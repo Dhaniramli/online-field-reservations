@@ -12,10 +12,10 @@
         <div class="collapse navbar-collapse" id="navbarKarsa">
             <ul class="navbar-nav ms-auto mb-lg-0">
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Home</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="{{ Route('index-booking') }}">Sewa Lapangan</a>
+                    <a class="nav-link {{ Request::is('sewa-lapangan*') ? 'active' : '' }}" href="{{ Route('index-booking') }}">Sewa Lapangan</a>
                 </li>
                 <li class="nav-item mx-2">
                     <a class="nav-link" href="#">Blog</a>
@@ -25,15 +25,15 @@
             <ul class="navbar-nav navbar-btn ms-auto mb-2 mb-lg-0 mb-md-3 mb-sm-3">
                 @auth
                 <li class="nav-item dropdown">
-                    <a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link mx-2 dropdown-toggle {{ Request::is('profile*') || Request::is('pembelian*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Hai, {{ auth()->user()->first_name }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/profile"><i class="fa fa-user" aria-hidden="true"></i>
+                        <li><a class="dropdown-item {{ Request::is('profile*') ? 'active' : '' }}" href="/profile"><i class="fa fa-user" aria-hidden="true"></i>
                                 Profil</a></li>
                         <li>
-                        <li><a class="dropdown-item" href="/pembelian"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <li><a class="dropdown-item {{ Request::is('pembelian*') ? 'active' : '' }}" href="/pembelian"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 Pembelian</a></li>
                         <li>
                             <hr class="dropdown-divider">

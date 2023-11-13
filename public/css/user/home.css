@@ -1,78 +1,8 @@
-/* .main-carousel{
-    background-color: #FCA500;
-}
-
-.main-carousel .carousel-cell {
-    width: 100%;
-    height: 100vh;
-    margin: 0;
-    background: #00AA9F;
-    border-radius: 5px;
-}
-
-.main-carousel .carousel-cell:before {
-    display: block;
-    text-align: center;
-    line-height: 200px;
-    font-size: 80px;
-    color: white;
-    position: relative;
-}
-
-.main-carousel .overlay {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-}
-
-.main-carousel img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-
-@media (max-width: 768px) {
-    .main-carousel .carousel-cell {
-        height: 30vh;
-    }
-
-    .main-carousel img {
-        height: 100%;
-        object-fit: cover;
-    }
-}
-
-.carousel-first {
-    height: 550px;
-}
-
-.main-carousel .flickity-prev-next-button {
-    width: 70px;
-    height: 70px;
-    background: transparent;
-}
-
-.main-carousel .flickity-prev-next-button .arrow {
-    fill: #FF7000;
-}
-
-.main-carousel .flickity-prev-next-button.no-svg {
-    color: #FF7000;
-}
-
-.main-carousel .flickity-prev-next-button:hover {
-    background: transparent;
-}
-
-.main-carousel .flickity-prev-next-button:disabled {
-    display: none;
-} */
-
 /* HOME NEW */
 .content-home {
     /* height: 100vh; */
     padding-top: 180px;
-    padding-bottom: 140px;
+    padding-bottom: 180px;
 }
 
 .content-home h1 {

@@ -18,10 +18,16 @@ nav {
     color: var(--primary-200);
 }
 
-nav .nav-link {
+.navbar .nav-link {
     font-weight: 500;
     font-size: 17px;
     color: var(--primary-100);
+}
+
+.navbar .nav-link.active{
+    color: var(--text-100);
+    font-size: 18px;
+    font-weight: 700;
 }
 
 
@@ -55,6 +61,10 @@ nav .dropdown-item {
 
 nav .dropdown-menu .dropdown-item:hover {
     background-color: var(--primary-200);
+}
+
+.navbar .dropdown-menu .dropdown-item.active{
+    background-color: var(--text-100);
 }
 
 nav .dropdown-menu a {
