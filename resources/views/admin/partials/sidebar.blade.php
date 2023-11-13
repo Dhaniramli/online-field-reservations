@@ -48,6 +48,12 @@
         </div>
     </li>
 
+    <li class="nav-item {{ Request::is('admin/tautan*') ? 'active' : '' }}">
+        <a class="nav-link " href="{{ Route('index-tautan') }}">
+            <i class="fas fa-link"></i>
+            <span>Tautan</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

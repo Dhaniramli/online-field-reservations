@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\HowTopayController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleController;
 use App\Http\Controllers\Admin\RequestCancelledController;
+use App\Http\Controllers\Admin\SocmedLinksController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\InvoiceController;
 use App\Http\Controllers\User\PaymentConfirmationController;
@@ -77,6 +78,11 @@ Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     Route::post('/admin/pembatalan', [HowTocancelController::class, 'store'])->name('store-howTocancel');
     Route::put('/admin/pembatalan/update', [HowTocancelController::class, 'update'])->name('update-howTocancel');
     Route::get('/admin/pembatalan/hapus/{id}', [HowTocancelController::class, 'destroy'])->name('destroy-howTocancel');
+    //route cara tautan
+    Route::get('/admin/tautan', [SocmedLinksController::class, 'index'])->name('index-tautan');
+    Route::post('/admin/tautan', [SocmedLinksController::class, 'store'])->name('store-tautan');
+    Route::put('/admin/tautan/update/{id}', [SocmedLinksController::class, 'update'])->name('update-tautan');
+    Route::get('/admin/tautan/hapus/{id}', [SocmedLinksController::class, 'destroy'])->name('destroy-tautan');
 
 });
 

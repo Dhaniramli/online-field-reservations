@@ -15,11 +15,12 @@ class HowToorderController extends Controller
         return view('admin.howToorder.index', compact('item'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $request->validate([
             'id' => 'required|max:255',
             'body' => 'required',
-        ],[
+        ], [
             'required' => 'isi kolom yang masih kosong',
         ]);
 
@@ -32,24 +33,26 @@ class HowToorderController extends Controller
         return redirect('/admin/cara-booking')->with('success', 'Berhasil disimpan!');
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $request->validate([
             'id' => 'required|max:255',
             'body' => 'required',
         ], [
             'required' => 'Isi kolom yang masih kosong',
         ]);
-    
+
         $item = HowToorder::find($request->input('id'));
-    
+
         $item->body = $request->input('body');
-    
+
         $item->save();
-    
+
         return redirect('/admin/cara-booking')->with('success', 'Berhasil disimpan!');
     }
-    
-    public function destroy($id) {
+
+    public function destroy($id)
+    {
         $item = HowToorder::find($id);
 
         $item->delete();
