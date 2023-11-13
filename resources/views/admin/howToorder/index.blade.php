@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/admin/privacy.css">
 
 <div class="container content mt-4">
-    <h1 class="h3 mb-2 text-gray-800 text-center">Kebijakan Privasi</h1>
+    <h1 class="h3 mb-2 text-gray-800 text-center">Cara Booking</h1>
     @if (session()->has('success'))
     @include('admin.partials.alertSuccess')
     @endif
@@ -15,12 +15,12 @@
                 <div class="col-lg-12 d-flex">
                     <div class="tombol-tambah ms-auto">
                         @if ($item)
-                        <a class="btn btn-danger" href="{{ url('/admin/kebijakan-privasi/hapus/' . $item->id) }}"
+                        <a class="btn btn-danger" href="{{ url('/admin/cara-booking/hapus/' . $item->id) }}"
                             id="deleteButton">Hapus</a>
-                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editPrivasiModal">Edit
+                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editHowToorderModal">Edit
                             Data</a>
                         @else
-                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#privasiModal">Tambah Data</a>
+                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#howToorderModal">Tambah Data</a>
                         @endif
                     </div>
                 </div>
@@ -45,6 +45,6 @@
     </div>
 </div>
 
-@include('admin.privacyPolicy.create')
-@include('admin.privacyPolicy.edit')
+@include('admin.howToorder.create')
+@include('admin.howToorder.edit')
 @endsection

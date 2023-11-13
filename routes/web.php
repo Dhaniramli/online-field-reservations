@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\FieldListController;
 use App\Http\Controllers\Admin\FieldScheduleController as AdminFieldScheduleController;
+use App\Http\Controllers\Admin\HowToorderController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleController;
 use App\Http\Controllers\Admin\RequestCancelledController;
@@ -59,6 +60,11 @@ Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     Route::post('/admin/kebijakan-privasi', [PrivacyPolicyController::class, 'store'])->name('store-privasi');
     Route::put('/admin/kebijakan-privasi/update', [PrivacyPolicyController::class, 'update'])->name('update-privasi');
     Route::get('/admin/kebijakan-privasi/hapus/{id}', [PrivacyPolicyController::class, 'destroy'])->name('destroy-privasi');
+    //route cara booking
+    Route::get('/admin/cara-booking', [HowToorderController::class, 'index'])->name('index-howToorder');
+    Route::post('/admin/cara-booking', [HowToorderController::class, 'store'])->name('store-howToorder');
+    Route::put('/admin/cara-booking/update', [HowToorderController::class, 'update'])->name('update-howToorder');
+    Route::get('/admin/cara-booking/hapus/{id}', [HowToorderController::class, 'destroy'])->name('destroy-howToorder');
 
 });
 
