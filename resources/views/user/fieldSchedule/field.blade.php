@@ -7,6 +7,14 @@
     <h1 class="text-center title-booking">Lapangan Tersedia</h1>
 
     <div class="row">
+        @if (!$fieldLists->count())
+        <div class="col-12 text-center d-flex justify-content-center align-items-center">
+            <div class="icon-not">
+                <img src="{{ asset('/img/data_not.png') }}" alt="">
+            </div>
+        </div>
+        
+        @else
         @foreach ($fieldLists as $item)
         <div class="col-lg-4 col-md-6 col-sm-12 colom-content">
             <div class="card card-lapangan">
@@ -21,6 +29,7 @@
             </div>
         </div>
         @endforeach
+        @endif
     </div>
 </div>
 @endsection

@@ -32,7 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 
-Route::get('/sewa-lapangan', [UserBookingController::class, 'index'])->name('index-booking');
+Route::get('/sewa-lapangan', [UserFieldScheduleController::class, 'field'])->name('index-booking');
 
 Route::get('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'index'])->name('index-jadwal');
 Route::post('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'index'])->name('index-jadwal');

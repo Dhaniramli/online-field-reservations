@@ -105,6 +105,15 @@
     opacity: 0.8;
 }
 
+.content-booking .icon-not{
+   width: 400px;
+   height: 400px;
+}
+
+.content-booking .icon-not img{
+    width: 100%;
+    height: 100%;
+}
 
 @media (max-width: 768px) {
     .colom-content {
@@ -122,6 +131,11 @@
         font-size: 30px;
         font-weight: 600;
     }
+
+    .content-booking .icon-not{
+        width: 300px;
+        height: 300px;
+     }
 }
 
 @media (min-width: 769px) and (max-width: 991px) {

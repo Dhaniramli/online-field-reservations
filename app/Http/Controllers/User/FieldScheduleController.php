@@ -11,6 +11,11 @@ use App\Models\FieldSchedule;
 
 class FieldScheduleController extends Controller
 {
+    public function field()
+    {
+        return view('user.fieldSchedule.field');
+    }
+
     public function index(Request $request, $id)
     {
         $items = FieldSchedule::where('field_list_id', $id);
@@ -33,7 +38,7 @@ class FieldScheduleController extends Controller
 
         // Mengambil data FieldSchedule
         $items = $items->get();
-        
+
         return view('user.fieldSchedule.index', compact('items', 'dates', 'id'));
     }
 }
