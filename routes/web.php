@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\FieldListController;
 use App\Http\Controllers\Admin\FieldScheduleController as AdminFieldScheduleController;
+use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleController;
 use App\Http\Controllers\Admin\RequestCancelledController;
 use App\Http\Controllers\AuthController;
@@ -53,6 +54,11 @@ Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     Route::post('/admin/kontak-kami', [ContactUsController::class, 'store'])->name('store-contact');
     Route::put('/admin/kontak-kami/update', [ContactUsController::class, 'update'])->name('update-contact');
     Route::get('/admin/kontak-kami/hapus/{id}', [ContactUsController::class, 'destroy'])->name('destroy-contact');
+    //route kebijakan privasi
+    Route::get('/admin/kebijakan-privasi', [PrivacyPolicyController::class, 'index'])->name('index-privasi');
+    Route::post('/admin/kebijakan-privasi', [PrivacyPolicyController::class, 'store'])->name('store-privasi');
+    Route::put('/admin/kebijakan-privasi/update', [PrivacyPolicyController::class, 'update'])->name('update-privasi');
+    Route::get('/admin/kebijakan-privasi/hapus/{id}', [PrivacyPolicyController::class, 'destroy'])->name('destroy-privasi');
 
 });
 
