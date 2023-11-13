@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\FieldListController;
 use App\Http\Controllers\Admin\FieldScheduleController as AdminFieldScheduleController;
 use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleController;
 use App\Http\Controllers\Admin\PlayingTimeController;
+use App\Http\Controllers\Admin\RequestCancelledController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\User\BookingController as UserBookingController;
@@ -50,7 +51,11 @@ Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     
     Route::get('/admin/lapangan/{id}/jadwal', [AdminFieldScheduleController::class, 'index'])->name('index-jadwalLapangan');
     Route::post('/admin/lapangan/store/jadwal', [AdminFieldScheduleController::class, 'store'])->name('store-jadwalLapangan');
-
+    
+    Route::get('/admin/permintaan-pembatalan', [RequestCancelledController::class, 'index'])->name('index-cancel');
+    Route::get('/admin/permintaan-pembatalan/hapus/{id}', [RequestCancelledController::class, 'destroy']);
+    Route::get('/admin/permintaan-pembatalan/konfir/{id}', [RequestCancelledController::class, 'confirm']);
+    Route::get('/admin/permintaan-pembatalan/tolak/{id}', [RequestCancelledController::class, 'reject']);
 });
 
 Route::middleware(['auth', 'onlyPengguna'])->group(function () {

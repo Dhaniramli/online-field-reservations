@@ -121,7 +121,13 @@
                     </div>
 
                     @if ($cancel->where('transaction_id', $item->id)->first())
-                    <h4 class="text-center mt-4 mb-2">Pembatalan menunggu konfirmasi dari admin</h4>
+                        @if ($cancel->where('transaction_id', $item->id)->where('status', 'pending')->first())
+                        <h4 class="text-center mt-4 mb-2">Pembatalan menunggu konfirmasi dari admin</h4>
+                        @elseif($cancel->where('transaction_id', $item->id)->where('status', 'confirm')->first())
+                        <h4 class="text-center text-success mt-4 mb-2">Pembatalan diterima, silahkan cek rekening anda</h4>
+                        @elseif($cancel->where('transaction_id', $item->id)->where('status', 'reject')->first())
+                        <h4 class="text-center mt-4 mb-2">Pembatalan ditolak</h4>
+                        @endif
                     @else
                     <a class="text-center cek-email mt-4 mb-2" href="mailto:{{ Auth::user()->email }}">Cek email untuk info pembayaran</a>
                     @endif

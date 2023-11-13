@@ -22,11 +22,11 @@
 
     <li class="nav-item {{ Request::is('admin/lapangan') ? 'active' : '' }}">
         <a class="nav-link " href="{{ Route('index-lapangan') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-futbol"></i>
             <span>Lapangan</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link " href="/admin">
+    <li class="nav-item {{ Request::is('admin/permintaan-pembatalan') ? 'active' : '' }}">
+        <a class="nav-link " href="{{ Route('index-cancel') }}">
             <i class="fas fa-fw fa-ban"></i>
             <span>Permintaan Pembatalan</span></a>
     </li>

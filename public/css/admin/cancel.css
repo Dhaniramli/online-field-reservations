@@ -1,0 +1,17 @@
+.status-pending{
+    color: red;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.status-confirmed{
+    color: green;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.status-reject{
+    color: red;
+    font-size: 15px;
+    font-weight: 700;
+}
