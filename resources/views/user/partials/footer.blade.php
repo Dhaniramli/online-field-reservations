@@ -1,35 +1,56 @@
+<link rel="stylesheet" href="/css/user/footer.css">
+
 <footer>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <h3>PERUSAHAAN</h3>
-                <div class="isi mt-4">
-                    <p><a href="">Tentang Kami</a></p>
-                    <p><a href="">Kebijakan Privasi</a></p>
-                    <p><a href="">Syarat & Ketentuan</a></p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <h3>BANTUAN</h3>
-                <div class="isi mt-4">
-                    <p><a href="">Cara Booking</a></p>
-                    <p><a href="">Pembayaran</a></p>
-                    <p><a href="">Pembatalan</a></p>
-                    <p><a href="">Masukan & Saran</a></p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <h3>KONTAK</h3>
-                <div class="isi mt-4">
-                    <p><a href="">karsaminisoccer@gmail.com</a></p>
-                    <p><a href="">@karsaminisoccer</a></p>
-                    <p><a href="">085XXXXXXXXX</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="cr">
-        <p>&copy; <a href="https://instagram.com/rdhani.rmli?igshid=OGQ5ZDc2ODk2ZA==">2023 Supported Developer By
-                Rahmadani Ramli</a></p>
+        <a href="#" class="brand">Karsa Mini Soccer</a>
+        <ul class="menu">
+            <li>
+                <a href="#">Tentang Kami</a>
+            </li>
+            <li>
+                <a href="#">Kontak</a>
+            </li>
+            <li>
+                <a href="#">Kebijakan Privasi</a>
+            </li>
+            <li>
+                <a href="#">Cara Booking</a>
+            </li>
+            <li>
+                <a href="#">Pembayaran</a>
+            </li>
+            <li>
+                <a href="#">Pembatalan</a>
+            </li>
+        </ul>
+
+        <ul class="media-icons">
+            <li>
+                <a href="#">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </li>
+        </ul>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis animi, molestiae doloribus ipsa exercitationem repudiandae illo id quidem facere molestias ipsum dolorem, veritatis rem eaque! Neque aspernatur dolorum officia. Velit!</p>
     </div>
 </footer>

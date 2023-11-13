@@ -2,10 +2,7 @@
 {{-- <link href="css/sb-admin-2.min.css" rel="stylesheet"> --}}
 
 <link rel="stylesheet" href="/css/user/body.css">
-<link rel="stylesheet" href="/css/user/venueCreate.css">
-<link rel="stylesheet" href="/css/user/footer.css">
 <link rel="stylesheet" href="/css/user/home.css">
-<link rel="stylesheet" href="/css/user/cart.css">
 
 <!-- Font Awesome -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />

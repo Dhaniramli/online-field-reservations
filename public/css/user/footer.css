@@ -1,46 +1,88 @@
-footer{
-    background-color: var(--primary-100);
-    /* background-color: #00AA9F; */
-    color: white;
+footer * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-footer a{
+footer ul {
+    list-style: none;
+}
+
+footer {
+    color: white;
+    background-color: var(--primary-100);
+    text-align: center;
+}
+
+footer p {
+    color: white;
+    max-width: 25em;
+    font-size: 0.9em;
+    line-height: 23px;
+    margin: 0 auto;
+}
+
+footer a {
     color: white;
     text-decoration: none;
-    font-size: 15px;
 }
 
-footer h3{
-    font-size: 18px;
-    font-weight: 500;
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2em;
 }
 
-footer a:hover{
-    color: #00AA9F;
-    /* color: #FF7000; */
-    font-size: 16px;
+footer .menu a{
+    transition: 0.9s;
+    font-weight: 600;
 }
 
-footer .container{
-    padding-top: 50px;
+footer .menu a:hover{
+    text-decoration: underline;
+    color: white;
 }
 
-footer .cr{
+footer .menu li{
+    display: inline-block;
+    margin: 0.7em;
     text-align: center;
-    padding-bottom: 20px;
 }
 
-footer .isi{
-    margin-bottom: 20px;
+footer .media-icons{
+    margin: 1.5em 0;
 }
 
-@media (max-width: 767.98px) {
-    footer h3{
-        text-align: center;
-    }
-
-    footer .isi{
-        text-align: center;
-    }
-
+.brand {
+    display: block;
+    font-size: 1.8em;
+    font-weight: 600;
+    margin-bottom: 1em;
 }
+
+.brand:hover{
+    color: white;
+}
+
+.media-icons li {
+    display: inline-block;
+    margin: 0.5em 0.5em 0.5em 0;
+}
+
+.media-icons a {
+    font-size: 1.1em;
+    width: 2em;
+    height: 2em;
+    border: 1px white solid;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.media-icons a:hover {
+    background: white;
+    color: var(--primary-100);
+}
+
