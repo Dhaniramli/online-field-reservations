@@ -11,13 +11,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarKarsa">
             <ul class="navbar-nav ms-auto mb-lg-0">
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ Route('index-booking') }}">Lapangan</a>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="{{ Route('index-booking') }}">Sewa Lapangan</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mx-2">
                     <a class="nav-link" href="#">Blog</a>
                 </li>
                 <hr>
@@ -25,7 +25,7 @@
             <ul class="navbar-nav navbar-btn ms-auto mb-2 mb-lg-0 mb-md-3 mb-sm-3">
                 @auth
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Hai, {{ auth()->user()->first_name }}
                     </a>

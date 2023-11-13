@@ -51,6 +51,6 @@
                 </a>
             </li>
         </ul>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis animi, molestiae doloribus ipsa exercitationem repudiandae illo id quidem facere molestias ipsum dolorem, veritatis rem eaque! Neque aspernatur dolorum officia. Velit!</p>
+        <p>&copy; <a href="https://instagram.com/rdhani.rmli?igshid=OGQ5ZDc2ODk2ZA==">2023 Supported Developer By Rahmadani Ramli</a></p>
     </div>
 </footer>
