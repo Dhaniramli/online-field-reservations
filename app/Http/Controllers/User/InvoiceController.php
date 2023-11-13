@@ -46,9 +46,23 @@ class InvoiceController extends Controller
                     ->orWhere('status_pay_final', 'unpaid')
                     ->orWhere('status_pay_final', 'pending');
             })->latest('created_at')->get();
-            $status = 'expire';             
 
             $status = 'unpaid';
+
+            return view('user.invoice.index', compact('transaction', 'status', 'cancel'));
+        } else if ($request->status === 'cancel') {
+            $dataCancel = RequestCancelled::where('user_id', $user->id)->get();
+
+            $transaction = collect();
+            foreach ($dataCancel as $cancel) {
+                $transactions = Transaction::where('id', $cancel->transaction_id)
+                    ->latest('created_at')
+                    ->get();
+
+                $transaction = $transaction->concat($transactions);
+            }
+
+            $status = 'cancel';
 
             return view('user.invoice.index', compact('transaction', 'status', 'cancel'));
         } else if ($request->status) {
@@ -94,8 +108,7 @@ class InvoiceController extends Controller
 
         if ($validator->fails()) {
             return response()->json(['success' => false, 'errors' => ['common' => ['Isi Semua Kolom']]], 422);
-        }
-        else {
+        } else {
 
             $cancel = RequestCancelled::create([
                 'user_id' => $user->id,

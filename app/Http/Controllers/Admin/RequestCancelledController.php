@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\RequestCancelled;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\FieldSchedule;
+use App\Models\RequestCancelled;
+use App\Http\Controllers\Controller;
 
 class RequestCancelledController extends Controller
 {
@@ -30,9 +32,23 @@ class RequestCancelledController extends Controller
             $cancel->update([
                 'status' => 'confirm'
             ]);
-            return redirect('/admin/permintaan-pembatalan');
+
+            $Transaction = Transaction::where('id', $cancel->transaction_id)->first();
+
+            $idsubah = explode(',', $Transaction->schedule_ids);
+            $bookingToUpdate = [];
+
+            foreach ($idsubah as $item_id) {
+                $booking = FieldSchedule::find($item_id);
+                $bookingToUpdate[] = $booking;
+            }
+
+            foreach ($bookingToUpdate as $booking) {
+                $booking->is_booked = false;
+                $booking->save();
+            }
         }
-        
+
         return redirect('/admin/permintaan-pembatalan');
     }
 
@@ -46,7 +62,7 @@ class RequestCancelledController extends Controller
             ]);
             return redirect('/admin/permintaan-pembatalan');
         }
-        
+
         return redirect('/admin/permintaan-pembatalan');
     }
 }

@@ -15,6 +15,7 @@
             class="btn btn-tabs btn-block {{ ($status === 'unpaid') ? 'active' : '' }}">Belum Selesai</a>
         <a href="/pembelian?status=expire" class="btn btn-tabs btn-block {{ ($status === 'expire') ? 'active' : '' }}">Tidak
             Selesai</a>
+        <a href="/pembelian?status=cancel" class="btn btn-tabs btn-block {{ ($status === 'cancel') ? 'active' : '' }}">Dibatalkan</a>
     </div>
 
     <div class="isi-content mt-5">
