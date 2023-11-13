@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\FieldListController;
 use App\Http\Controllers\Admin\FieldScheduleController as AdminFieldScheduleController;
 use App\Http\Controllers\Admin\HowToorderController;
+use App\Http\Controllers\Admin\HowTopayController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleController;
 use App\Http\Controllers\Admin\RequestCancelledController;
@@ -65,6 +66,11 @@ Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     Route::post('/admin/cara-booking', [HowToorderController::class, 'store'])->name('store-howToorder');
     Route::put('/admin/cara-booking/update', [HowToorderController::class, 'update'])->name('update-howToorder');
     Route::get('/admin/cara-booking/hapus/{id}', [HowToorderController::class, 'destroy'])->name('destroy-howToorder');
+    //route cara pembayaran
+    Route::get('/admin/pembayaran', [HowTopayController::class, 'index'])->name('index-howTopay');
+    Route::post('/admin/pembayaran', [HowTopayController::class, 'store'])->name('store-howTopay');
+    Route::put('/admin/pembayaran/update', [HowTopayController::class, 'update'])->name('update-howTopay');
+    Route::get('/admin/pembayaran/hapus/{id}', [HowTopayController::class, 'destroy'])->name('destroy-howTopay');
 
 });
 
