@@ -7,9 +7,9 @@
     <h1>Kontak Kami</h1>
 
     <div class="card border-0 shadow">
-        <div class="row row-content h-100">
-            <div class="col-lg-6 col-md-6">
-                <div class="map">
+        <div class="row row-content">
+            <div class="col-lg-6 col-md-6 map-1">
+                <div class="card card-2 shadow-none border-0 m-0">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973.7705281927842!2d119.48338967397413!3d-5.140606851984108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbee30b58cb90a9%3A0xb37efae63a9621ee!2sKarsa%20Mini%20Soccer!5e0!3m2!1sid!2sid!4v1699162349700!5m2!1sid!2sid"
                         style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

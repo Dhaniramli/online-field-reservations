@@ -14,12 +14,12 @@
     margin-top: 50px;
 }
 
-.kontak-kami .map {
+.kontak-kami .card {
     width: 100%;
     height: 100%;
 }
 
-.kontak-kami .map iframe {
+.kontak-kami .card iframe {
     width: 100%;
     height: 100%;
 }
@@ -29,6 +29,11 @@
     padding-bottom: 30px;
     padding-left: 30px;
     padding-right: 30px;
+}
+
+.row-content{
+    height: 100%;
+    margin-bottom: 0px;
 }
 
 h5{
@@ -57,7 +62,7 @@ h5{
 }
 
 @media (max-width: 991px) {
-    .kontak-kami .map {
+    .kontak-kami .card {
         width: 100%;
         min-height: 300px;
     }
