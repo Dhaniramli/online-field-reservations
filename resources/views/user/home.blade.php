@@ -100,7 +100,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title text-center">Event Turnamen</h5>
-                    <p class="card-text text-center">Memberikan layanan dan harga terbaik untuk anda yang akan mengadakan acara serta turnamen</p>
+                    <p class="card-text text-center">Memberikan layanan dan harga terbaik untuk anda yang akan mengadakan turnamen</p>
                 </div>
             </div>
         </div>
