@@ -1,6 +1,10 @@
 .sidebar{
     background-color: #019b98;
-    color: white;
+    color: rgb(209, 209, 209);
+}
+
+.sidebar .nav-item.active .nav-link{
+  color: white;
 }
 
 .sidebar-brand-text{
