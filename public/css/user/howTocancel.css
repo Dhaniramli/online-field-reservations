@@ -1,0 +1,26 @@
+.pembatalan{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.pembatalan h1 {
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--primary-100);
+}
+
+.pembatalan .card{
+    margin-top: 50px;
+    min-height: 100px;
+}
+
+.isi{
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .pembatalan h1{
+        font-size: 30px;
+        text-align: center;
+    }
+}

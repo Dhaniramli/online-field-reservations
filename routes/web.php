@@ -111,3 +111,7 @@ Route::middleware(['auth', 'onlyPengguna'])->group(function () {
 });
 
 Route::get('/kontak-kami', [FooterItemsController::class, 'contact_us'])->name('contact-us');
+Route::get('/kebijakan-privasi', [FooterItemsController::class, 'privacy_policy'])->name('privacy-policy');
+Route::get('/cara-booking', [FooterItemsController::class, 'cara_booking'])->name('cara-booking');
+Route::get('/pembayaran', [FooterItemsController::class, 'pembayaran'])->name('pembayaran');
+Route::get('/pembatalan', [FooterItemsController::class, 'pembatalan'])->name('pembatalan');
