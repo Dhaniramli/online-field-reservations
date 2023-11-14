@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\SocmedLinks;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SocmedLinksController extends Controller
 {
@@ -17,13 +18,17 @@ class SocmedLinksController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|max:255|unique:socmed_links',
             'link' => 'required|max:255',
         ], [
-            'required' => 'isi kolom yang masih kosong',
-            'unique' => 'sosial media sudah terisi',
+            'required' => 'Isi kolom yang masih kosong',
+            'unique' => 'Sosial media sudah terisi',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
 
         $item = new SocmedLinks([
             'name' => $request->input('name'),
@@ -31,22 +36,21 @@ class SocmedLinksController extends Controller
         ]);
         $item->save();
 
-        return redirect('/admin/tautan')->with('success', 'Berhasil disimpan!');
+        return response()->json(['success' => 'Berhasil disimpan!']);
     }
+
+
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|max:255|unique:socmed_links',
             'link' => 'required|max:255',
         ], [
-            'required' => 'isi kolom yang masih kosong',
             'unique' => 'sosial media sudah terisi',
         ]);
 
         $item = SocmedLinks::find($id);
 
-        $item->name = $request->input('name');
         $item->link = $request->input('link');
 
         $item->save();

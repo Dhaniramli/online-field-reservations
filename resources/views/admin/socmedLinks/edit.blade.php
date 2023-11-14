@@ -6,14 +6,14 @@
                 <h3 class="modal-title" id="editTautanModalLabel">Tambah Tautan</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('update-tautan', ['id' => $item->id]) }}" method="POST">
+            <form id="edit-form-tautan" action="{{ route('update-tautan', ['id' => $item->id]) }}" method="POST">
                 <div class="modal-body">
                     @csrf
                     @method('put')
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Sosial Media</label>
-                        <select class="form-select @error('name') is-invalid @enderror" id="name" name="name" required>
+                        <select class="form-select @error('name') is-invalid @enderror" id="name" name="name" required disabled>
                             <option selected disabled>pilih</option>
                             <option value="Facebook" {{ old('name', $item->name) === 'Facebook' ? 'selected' : '' }}>Facebook</option>
                             <option value="Instagram" {{ old('name', $item->name) === 'Instagram' ? 'selected' : '' }}>Instagram</option>
