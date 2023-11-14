@@ -32,45 +32,27 @@ class FieldListController extends Controller
         return redirect('/admin/lapangan')->with('success', 'Berhasil disimpan!');
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     // Validasi input
-    //     $request->validate([
-    //         'name' => 'required||numeric|unique:field_lists',
-    //         'time' => 'required|array',
-    //         'time.*' => 'required',
-    //         'price' => 'required|array',
-    //         'price.*' => 'required|numeric',
-    //     ]);
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+        ],[
+            'required' => 'isi kolom yang masih kosong'
+        ]);
 
-    //     // Mengambil data lapangan yang akan diubah
-    //     $lapangan = FieldList::find($id);
+        $lapangan = FieldList::find($id);
 
-    //     if (!$lapangan) {
-    //         return redirect('/admin/daftar-lapangan')->with('error', 'Lapangan tidak ditemukan!');
-    //     }
+        $lapangan->name = $request->input('name');
 
-    //     // Mengupdate data lapangan
-    //     $lapangan->name = $request->input('name');
-    //     $lapangan->save();
+        $lapangan->save();
 
-    //     // Simpan data harga perjam
-    //     $times = $request->input('time');
-    //     $prices = $request->input('price');
+        return redirect('/admin/lapangan')->with('success', 'Berhasil disimpan!');
+    }
 
-    //     // Hapus data harga perjam yang ada terlebih dahulu
-    //     $lapangan->dataFields()->delete();
+    public function destroy($id)
+    {
+        FieldList::destroy($id);
 
-      
-
-    //     return redirect('/admin/daftar-lapangan')->with('success', 'Berhasil diperbarui!');
-    // }
-
-
-    // public function destroy($id)
-    // {
-    //     FieldList::destroy($id);
-
-    //     return redirect('/admin/daftar-lapangan');
-    // }
+        return redirect('/admin/lapangan');
+    }
 }
