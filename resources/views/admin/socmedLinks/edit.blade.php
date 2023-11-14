@@ -1,9 +1,9 @@
-<div class="modal fade" id="editTautanModal" tabindex="-1" aria-labelledby="editTautanModalLabel"
+<div class="modal fade" id="{{ 'edit' . $item->id }}" tabindex="-1" aria-labelledby="{{ 'edit' . $item->id }}Label"
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="editTautanModalLabel">Tambah Tautan</h3>
+                <h3 class="modal-title" id="{{ 'edit' . $item->id }}Label">Tambah Tautan</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="edit-form-tautan" action="{{ route('update-tautan', ['id' => $item->id]) }}" method="POST">

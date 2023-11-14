@@ -31,7 +31,7 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->link }}</td>
                             <td class="text-center" style="vertical-align: middle;">
-                                <a class="btn btn-warning btn-icon-split btn-sm" data-bs-toggle="modal" data-bs-target="#editTautanModal"><span class="text">Edit</span>
+                                <a class="btn btn-warning btn-icon-split btn-sm" data-bs-toggle="modal" data-bs-target="#{{ 'edit' . $item->id }}"><span class="text">Edit</span>
                                 </a>
                                 <a id="deleteButton" href="{{ url('/admin/tautan/hapus/' . $item->id) }}"
                                     class="btn btn-danger btn-icon-split btn-sm">
