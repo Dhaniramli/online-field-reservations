@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\DataField;
 use App\Models\FieldList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class FieldListController extends Controller
 {
@@ -18,35 +20,40 @@ class FieldListController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-        ],[
-            'required' => 'isi kolom yang masih kosong'
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'body' => 'required|max:255',
+            'image' => 'image|file|required',
         ]);
 
-        $lapangan = new FieldList([
-            'name' => $request->input('name'),
-        ]);
-        $lapangan->save();
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('fieldList-images');
+        }
+
+        FieldList::create($validatedData);
 
         return redirect('/admin/lapangan')->with('success', 'Berhasil disimpan!');
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-        ],[
-            'required' => 'isi kolom yang masih kosong'
-        ]);
+        $fieldList = FieldList::findOrFail($id);
 
-        $lapangan = FieldList::find($id);
+        $fieldList->name = $request->input('name');
+        $fieldList->body = $request->input('body');
 
-        $lapangan->name = $request->input('name');
+        if ($request->hasFile('image')) {
+            if ($fieldList->image) {
+                Storage::delete($fieldList->image);
+            }
 
-        $lapangan->save();
+            $imagePath = $request->file('image')->store('fieldList-images');
+            $fieldList->image = $imagePath;
+        }
 
-        return redirect('/admin/lapangan')->with('success', 'Berhasil disimpan!');
+        $fieldList->save();
+
+        return redirect('/admin/lapangan')->with('success', 'Data berhasil diperbarui!');
     }
 
     public function destroy($id)

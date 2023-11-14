@@ -20,6 +20,8 @@
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">Lapangan</th>
+                            <th class="text-center">Deskripsi</th>
+                            <th class="text-center">Gambar</th>
                             <th class="text-center">jadwal</th>
                             <th class="text-center">Aksi</th>
                         </tr>
@@ -28,9 +30,9 @@
                         @foreach ($items as $item)
                         <tr>
                             <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                            <td>
-                                {{ $item->name }}
-                            </td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->body }}</td>
+                            <td><img src="{{ asset('storage/' . $item->image) }}" alt="" style="height: 200px;"></td>
                             <td class="text-center" style="vertical-align: middle;">
                                 <a href="{{ url('/admin/lapangan/' . $item->id . '/jadwal') }}"
                                     class="btn btn-info btn-icon-split btn-sm">
@@ -38,11 +40,11 @@
                                 </a>
                             </td>
                             <td class="text-center" style="vertical-align: middle;">
-                                <a class="btn btn-warning btn-icon-split btn-sm" data-bs-toggle="modal" data-bs-target="#{{ 'edit' . $item->id }}">
+                                <a class="btn btn-warning btn-icon-split btn-sm mb-2" data-bs-toggle="modal" data-bs-target="#{{ 'edit' . $item->id }}">
                                     <span class="text">Edit</span>
                                 </a>
                                 <a id="deleteButton" href="{{ url('/admin/lapangan/hapus/' . $item->id) }}"
-                                    class="btn btn-danger btn-icon-split btn-sm">
+                                    class="btn btn-danger btn-icon-split btn-sm mb-2">
                                     <span class="text">Hapus</span>
                                 </a>
                             </td>

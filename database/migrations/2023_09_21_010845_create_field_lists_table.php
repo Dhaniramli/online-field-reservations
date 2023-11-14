@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('field_lists', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('image')->nullable();
+            $table->string('body')->nullable();
             $table->timestamps();
         });
     }
