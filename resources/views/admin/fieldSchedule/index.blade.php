@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container content-schedule mt-4">
-    <h1 class="title-jadwal text-center">Jadwal {{ $items->name }}</h1>
+    <h1 class="h3 mb-2 text-gray-800 text-center">Jadwal {{ $items->name }}</h1>
     <!-- Tambahkan input pencarian di luar tabel -->
     <div class="card shadow">
         <div class="card-header">
@@ -23,7 +23,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table id="myTable" class="table table-striped display">
+                <table id="tableSchedule" class="table table-striped display">
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
@@ -52,11 +52,10 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="/admin/daftar-lapangan/edit/{{ $fieldSchedule->id }}"
-                                    class="btn btn-warning btn-icon-split btn-sm">
+                                <a class="btn btn-warning btn-icon-split btn-sm" data-bs-toggle="modal" data-bs-target="#{{ 'edit' . $fieldSchedule->id }}">
                                     <span class="text">Edit</span>
                                 </a>
-                                <a id="deleteButton" href="{{ url('/admin/daftar-lapangan/hapus/' . $fieldSchedule->id) }}"
+                                <a id="deleteButton" href="{{ url('/admin/lapangan/hapus/jadwal/' . $fieldSchedule->id) }}"
                                     class="btn btn-danger btn-icon-split btn-sm">
                                     <span class="text">Hapus</span>
                                 </a>
@@ -74,11 +73,10 @@
 </div>
 
 <script>
-    // let table = new DataTable('#myTable');
 
     $(document).ready(function () {
         // Inisialisasi DataTables dengan konfigurasi pencarian
-        var table = $('#myTable').DataTable({
+        var table = $('#tableSchedule').DataTable({
             searching: true, // Hanya aktifkan fitur pencarian
             paging: true, // Nonaktifkan paging (halaman)
             info: true, // Nonaktifkan info jumlah data
@@ -96,3 +94,7 @@
 @endsection
 
 @include('admin.fieldSchedule.create')
+
+@foreach ($fieldSchedules as $fieldSchedule)
+    @include('admin.fieldSchedule.edit')
+@endforeach

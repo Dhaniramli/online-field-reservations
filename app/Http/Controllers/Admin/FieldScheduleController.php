@@ -49,4 +49,37 @@ class FieldScheduleController extends Controller
         // return redirect('/admin/jadwal-lapangan/{id}')->with('success', 'Berhasil disimpan!');
         return back()->with('success', 'Berhasil disimpan!');
     }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'date' => 'required',
+            'time_start' => 'required',
+            'time_finish' => 'required',
+            'price' => 'required',
+        ], [
+            'date.required' => 'isi kolom yang masih kosong',
+            'time_start.required' => 'isi kolom yang masih kosong',
+            'time_finish.required' => 'isi kolom yang masih kosong',
+            'price.required' => 'isi kolom yang masih kosong',
+        ]);
+
+        $jadwal = FieldSchedule::find($id);
+
+        $jadwal->date = $request->input('date');
+        $jadwal->time_start = $request->input('time_start');
+        $jadwal->time_finish = $request->input('time_finish');
+        $jadwal->price = $request->input('price');
+
+        $jadwal->save();
+
+        return back()->with('success', 'Berhasil disimpan!');
+    }
+
+    public function destroy($id)
+    {
+        FieldSchedule::destroy($id);
+
+        return back();
+    }
 }

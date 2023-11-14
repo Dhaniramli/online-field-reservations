@@ -47,11 +47,12 @@ Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     Route::post('/admin/lapangan/store', [FieldListController::class, 'store'])->name('store-lapangan');
     Route::put('/admin/lapangan/update/{id}', [FieldListController::class, 'update'])->name('update-lapangan');
     Route::get('/admin/lapangan/hapus/{id}', [FieldListController::class, 'destroy'])->name('destroy-lapangan');
-
+    
     //route jadwal lapangan
     Route::get('/admin/lapangan/{id}/jadwal', [AdminFieldScheduleController::class, 'index'])->name('index-jadwalLapangan');
     Route::post('/admin/lapangan/store/jadwal', [AdminFieldScheduleController::class, 'store'])->name('store-jadwalLapangan');
-    Route::put('/admin/lapangan/update/jadwal', [AdminFieldScheduleController::class, 'update'])->name('update-jadwalLapangan');
+    Route::put('/admin/lapangan/update/jadwal/{id}', [AdminFieldScheduleController::class, 'update'])->name('update-jadwalLapangan');
+    Route::get('/admin/lapangan/hapus/jadwal/{id}', [AdminFieldScheduleController::class, 'destroy'])->name('destroy-jadwalLapangan');
 
     Route::get('/admin/permintaan-pembatalan', [RequestCancelledController::class, 'index'])->name('index-cancel');
     Route::get('/admin/permintaan-pembatalan/hapus/{id}', [RequestCancelledController::class, 'destroy']);
