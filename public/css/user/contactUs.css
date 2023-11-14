@@ -1,0 +1,71 @@
+.kontak-kami {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.kontak-kami h1 {
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--primary-100);
+}
+
+.kontak-kami .card {
+    min-height: 70vh;
+    margin-top: 50px;
+}
+
+.kontak-kami .map {
+    width: 100%;
+    height: 100%;
+}
+
+.kontak-kami .map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.isi {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+h5{
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-100);
+}
+
+.custom-icon-size {
+    font-size: 40px;
+    color: var(--text-100);
+}
+
+.isi hr{
+    border: 1px solid var(--text-100);
+}
+
+.isi p{
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-200);
+}
+
+.isi-2{
+    min-height: 100px;
+}
+
+@media (max-width: 991px) {
+    .kontak-kami .map {
+        width: 100%;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .kontak-kami h1{
+        font-size: 30px;
+        text-align: center;
+    }
+}

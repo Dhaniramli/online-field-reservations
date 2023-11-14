@@ -5,19 +5,19 @@
         <a href="#" class="brand">Karsa Mini Soccer</a>
         <ul class="menu">
             <li>
-                <a href="#">Kontak Kami</a>
+                <a href="/kontak-kami">Kontak Kami</a>
             </li>
             <li>
-                <a href="#">Kebijakan Privasi</a>
+                <a href="/kebijakan-privasi">Kebijakan Privasi</a>
             </li>
             <li>
-                <a href="#">Cara Booking</a>
+                <a href="/cara-booking">Cara Booking</a>
             </li>
             <li>
-                <a href="#">Pembayaran</a>
+                <a href="/pembayaran">Pembayaran</a>
             </li>
             <li>
-                <a href="#">Pembatalan</a>
+                <a href="/pembatalan">Pembatalan</a>
             </li>
         </ul>
 

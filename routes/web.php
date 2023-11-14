@@ -11,6 +11,7 @@ use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleContro
 use App\Http\Controllers\Admin\RequestCancelledController;
 use App\Http\Controllers\Admin\SocmedLinksController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\User\FooterItemsController;
 use App\Http\Controllers\User\InvoiceController;
 use App\Http\Controllers\User\PaymentConfirmationController;
 use App\Http\Controllers\User\ProfileController;
@@ -108,3 +109,5 @@ Route::middleware(['auth', 'onlyPengguna'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('index-profile');
     Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('update-profile');
 });
+
+Route::get('/kontak-kami', [FooterItemsController::class, 'contact_us'])->name('contact-us');
