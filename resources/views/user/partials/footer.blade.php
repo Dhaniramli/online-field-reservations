@@ -23,27 +23,27 @@
 
         <ul class="media-icons">
             <li>
-                <a href="#">
+                <a href="{{ $facebookLink ? $facebookLink->link : '#' }}">
                     <i class="fab fa-facebook"></i>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ $twitterLink ? $twitterLink->link : '#' }}">
                     <i class="fab fa-twitter"></i>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ $instagramLink ? $instagramLink->link : '#' }}">
                     <i class="fab fa-instagram"></i>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ $youtubeLink ? $youtubeLink->link : '#' }}">
                     <i class="fa-brands fa-youtube"></i>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ $linkedinLink ? $linkedinLink->link : '#' }}">
                     <i class="fab fa-linkedin"></i>
                 </a>
             </li>
