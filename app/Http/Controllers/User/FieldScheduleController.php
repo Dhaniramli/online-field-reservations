@@ -7,6 +7,7 @@ use App\Models\PlayingTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
+use App\Models\FieldList;
 use App\Models\FieldSchedule;
 
 class FieldScheduleController extends Controller
@@ -19,6 +20,8 @@ class FieldScheduleController extends Controller
     public function index(Request $request, $id)
     {
         $items = FieldSchedule::where('field_list_id', $id);
+
+        $fieldList = FieldList::findOrFail($id);
 
         // Inisialisasi variabel $dates jika Anda ingin menggunakannya
         $dates = [];
@@ -39,6 +42,6 @@ class FieldScheduleController extends Controller
         // Mengambil data FieldSchedule
         $items = $items->get();
 
-        return view('user.fieldSchedule.index', compact('items', 'dates', 'id'));
+        return view('user.fieldSchedule.index', compact('items', 'dates', 'id', 'fieldList'));
     }
 }

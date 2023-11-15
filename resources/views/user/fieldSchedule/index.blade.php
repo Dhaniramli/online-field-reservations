@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/user/schedule.css">
 
 <div class="container content-schedule">
-    <h1 class="title-jadwal text-center">Jadwal Lapangan</h1>
+    <h1 class="title-jadwal text-center">Jadwal {{ $fieldList->name }}</h1>
 
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6 col-8 mx-auto my-auto">
