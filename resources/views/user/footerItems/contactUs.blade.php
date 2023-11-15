@@ -33,7 +33,7 @@
                         </div>
                         <div class="content ml-4">
                             <p>Jangan ragu untuk menghubungi kami</p>
-                            <h5>{{ $item ? $item->phone_number : '' }}</h5>
+                            <a href="https://wa.me/{{ $item ? $item->phone_number : '' }}" style="text-decoration: none;"><h5>{{ $item ? $item->phone_number : '' }}</h5></a>
                         </div>
                     </div>
                     <hr>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="content ml-4">
                             <p>Sapa Kami di</p>
-                            <h5>{{ $item ? $item->email : '' }}</h5>
+                            <a href="mailto:{{ $item ? $item->email : '' }}" style="text-decoration: none;"><h5>{{ $item ? $item->email : 'Email tidak tersedia' }}</h5></a>
                         </div>
                     </div>
                 </div>

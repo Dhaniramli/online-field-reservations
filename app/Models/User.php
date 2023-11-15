@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Transaction;
 use App\Models\RequestCancelled;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -50,5 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(RequestCancelled::class);
     }
-    
+
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

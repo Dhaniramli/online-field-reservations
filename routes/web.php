@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleController;
 use App\Http\Controllers\Admin\RequestCancelledController;
 use App\Http\Controllers\Admin\SocmedLinksController;
+use App\Http\Controllers\Admin\TransactionDataController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\FooterItemsController;
 use App\Http\Controllers\User\InvoiceController;
@@ -55,10 +56,17 @@ Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     Route::put('/admin/lapangan/update/jadwal/{id}', [AdminFieldScheduleController::class, 'update'])->name('update-jadwalLapangan');
     Route::get('/admin/lapangan/hapus/jadwal/{id}', [AdminFieldScheduleController::class, 'destroy'])->name('destroy-jadwalLapangan');
 
+    //route pembatalan
     Route::get('/admin/permintaan-pembatalan', [RequestCancelledController::class, 'index'])->name('index-cancel');
     Route::get('/admin/permintaan-pembatalan/hapus/{id}', [RequestCancelledController::class, 'destroy']);
     Route::get('/admin/permintaan-pembatalan/konfir/{id}', [RequestCancelledController::class, 'confirm']);
     Route::get('/admin/permintaan-pembatalan/tolak/{id}', [RequestCancelledController::class, 'reject']);
+
+    //route cara tautan
+    Route::get('/admin/data-transaksi', [TransactionDataController::class, 'index'])->name('index-transaksi');
+    Route::post('/admin/data-transaksi', [TransactionDataController::class, 'index'])->name('index-transaksi');
+    Route::get('/admin/data-transaksi/show/{id}', [TransactionDataController::class, 'show'])->name('show-transaksi');
+    Route::get('/admin/data-transaksi/hapus/{id}', [TransactionDataController::class, 'destroy'])->name('destroy-transaksi');
     
     //route kontak kami
     Route::get('/admin/kontak-kami', [ContactUsController::class, 'index'])->name('index-contact');
@@ -90,6 +98,7 @@ Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     Route::post('/admin/tautan', [SocmedLinksController::class, 'store'])->name('store-tautan');
     Route::put('/admin/tautan/update/{id}', [SocmedLinksController::class, 'update'])->name('update-tautan');
     Route::get('/admin/tautan/hapus/{id}', [SocmedLinksController::class, 'destroy'])->name('destroy-tautan');
+    
 
 });
 

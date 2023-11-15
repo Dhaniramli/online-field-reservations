@@ -27,8 +27,13 @@
     </li>
     <li class="nav-item {{ Request::is('admin/permintaan-pembatalan*') ? 'active' : '' }}">
         <a class="nav-link " href="{{ Route('index-cancel') }}">
-            <i class="fas fa-fw fa-ban"></i>
+            <i class="fas fa-ban"></i>
             <span>Permintaan Pembatalan</span></a>
+    </li>
+    <li class="nav-item {{ Request::is('admin/data-transaksi*') ? 'active' : '' }}">
+        <a class="nav-link " href="{{ Route('index-transaksi') }}">
+            <i class="fas fa-database"></i>
+            <span>Data Transaksi</span></a>
     </li>
 
     <li class="nav-item {{ (Request::is('admin/kontak-kami*') || Request::is('admin/kebijakan-privasi*') || Request::is('admin/cara-booking*') || Request::is('admin/pembayaran*') || Request::is('admin/pembatalan*')) ? 'active' : '' }}">
