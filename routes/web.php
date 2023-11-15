@@ -66,6 +66,7 @@ Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     Route::get('/admin/data-transaksi', [TransactionDataController::class, 'index'])->name('index-transaksi');
     Route::post('/admin/data-transaksi', [TransactionDataController::class, 'index'])->name('index-transaksi');
     Route::get('/admin/data-transaksi/show/{id}', [TransactionDataController::class, 'show'])->name('show-transaksi');
+    Route::get('/admin/data-transaksi/export', [TransactionDataController::class, 'export_excel'])->name('export-excel');
     Route::get('/admin/data-transaksi/hapus/{id}', [TransactionDataController::class, 'destroy'])->name('destroy-transaksi');
     
     //route kontak kami

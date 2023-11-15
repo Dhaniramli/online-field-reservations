@@ -68,6 +68,9 @@
                 </table>
             </div>
         </div>
+        <div class="card card-footer">
+            <a href="{{ url('/admin/data-transaksi/export') }}" class="btn btn-success">Download Excel</a>
+        </div>
     </div>
 
 </div>

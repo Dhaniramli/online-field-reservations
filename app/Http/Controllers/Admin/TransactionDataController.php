@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\FieldSchedule;
+use Illuminate\Support\Carbon;
 use App\Models\RequestCancelled;
+use App\Exports\ExportTransaction;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransactionDataController extends Controller
 {
@@ -67,7 +70,12 @@ class TransactionDataController extends Controller
     public function destroy($id)
     {
         Transaction::destroy($id);
-
         return back();
+    }
+
+    public function export_excel()
+    {
+        $timestamp = Carbon::now()->format('Ymd');
+        return (new ExportTransaction)->download('transaksi-' . $timestamp . '.xlsx');
     }
 }
