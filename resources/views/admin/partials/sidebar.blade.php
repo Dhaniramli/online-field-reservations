@@ -20,16 +20,24 @@
             <span>Dashboard</span></a>
     </li>
 
+    <li class="nav-item {{ Request::is('admin/pengguna*') ? 'active' : '' }}">
+        <a class="nav-link " href="{{ Route('index-pengguna') }}">
+            <i class="fas fa-users"></i>
+            <span>Data Pengguna</span></a>
+    </li>
+
     <li class="nav-item {{ Request::is('admin/lapangan*') ? 'active' : '' }}">
         <a class="nav-link " href="{{ Route('index-lapangan') }}">
             <i class="fas fa-futbol"></i>
             <span>Lapangan</span></a>
     </li>
+
     <li class="nav-item {{ Request::is('admin/permintaan-pembatalan*') ? 'active' : '' }}">
         <a class="nav-link " href="{{ Route('index-cancel') }}">
             <i class="fas fa-ban"></i>
             <span>Permintaan Pembatalan</span></a>
     </li>
+
     <li class="nav-item {{ Request::is('admin/data-transaksi*') ? 'active' : '' }}">
         <a class="nav-link " href="{{ Route('index-transaksi') }}">
             <i class="fas fa-database"></i>

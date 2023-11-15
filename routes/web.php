@@ -11,6 +11,7 @@ use App\Http\Controllers\User\FieldScheduleController as UserFieldScheduleContro
 use App\Http\Controllers\Admin\RequestCancelledController;
 use App\Http\Controllers\Admin\SocmedLinksController;
 use App\Http\Controllers\Admin\TransactionDataController;
+use App\Http\Controllers\Admin\UsersDataController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\FooterItemsController;
 use App\Http\Controllers\User\InvoiceController;
@@ -43,6 +44,10 @@ Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     Route::get('/admin', function () {
         return view('admin.home');
     });
+
+    //route data pengguna
+    Route::get('/admin/pengguna', [UsersDataController::class, 'index'])->name('index-pengguna');
+    Route::get('/admin/pengguna/hapus/{id}', [UsersDataController::class, 'destroy'])->name('destroy-pengguna');
 
     //route list lapangan
     Route::get('/admin/lapangan', [FieldListController::class, 'index'])->name('index-lapangan');
