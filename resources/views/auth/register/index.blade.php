@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/img/soccer-ball.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('/img/soccer-ball.png') }}">
 
     <title>Karsa Mini Soccer | Register</title>
 
@@ -32,7 +34,9 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block" style="background-image: url('{{ asset('/img/login_img.jpeg') }}'); background-size: cover;"></div>
+                    <div class="col-lg-5 d-none d-lg-block"
+                        style="background-image: url('{{ asset('/img/login_img.jpeg') }}'); background-size: cover;">
+                    </div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
@@ -43,73 +47,81 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input name="first_name" type="text" class="form-control form-control-user @error('first_name') is-invalid @enderror" id="first_name"
-                                            placeholder="Nama Depan" value="{{ old('first_name') }}">
-                                            @error('first_name')
-                                            <div class="invalid-feedback ml-4">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
+                                        <input name="first_name" type="text"
+                                            class="form-control form-control-user @error('first_name') is-invalid @enderror"
+                                            id="first_name" placeholder="Nama Depan" value="{{ old('first_name') }}">
+                                        @error('first_name')
+                                        <div class="invalid-feedback ml-4">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="col-sm-6">
-                                        <input name="last_name" type="text" class="form-control form-control-user @error('last_name') is-invalid @enderror" id="last_name"
-                                            placeholder="Nama Belakang" value="{{ old('last_name') }}">
-                                            @error('last_name')
-                                            <div class="invalid-feedback ml-4">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
+                                        <input name="last_name" type="text"
+                                            class="form-control form-control-user @error('last_name') is-invalid @enderror"
+                                            id="last_name" placeholder="Nama Belakang" value="{{ old('last_name') }}">
+                                        @error('last_name')
+                                        <div class="invalid-feedback ml-4">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input name="phone_number" type="number" class="form-control form-control-user @error('phone_number') is-invalid @enderror" id="phone_number"
-                                            placeholder="Nomor Telpon" value="{{ old('phone_number') }}">
-                                            @error('phone_number')
-                                            <div class="invalid-feedback ml-4">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
+                                        <input name="phone_number" type="number"
+                                            class="form-control form-control-user @error('phone_number') is-invalid @enderror"
+                                            id="phone_number" placeholder="Nomor Telpon"
+                                            value="{{ old('phone_number') }}">
+                                        @error('phone_number')
+                                        <div class="invalid-feedback ml-4">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="col-sm-6">
-                                        <input name="team_name" type="team_name" class="form-control form-control-user @error('team_name') is-invalid @enderror" id="team_name"
-                                            placeholder="Nama Tim" value="{{ old('team_name') }}">
-                                            @error('team_name')
-                                            <div class="invalid-feedback ml-4">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
+                                        <input name="team_name" type="team_name"
+                                            class="form-control form-control-user @error('team_name') is-invalid @enderror"
+                                            id="team_name" placeholder="Nama Tim" value="{{ old('team_name') }}">
+                                        @error('team_name')
+                                        <div class="invalid-feedback ml-4">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <input name="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" id="email"
-                                            placeholder="Email" value="{{ old('email') }}">
-                                            @error('email')
-                                            <div class="invalid-feedback ml-4">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
+                                    <input name="email" type="email"
+                                        class="form-control form-control-user @error('email') is-invalid @enderror"
+                                        id="email" placeholder="Email" value="{{ old('email') }}">
+                                    @error('email')
+                                    <div class="invalid-feedback ml-4">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input name="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror"
+                                        <input name="password" type="password"
+                                            class="form-control form-control-user @error('password') is-invalid @enderror"
                                             id="password" placeholder="Kata Sandi">
-                                            @error('password')
-                                            <div class="invalid-feedback ml-4">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
+                                        @error('password')
+                                        <div class="invalid-feedback ml-4">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="col-sm-6">
-                                        <input name="password_confirm" type="password" class="form-control form-control-user @error('password_confirm') is-invalid @enderror"
+                                        <input name="password_confirm" type="password"
+                                            class="form-control form-control-user @error('password_confirm') is-invalid @enderror"
                                             id="password_confirm" placeholder="Konfirmasi Kata Sandi">
-                                            @error('password_confirm')
-                                            <div class="invalid-feedback ml-4">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
+                                        @error('password_confirm')
+                                        <div class="invalid-feedback ml-4">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-register btn-user btn-block mt-5">

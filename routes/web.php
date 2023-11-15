@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FieldListController;
 use App\Http\Controllers\Admin\FieldScheduleController as AdminFieldScheduleController;
 use App\Http\Controllers\Admin\HowTocancelController;
@@ -14,14 +15,14 @@ use App\Http\Controllers\Admin\TransactionDataController;
 use App\Http\Controllers\Admin\UsersDataController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\FooterItemsController;
+use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\InvoiceController;
 use App\Http\Controllers\User\PaymentConfirmationController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('user.home');
-})->name('home');
+//route home
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [AuthController::class, 'indexLogin'])->name('login');
 Route::get('/register', [AuthController::class, 'indexRegister'])->name('register');
@@ -41,39 +42,32 @@ Route::get('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'i
 Route::post('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'index'])->name('index-jadwal');
 
 Route::middleware(['auth', 'onlyAdmin'])->group(function () {
-    Route::get('/admin', function () {
-        return view('admin.home');
-    });
-
+    //route dashboard
+    Route::get('/admin', [DashboardController::class, 'index'])->name('dashboard');
     //route data pengguna
     Route::get('/admin/pengguna', [UsersDataController::class, 'index'])->name('index-pengguna');
     Route::get('/admin/pengguna/hapus/{id}', [UsersDataController::class, 'destroy'])->name('destroy-pengguna');
-
     //route list lapangan
     Route::get('/admin/lapangan', [FieldListController::class, 'index'])->name('index-lapangan');
     Route::post('/admin/lapangan/store', [FieldListController::class, 'store'])->name('store-lapangan');
     Route::put('/admin/lapangan/update/{id}', [FieldListController::class, 'update'])->name('update-lapangan');
     Route::get('/admin/lapangan/hapus/{id}', [FieldListController::class, 'destroy'])->name('destroy-lapangan');
-    
     //route jadwal lapangan
     Route::get('/admin/lapangan/{id}/jadwal', [AdminFieldScheduleController::class, 'index'])->name('index-jadwalLapangan');
     Route::post('/admin/lapangan/store/jadwal', [AdminFieldScheduleController::class, 'store'])->name('store-jadwalLapangan');
     Route::put('/admin/lapangan/update/jadwal/{id}', [AdminFieldScheduleController::class, 'update'])->name('update-jadwalLapangan');
     Route::get('/admin/lapangan/hapus/jadwal/{id}', [AdminFieldScheduleController::class, 'destroy'])->name('destroy-jadwalLapangan');
-
     //route pembatalan
     Route::get('/admin/permintaan-pembatalan', [RequestCancelledController::class, 'index'])->name('index-cancel');
     Route::get('/admin/permintaan-pembatalan/hapus/{id}', [RequestCancelledController::class, 'destroy']);
     Route::get('/admin/permintaan-pembatalan/konfir/{id}', [RequestCancelledController::class, 'confirm']);
     Route::get('/admin/permintaan-pembatalan/tolak/{id}', [RequestCancelledController::class, 'reject']);
-
     //route cara tautan
     Route::get('/admin/data-transaksi', [TransactionDataController::class, 'index'])->name('index-transaksi');
     Route::post('/admin/data-transaksi', [TransactionDataController::class, 'index'])->name('index-transaksi');
     Route::get('/admin/data-transaksi/show/{id}', [TransactionDataController::class, 'show'])->name('show-transaksi');
     Route::get('/admin/data-transaksi/hapus/{id}', [TransactionDataController::class, 'destroy'])->name('destroy-transaksi');
     Route::get('/admin/data-transaksi/export', [TransactionDataController::class, 'export_excel'])->name('export-excel');
-    
     //route kontak kami
     Route::get('/admin/kontak-kami', [ContactUsController::class, 'index'])->name('index-contact');
     Route::post('/admin/kontak-kami', [ContactUsController::class, 'store'])->name('store-contact');
@@ -104,8 +98,6 @@ Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     Route::post('/admin/tautan', [SocmedLinksController::class, 'store'])->name('store-tautan');
     Route::put('/admin/tautan/update/{id}', [SocmedLinksController::class, 'update'])->name('update-tautan');
     Route::get('/admin/tautan/hapus/{id}', [SocmedLinksController::class, 'destroy'])->name('destroy-tautan');
-    
-
 });
 
 Route::middleware(['auth', 'onlyPengguna'])->group(function () {

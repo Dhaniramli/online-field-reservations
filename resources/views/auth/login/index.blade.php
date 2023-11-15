@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/img/soccer-ball.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('/img/soccer-ball.png') }}">
 
     <title>Karsa Mini Soccer | Login</title>
 
@@ -31,10 +33,12 @@
             Swal.fire({
                 position: 'top-end',
                 icon: 'error',
-                title: '{!! session('loginError') !!}',
+                title: '{!! session('
+                loginError ') !!}',
                 showConfirmButton: false,
                 timer: 1000
             });
+
         </script>
         @endif
         @if(session('success'))
@@ -42,10 +46,12 @@
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: '{!! session('success') !!}',
+                title: '{!! session('
+                success ') !!}',
                 showConfirmButton: false,
                 timer: 1000
             });
+
         </script>
         @endif
 

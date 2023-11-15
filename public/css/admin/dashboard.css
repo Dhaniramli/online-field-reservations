@@ -1,0 +1,15 @@
+h1{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-100);
+}
+
+h2{
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--primary-100);
+}
+
+.text-1{
+    font-size: 12px;
+}

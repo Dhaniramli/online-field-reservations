@@ -18,7 +18,7 @@
                                 </svg>
                         </div>
                     </div>
-                    <h2 class="text-center">800+</h2>
+                    <h2 class="text-center">{{ $user ? $user->count() : 0 }}</h2>
                     <h3 class="text-center">Pengguna</h3>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-6">
@@ -30,7 +30,7 @@
                                 </svg>
                         </div>
                     </div>
-                    <h2 class="text-center">2</h2>
+                    <h2 class="text-center">{{ $lapangan ? $lapangan->count() : 0 }}</h2>
                     <h3 class="text-center">Lapangan</h3>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-6">
@@ -61,7 +61,9 @@
                             </svg>
                         </div>
                     </div>
-                    <h2 class="text-center">48+</h2>
+                    <h2 class="text-center">
+                        {{ $jadwalTersedia ? $jadwalTersedia->count() : 0 }}
+                    </h2>
                     <h3 class="text-center">Jadwal</h3>
                 </div>
             </div>
