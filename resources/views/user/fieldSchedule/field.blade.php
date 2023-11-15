@@ -23,7 +23,7 @@
                 </div>
                 <div class="content">
                     <h2>{{ $item->name }}</h2>
-                    <p>{{ \Illuminate\Support\Str::limit($item->body, 190, '...') }}</p>
+                    <p>{{ \Illuminate\Support\Str::limit($item->body, 185, '...') }}</p>
                     <a href="/sewa-lapangan/{{ $item->id }}/jadwal">Lihat Jadwal</a>
                 </div>
             </div>

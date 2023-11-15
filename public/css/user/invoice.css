@@ -164,6 +164,11 @@
     .show-invoice h2 {
         font-size: 20px;
     }
+
+    .icon-not img{
+        height: 400px;
+        width: 400px;
+    }
 }
 
 /* AKHIR SHOW INVOICE */

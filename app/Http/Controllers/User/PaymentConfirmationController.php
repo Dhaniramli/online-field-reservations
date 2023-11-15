@@ -65,6 +65,26 @@ class PaymentConfirmationController extends Controller
 
         $order_id_final = $order_id + 1;
 
+
+
+        //Ubah Status Jadwal Yang diPesan
+        $idsubah = explode(',', $request->ids);
+        $bookingToUpdate = [];
+
+        foreach ($idsubah as $id) {
+            $booking = FieldSchedule::find($id);
+
+            if (!$booking) {
+                return response()->json(['message' => 'Data tidak ditemukan'], 404);
+            }
+
+            if ($booking->is_booked) {
+                return response()->json(['message' => 'Jadwal sudah tidak tersedia, silahkan pilih jadwal lain yang masih tersedia!'], 400);
+            } else {
+                $bookingToUpdate[] = $booking;
+            }
+        }
+
         if ($request->totalPrice === $request->gross_amount) {
             $dataTransaksi = Transaction::create([
                 'id' => $order_id,
@@ -89,24 +109,6 @@ class PaymentConfirmationController extends Controller
                 'pay_final' => $request->gross_amount,
                 'status_pay_final' => 'unpaid',
             ]);
-        }
-
-        //Ubah Status Jadwal Yang diPesan
-        $idsubah = explode(',', $request->ids);
-        $bookingToUpdate = [];
-
-        foreach ($idsubah as $id) {
-            $booking = FieldSchedule::find($id);
-
-            if (!$booking) {
-                return response()->json(['message' => 'Data tidak ditemukan'], 404);
-            }
-
-            if ($booking->is_booked) {
-                return response()->json(['message' => 'Jadwal sudah tidak tersedia, silahkan pilih jadwal lain yang masih tersedia!'], 400);
-            } else {
-                $bookingToUpdate[] = $booking;
-            }
         }
 
         foreach ($bookingToUpdate as $booking) {
