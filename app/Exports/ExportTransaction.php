@@ -8,20 +8,64 @@ use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\FromCollection;
 
 class ExportTransaction implements FromQuery, WithMapping, WithHeadings
 {
     use Exportable;
 
+    protected $statusAndDate;
+
+    public function __construct($statusAndDate)
+    {
+        $this->statusAndDate = $statusAndDate;
+    }
+
     /**
      * @return \Illuminate\Support\Collection
      */
+
     public function query()
     {
-        $data = Transaction::query();
+        $status = $this->statusAndDate['status'];
+        $date = $this->statusAndDate['date'];
+        // $data = Transaction::query()->where('status_pay_early', $this->statusAndDate);
 
-        return $data;
+        if ($status === 'selesai') {
+            $data = Transaction::query()
+                ->where('created_at', $date)
+                ->where('status_pay_early', 'paid')
+                ->orWhere('status_pay_final', 'paid');
+
+            return $data;
+        } else if ($status === 'belum-selesai') {
+            $data = Transaction::query()
+                ->where('created_at', $date)
+                ->where('status_pay_early', 'unpaid')
+                ->orWhere('status_pay_early', 'pending')
+                ->orWhere('status_pay_final', 'pending')
+                ->orWhere('status_pay_final', 'unpaid');
+
+            return $data;
+        } else if ($status === 'tidak-selesai') {
+            $data = Transaction::query()
+                ->where('created_at', $date)
+                ->where('status_pay_early', 'expire')
+                ->orWhere('status_pay_final', 'expire');
+
+            return $data;
+        } else if ($status) {
+            $data = [];
+
+            return $data;
+        } else {
+            if ($date) {
+                $data = Transaction::query()->where('created_at', $date);
+                return $data;
+            } else {
+                $data = Transaction::query();
+                return $data;
+            }
+        }
     }
 
     public function map($transaksi): array

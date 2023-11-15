@@ -10,14 +10,29 @@
     <h1 class="h3 mb-2 text-gray-800 text-center">Data Transaksi</h1>
 
     <div class="card shadow mb-4">
-        <div class="card-header py-3 d-flex">
-            <select id="selectMenu" class="form-select" aria-label="Default select example" style="width: fit-content;">
-                <option value="link1" {{ !$status ? 'selected' : '' }}>Semua Data Transaksi</option>
-                <option value="link2" {{ $status === 'selesai' ? 'selected' : '' }}>Data Transaksi Selesai</option>
-                <option value="link3" {{ $status === 'belum-selesai' ? 'selected' : '' }}>Data Transaksi Belum Selesai</option>
-                <option value="link4" {{ $status === 'tidak-selesai' ? 'selected' : '' }}>Data Transaksi Tidak Selesai</option>
-            </select>
-        </div>
+        <form action="/admin/data-transaksi" method="POST">
+            <div class="card-header py-3 d-flex">
+                @csrf
+
+                <div class="mb-3">
+                    <select id="selectMenu" name="status" class="form-select" aria-label="Default select example" style="width: fit-content;">
+                        <option value="" {{ !$status ? 'selected' : '' }}>Semua Data Transaksi</option>
+                        <option value="selesai" {{ $status === 'selesai' ? 'selected' : '' }}>Data Transaksi Selesai</option>
+                        <option value="belum-selesai" {{ $status === 'belum-selesai' ? 'selected' : '' }}>Data Transaksi Belum Selesai</option>
+                        <option value="tidak-selesai" {{ $status === 'tidak-selesai' ? 'selected' : '' }}>Data Transaksi Tidak Selesai</option>
+                    </select>
+                </div>
+
+                <div class="mb-3 ml-3">
+                    <input type="date" class="form-control @error('date') is-invalid @enderror" id="date" name="date"
+                    value="{{ old('date') }}">
+                </div>
+                
+                <div class="mb-3 ml-3">
+                    <button type="submit" class="btn btn-success">Filter</button>
+                </div>
+            </div>
+        </form>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -69,33 +84,34 @@
             </div>
         </div>
         <div class="card card-footer">
-            <a href="{{ url('/admin/data-transaksi/export') }}" class="btn btn-success">Download Excel</a>
+            {{-- <a href="{{ url('/admin/data-transaksi/export') }}" class="btn btn-success">Download Excel</a> --}}
+            <a href="{{ url('/admin/data-transaksi/export?status=' . ($status ? $status : '') . '&date=' . ($date ? $date : '')) }}" class="btn btn-success">Download Excel</a>
         </div>
     </div>
 
 </div>
 
-<script>
+{{-- <script>
     const links = {
-    link1: "/admin/data-transaksi",
-    link2: "/admin/data-transaksi?status=selesai",
-    link3: "/admin/data-transaksi?status=belum-selesai",
-    link4: "/admin/data-transaksi?status=tidak-selesai"
-};
+        link1: "/admin/data-transaksi",
+        link2: "/admin/data-transaksi?status=selesai",
+        link3: "/admin/data-transaksi?status=belum-selesai",
+        link4: "/admin/data-transaksi?status=tidak-selesai"
+    };
 
-document.addEventListener('DOMContentLoaded', function () {
-    const selectMenu = document.getElementById('selectMenu');
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectMenu = document.getElementById('selectMenu');
 
-    selectMenu.addEventListener('change', function () {
-        const selectedOption = selectMenu.options[selectMenu.selectedIndex].value;
-        const selectedLink = links[selectedOption];
-        if (selectedLink) {
-            window.location.href = selectedLink;
-        }
+        selectMenu.addEventListener('change', function () {
+            const selectedOption = selectMenu.options[selectMenu.selectedIndex].value;
+            const selectedLink = links[selectedOption];
+            if (selectedLink) {
+                window.location.href = selectedLink;
+            }
+        });
     });
-});
 
-</script>
+</script> --}}
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

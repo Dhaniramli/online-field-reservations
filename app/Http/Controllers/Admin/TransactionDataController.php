@@ -16,43 +16,74 @@ class TransactionDataController extends Controller
 {
     public function index(Request $request)
     {
+        $date = $request->date;
 
         if ($request->status === 'selesai') {
-            $items = Transaction::where('status_pay_early', 'paid')
-                ->orWhere('status_pay_final', 'paid')
-                ->get();
+            $itemsQuery = Transaction::where(function ($query) {
+                $query->where('status_pay_early', 'paid')
+                    ->orWhere('status_pay_final', 'paid');
+            });
+
+            if ($request->filled('date')) {
+                $itemsQuery->whereDate('created_at', $request->date);
+            }
+
+            $items = $itemsQuery->get();
+
             $status = 'selesai';
 
-            return view('admin.transactionData.index', compact('items', 'status'));
+            return view('admin.transactionData.index', compact('items', 'status', 'date'));
         } else if ($request->status === 'belum-selesai') {
-            $items = Transaction::where(function ($query) {
-                $query->where('status_pay_early', 'unpaid')
-                    ->orWhere('status_pay_early', 'pending');
-            })->orWhere(function ($query) {
-                $query->where('status_pay_final', 'unpaid')
-                    ->orWhere('status_pay_final', 'pending');
-            })->get();
+            $itemsQuery = Transaction::where(function ($query) {
+                $query->where(function ($q) {
+                    $q->where('status_pay_early', 'unpaid')
+                        ->orWhere('status_pay_early', 'pending');
+                })->orWhere(function ($q) {
+                    $q->where('status_pay_final', 'unpaid')
+                        ->orWhere('status_pay_final', 'pending');
+                });
+            });
+
+            if ($request->filled('date')) {
+                $itemsQuery->whereDate('created_at', $request->date);
+            }
+
+            $items = $itemsQuery->get();
 
             $status = 'belum-selesai';
 
-            return view('admin.transactionData.index', compact('items', 'status'));
+            return view('admin.transactionData.index', compact('items', 'status', 'date'));
         } else if ($request->status === 'tidak-selesai') {
-            $items = Transaction::where('status_pay_early', 'expire')
-                ->orWhere('status_pay_final', 'expire')
-                ->get();
+            $itemsQuery = Transaction::where(function ($query) {
+                $query->where('status_pay_early', 'expire')
+                    ->orWhere('status_pay_final', 'expire');
+            });
+
+            if ($request->filled('date')) {
+                $itemsQuery->whereDate('created_at', $request->date);
+            }
+
+            $items = $itemsQuery->get();
+
             $status = 'tidak-selesai';
 
-            return view('admin.transactionData.index', compact('items', 'status'));
+            return view('admin.transactionData.index', compact('items', 'status', 'date'));
         } else if ($request->status) {
             $items = [];
             $status = '';
 
-            return view('admin.transactionData.index', compact('items', 'status'));
+            return view('admin.transactionData.index', compact('items', 'status', 'date'));
         } else {
             $status = '';
-            $items = Transaction::all();
+            $itemsQuery = Transaction::query();
 
-            return view('admin.transactionData.index', compact('items', 'status'));
+            if ($request->filled('date')) {
+                $itemsQuery->whereDate('created_at', $request->date);
+            }
+
+            $items = $itemsQuery->get();
+
+            return view('admin.transactionData.index', compact('items', 'status', 'date'));
         }
     }
 
@@ -73,9 +104,14 @@ class TransactionDataController extends Controller
         return back();
     }
 
-    public function export_excel()
+    public function export_excel(Request $request)
     {
+        $statusAndDate = [
+            'status' => $request->input('status'),
+            'date' => $request->input('date'),
+        ];
+
         $timestamp = Carbon::now()->format('Ymd');
-        return (new ExportTransaction)->download('transaksi-' . $timestamp . '.xlsx');
+        return (new ExportTransaction($statusAndDate))->download('transaksi-' . $timestamp . '.xlsx');
     }
 }
