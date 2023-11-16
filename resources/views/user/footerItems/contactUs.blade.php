@@ -19,7 +19,7 @@
                 <div class="isi">
                     <div class="isi-2 alamat d-flex">
                         <div class="icon">
-                            <i class="fa-solid fa-map-pin custom-icon-size"></i>
+                            <i class="fa-regular fa-compass custom-icon-size"></i>
                         </div>
                         <div class="content ml-4">
                             <p>Ayo kunjungi kami di</p>
@@ -29,7 +29,7 @@
                     <hr>
                     <div class="isi-2  d-flex">
                         <div class="icon">
-                            <i class="fa-solid fa-phone custom-icon-size"></i>
+                            <i class="fa-brands fa-whatsapp custom-icon-size"></i>
                         </div>
                         <div class="content ml-4">
                             <p>Jangan ragu untuk menghubungi kami</p>
@@ -39,7 +39,7 @@
                     <hr>
                     <div class="isi-2  d-flex">
                         <div class="icon">
-                            <i class="fa-solid fa-envelope custom-icon-size"></i>
+                            <i class="fa-regular fa-envelope custom-icon-size"></i>
                         </div>
                         <div class="content ml-4">
                             <p>Sapa Kami di</p>
