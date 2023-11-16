@@ -4,9 +4,9 @@
     <div class="container">
         <a href="#" class="brand">Karsa Mini Soccer</a>
         <ul class="menu">
-            <li>
+            {{-- <li>
                 <a href="/kontak-kami">Kontak Kami</a>
-            </li>
+            </li> --}}
             <li>
                 <a href="/kebijakan-privasi">Kebijakan Privasi</a>
             </li>

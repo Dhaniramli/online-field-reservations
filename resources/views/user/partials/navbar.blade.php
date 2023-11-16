@@ -10,7 +10,7 @@
             <span class="toggler-icon bottom-bar"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarKarsa">
-            <ul class="navbar-nav ms-auto mb-lg-0">
+            {{-- <ul class="navbar-nav ms-auto mb-lg-0">
                 <li class="nav-item mx-2">
                     <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Home</a>
                 </li>
@@ -21,8 +21,18 @@
                     <a class="nav-link" href="#">Blog</a>
                 </li>
                 <hr>
-            </ul>
+            </ul> --}}
             <ul class="navbar-nav navbar-btn ms-auto mb-2 mb-lg-0 mb-md-3 mb-sm-3">
+                <li class="nav-item mx-2">
+                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Home</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link {{ Request::is('sewa-lapangan*') ? 'active' : '' }}" href="{{ Route('index-booking') }}">Sewa Lapangan</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link {{ Request::is('kontak-kami*') ? 'active' : '' }}" href="/kontak-kami">Kontak Kami</a>
+                </li>
+                <hr class="vertical-line">
                 @auth
                 <li class="nav-item dropdown">
                     <a class="nav-link mx-2 dropdown-toggle {{ Request::is('profile*') || Request::is('pembelian*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown"
@@ -43,7 +53,7 @@
                     </ul>
                 </li>
                 @else
-                <li class="nav-item mb-lg-0 mb-md-2 mb-sm-2">
+                <li class="nav-item mb-lg-0 mb-md-2 mb-sm-2 mx-2">
                     <a class="nav-link btn-login" href="/login">Masuk</a>
                 </li>
                 <li class="nav-item">
