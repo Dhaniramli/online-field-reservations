@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/img/soccer-ball.png') }}">
-    <link rel="icon" type="image/png" href="{{ asset('/img/soccer-ball.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/img/karsa_logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('/img/karsa_logo.png') }}">
 
     <title>Karsa Mini Soccer | Admin</title>
 

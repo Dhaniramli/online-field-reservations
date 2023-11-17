@@ -1,5 +1,5 @@
-<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/img/soccer-ball.png') }}">
-<link rel="icon" type="image/png" href="{{ asset('/img/soccer-ball.png') }}">
+<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/img/karsa_logo.png') }}">
+<link rel="icon" type="image/png" href="{{ asset('/img/karsa_logo.png') }}">
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/user/body.css">

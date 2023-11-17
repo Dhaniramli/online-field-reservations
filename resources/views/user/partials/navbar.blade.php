@@ -2,7 +2,12 @@
 
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container card-navbar">
-        <a class="navbar-brand" href="/">KARSA MINI SOCCER</a>
+        <div class="logo-dan-title d-flex align-items-center">
+            <div class="navbar-logo">
+                <img src="{{ asset('/img/karsa_logo_2.png') }}" alt="Logo">
+            </div>
+            <a class="navbar-brand" href="/">KARSA MINI SOCCER</a>
+        </div>
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarKarsa"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="toggler-icon top-bar"></span>
