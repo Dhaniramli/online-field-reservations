@@ -3,15 +3,17 @@
 <ul class="navbar-nav sidebar accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
-        {{-- <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-        </div> --}}
+    <a class="sidebar-brand" href="">
+    <div class="iconnya d-flex justify-content-center mb-2">
+        <div class="sidebar-brand-icon">
+            <img src="{{ asset('/img/karsa_logo.png') }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+    </div>
         <div class="sidebar-brand-text mx-3">Karsa Mini Soccer</div>
     </a>
 
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+    <hr class="sidebar-divider my-0 mb-5">
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item {{ Request::is('admin') ? 'active' : '' }}">

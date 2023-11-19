@@ -12,7 +12,7 @@
                 <table class="table table-borderless">
                     <tr>
                         <td class="h-12">Nama Tim</td>
-                        <td>: Belum ada</td>
+                        <td>: {{ $user->team_name }}</td>
                     </tr>
                     <tr>
                         <td>Nama Pelanggan</td>
