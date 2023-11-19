@@ -4,10 +4,10 @@
 <link rel="stylesheet" href="/css/user/schedule.css">
 
 <div class="container content-schedule">
-    <h1 class="title-jadwal text-center">Jadwal {{ $fieldList->name }}</h1>
+    <h1 class="title-jadwal text-center" data-aos="zoom-in" data-aos-duration="2000">Jadwal {{ $fieldList->name }}</h1>
 
     <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-6 col-8 mx-auto my-auto">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-8 mx-auto my-auto" data-aos="zoom-in-up" data-aos-duration="2000">
             <form action="/sewa-lapangan/{{ $id }}/jadwal" method="POST">
                 @csrf
 
@@ -22,14 +22,14 @@
 
     <div class="row isi-list-jadwal">
         @if (!$items->count())
-        <div class="col-lg-6 col-md-4 col-6 p-2 my-auto mx-auto">
+        <div class="col-lg-6 col-md-4 col-6 p-2 my-auto mx-auto" data-aos="zoom-in-up" data-aos-duration="2000">
             <div class="icon-not d-flex justify-content-center">
                 <img src="{{ asset('/img/jadwal_not.png') }}" alt="">
             </div>
         </div>
         @else
         @foreach ($items as $item)
-        <div class="col-lg-3 col-md-4 col-6 p-2">
+        <div class="col-lg-3 col-md-4 col-6 p-2" data-aos="zoom-in-up" data-aos-duration="2000">
             <div class="card card-jadwal d-flex flex-column justify-content-center align-items-center {{ $item->is_booked ? 'booked' : '' }}"
                 data-id="{{ $item->id }}" data-selected="false" data-is-booked="{{ $item->is_booked }}">
                 <h1 class="text-center">{{ $item->time_start . ' - ' . $item->time_finish }}</h1>

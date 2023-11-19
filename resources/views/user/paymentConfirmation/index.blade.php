@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-5 content-kanan">
                     <h4>Rp. {{ number_format($item->price, 0, ',', '.') }}</h4>
-                    <button class="btn btn-tambah btn-danger" data-item-id="{{ $item->id }}"
+                    <button class="btn btn-tambah btn-sm btn-danger" data-item-id="{{ $item->id }}"
                         data-item-price="{{ $item->price }}">Hapus</button>
                 </div>
             </div>
@@ -36,7 +36,7 @@
         @endforeach
     </div>
 
-    <div class="card mt-5 p-4">
+    <div class="card mt-5 p-4 mb-5">
         <form>
             <div class="form-check form-check-inline">
                 <label class="form-check-label" for="metode-bayar-dp">Bayar DP</label>

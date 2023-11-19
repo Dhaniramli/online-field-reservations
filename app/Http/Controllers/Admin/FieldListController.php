@@ -22,7 +22,7 @@ class FieldListController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'body' => 'required|max:255',
+            // 'body' => 'required|max:255',
             'image' => 'image|file|required',
         ]);
 
@@ -40,7 +40,7 @@ class FieldListController extends Controller
         $fieldList = FieldList::findOrFail($id);
 
         $fieldList->name = $request->input('name');
-        $fieldList->body = $request->input('body');
+        // $fieldList->body = $request->input('body');
 
         if ($request->hasFile('image')) {
             if ($fieldList->image) {

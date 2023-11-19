@@ -5,11 +5,11 @@
 
 <div class="container-fluid content-home"
     style="background-image: linear-gradient(rgba(1, 78, 96, 1), rgba(1, 78, 96, 0.5)), url('{{ asset('/img/bg-home.jpg') }}'); background-size: cover;">
-    <h1 class="text-center">Sewa Lapangan Karsa Mini Soccer</h1>
+    <h1 data-aos="zoom-in" data-aos-duration="2000" class="text-center">Sewa Lapangan Karsa Mini Soccer</h1>
     <div class="row card-icon">
         <div class="col-lg-6 col-md-6 col-11 mx-auto my-auto">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6" data-aos="zoom-in-up" data-aos-duration="2000">
                     <div class="d-flex justify-content-center">
                         <div class="icon-home">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1792">
@@ -18,10 +18,10 @@
                                 </svg>
                         </div>
                     </div>
-                    <h2 class="text-center">{{ $user ? $user->count() : 0 }}</h2>
+                    <h2 class="text-center">{{ $user && $user->count() > 99 ? '99+' : ($user ? $user->count() : 0) }}</h2>
                     <h3 class="text-center">Pengguna</h3>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6" data-aos="zoom-in-up" data-aos-duration="2000">
                     <div class="d-flex justify-content-center">
                         <div class="icon-home">
                             <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
@@ -33,25 +33,25 @@
                     <h2 class="text-center">{{ $lapangan ? $lapangan->count() : 0 }}</h2>
                     <h3 class="text-center">Lapangan</h3>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6" data-aos="zoom-in-up" data-aos-duration="2000">
                     <div class="d-flex justify-content-center">
                         <div class="icon-home">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M15 3H9V1h6v2m-2 16c0 1.03.26 2 .71 2.83c-.55.11-1.12.17-1.71.17a9 9 0 0 1 0-18c2.12 0 4.07.74 5.62 2l1.42-1.44c.51.44.96.9 1.41 1.41l-1.42 1.42A8.963 8.963 0 0 1 21 13v.35c-.64-.22-1.3-.35-2-.35c-3.31 0-6 2.69-6 6m0-12h-2v7h2V7m9.54 9.88l-1.42-1.41L19 17.59l-2.12-2.12l-1.41 1.41L17.59 19l-2.12 2.12l1.41 1.42L19 20.41l2.12 2.13l1.42-1.42L20.41 19l2.13-2.12Z"/></svg>
                         </div>
                     </div>
                     <h2 class="text-center">
-                        {{ $jadwalTerjual ? $jadwalTerjual->count() : 0 }}
+                        {{ $jadwalTerjual && $jadwalTerjual->count() > 99 ? '99+' : ($jadwalTerjual ? $jadwalTerjual->count() : 0) }}
                     </h2>
                     <h3 class="text-center">Jadwal Terjual</h3>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6" data-aos="zoom-in-up" data-aos-duration="2000">
                     <div class="d-flex justify-content-center">
                         <div class="icon-home">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M15 3H9V1h6v2m-2 16c0 1.03.26 2 .71 2.83c-.55.11-1.12.17-1.71.17a9 9 0 0 1 0-18c2.12 0 4.07.74 5.62 2l1.42-1.44c.51.44.96.9 1.41 1.41l-1.42 1.42A8.963 8.963 0 0 1 21 13v.35c-.64-.22-1.3-.35-2-.35c-3.31 0-6 2.69-6 6m0-12h-2v7h2V7m8.34 8.84l-3.59 3.59l-1.59-1.59L15 19l2.75 3l4.75-4.75l-1.16-1.41Z"/></svg>
                         </div>
                     </div>
                     <h2 class="text-center">
-                        {{ $jadwalTersedia ? $jadwalTersedia->count() : 0 }}
+                        {{ $jadwalTersedia && $jadwalTersedia->count() > 99 ? '99+' : ($jadwalTersedia ? $jadwalTersedia->count() : 0) }}
                     </h2>
                     <h3 class="text-center">Jadwal Tersedia</h3>
                 </div>
@@ -61,12 +61,12 @@
 </div>
 
 <div class="container layanan-kami">
-    <h1 class="text-center">Layanan Kami</h1>
-    <h2 class="text-center">Kami Menyediakan Layanan dan Lapangan Olahraga Terbaik Untuk Anda</h2>
+    <h1 class="text-center" data-aos="zoom-in" data-aos-duration="2000">Layanan Kami</h1>
+    <h2 class="text-center" data-aos="zoom-in" data-aos-duration="2000">Kami Menyediakan Layanan dan Lapangan Olahraga Terbaik Untuk Anda</h2>
 
     <div class="row content-layanan-kami">
         <div class="col-lg-4">
-            <div class="card">
+            <div class="card" data-aos="zoom-in-up" data-aos-duration="2000">
                 <div class="layanan-icon">
                     <div class="card-icon p-4">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -83,7 +83,7 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <div class="card">
+            <div class="card" data-aos="zoom-in-up" data-aos-duration="2000">
                 <div class="layanan-icon">
                     <div class="card-icon p-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path fill="currentColor" d="M338.8 31.81c-5 19.51-9.9 38.69-14.9 57.64c-45.3 7.27-90.5 7.28-135.8 0c-5-18.95-9.9-38.13-14.9-57.64c54.9 22.58 110.7 22.58 165.6 0zm17.3 4.59l34.4 45.95c-14 96.25-40 204.15-77.5 302.95c-10.7-12.4-25.2-21.3-41.8-24.7c28.3-111.3 56.6-212.3 84.9-324.2zm-200.2 0c28.3 111.9 56.6 212.9 84.9 324.2c-16.6 3.4-31.1 12.3-41.8 24.7c-37.5-98.8-63.5-206.7-77.5-302.95zM256 377c31.6 0 57 25.4 57 57s-25.4 57-57 57s-57-25.4-57-57s25.4-57 57-57z"/></svg>
@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <div class="card">
+            <div class="card" data-aos="zoom-in-up" data-aos-duration="2000">
                 <div class="layanan-icon">
                     <div class="card-icon p-4">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M11 19q-2.5 0-4.25-1.75T5 13q0-.275.025-.55t.075-.55q-.125.05-.3.075T4.5 12q-1.05 0-1.775-.725T2 9.5q0-1.05.688-1.775T4.425 7q.825 0 1.488.462T6.85 8.65q.825-.75 1.888-1.2T11 7h11v4h-5v2q0 2.5-1.75 4.25T11 19Zm-6.5-8.5q.425 0 .713-.288T5.5 9.5q0-.425-.288-.713T4.5 8.5q-.425 0-.713.288T3.5 9.5q0 .425.288.713t.712.287ZM11 15q.825 0 1.413-.588T13 13q0-.825-.588-1.413T11 11q-.825 0-1.413.588T9 13q0 .825.588 1.413T11 15Z"/></svg>
@@ -112,9 +112,9 @@
 </div>
 
 <div class="container-fluid lokasi-kami">
-    <h1 class="text-center">Lokasi Karsa Mini Soccer</h1>
+    <h1 class="text-center" data-aos="zoom-in" data-aos-duration="2000">Lokasi Karsa Mini Soccer</h1>
 
-    <div class="card card-lokasi">
+    <div class="card card-lokasi" data-aos="zoom-in-up" data-aos-duration="2000">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3973.7705281927842!2d119.48338967397413!3d-5.140606851984108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbee30b58cb90a9%3A0xb37efae63a9621ee!2sKarsa%20Mini%20Soccer!5e0!3m2!1sid!2sid!4v1699162349700!5m2!1sid!2sid" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 

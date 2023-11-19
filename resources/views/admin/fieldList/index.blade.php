@@ -20,7 +20,7 @@
                         <tr>
                             <th class="text-center">No</th>
                             <th class="text-center">Lapangan</th>
-                            <th class="text-center">Deskripsi</th>
+                            {{-- <th class="text-center">Deskripsi</th> --}}
                             <th class="text-center">Gambar</th>
                             <th class="text-center">jadwal</th>
                             <th class="text-center">Aksi</th>
@@ -31,7 +31,7 @@
                         <tr>
                             <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->body }}</td>
+                            {{-- <td>{{ $item->body }}</td> --}}
                             <td><img src="{{ asset('storage/' . $item->image) }}" alt="" style="height: 200px;"></td>
                             <td class="text-center" style="vertical-align: middle;">
                                 <a href="{{ url('/admin/lapangan/' . $item->id . '/jadwal') }}"

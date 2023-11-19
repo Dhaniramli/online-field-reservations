@@ -6,7 +6,9 @@
             <div class="navbar-logo">
                 <img src="{{ asset('/img/karsa_logo_2.png') }}" alt="Logo">
             </div>
-            <a class="navbar-brand" href="/">KARSA MINI SOCCER</a>
+            <div class="navbar-title d-flex align-items-center justify-conten-center">
+                <a class="navbar-brand" href="/">KARSA MINI SOCCER</a>
+            </div>
         </div>
         <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarKarsa"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

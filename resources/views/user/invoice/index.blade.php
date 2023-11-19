@@ -4,9 +4,9 @@
 <link rel="stylesheet" href="/css/user/invoice.css">
 
 <div class="container content-pembelian">
-    <h1 class="text-center">Daftar Transaksi</h1>
+    <h1 class="text-center" data-aos="zoom-in" data-aos-duration="2000">Daftar Transaksi</h1>
 
-    <div class="scrollable-tabs-container mt-5">
+    <div class="scrollable-tabs-container mt-5" data-aos="zoom-in-up" data-aos-duration="2000">
         <a href="/pembelian" class="btn btn-tabs btn-block {{ ($status === 'semua') ? 'active' : '' }}">Semua</a>
         <a href="/pembelian?status=pending"
             class="btn btn-tabs btn-block {{ ($status === 'pending') ? 'active' : '' }}">Berlangsung</a>
@@ -22,12 +22,12 @@
         <div class="row">
             <div class="col-lg-6 col-md-8 mx-auto my-auto">
                 @if (!$transaction->count())
-                <div class="icon-not d-flex justify-content-center">
+                <div class="icon-not d-flex justify-content-center" data-aos="zoom-in-up" data-aos-duration="2000">
                     <img src="{{ asset('/img/data_not.png') }}" alt="">
                 </div>
                 @endif
                 @foreach ($transaction as $item)
-                <div class="card shadow p-3 border-0 mb-3">
+                <div class="card shadow p-3 border-0 mb-3" data-aos="zoom-in-up" data-aos-duration="2000">
                     <div class="header-content d-flex">
                         <h2 class="mb-3">Sewa Lapangan</h2>
                         <p>{{ \Carbon\Carbon::parse($item->created_at)->format('d F Y') }}</p>

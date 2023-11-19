@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/css/user/profile.css">
 
 <div class="container content-profile">
-    <h1 class="text-center">Profil Pengguna</h1>
+    <h1 data-aos="zoom-in" data-aos-duration="2000" class="text-center">Profil Pengguna</h1>
     @if (session()->has('success'))
     @include('user.partials.alertSuccess')
     @endif
@@ -12,7 +12,7 @@
     <div class="row mt-5">
         <div class="col-lg-6 mx-auto my-auto">
 
-            <div class="card card-isi shadow border-0">
+            <div class="card card-isi shadow border-0" data-aos="zoom-in-up" data-aos-duration="2000">
                 <form action="/profile/{{ $user->id }}" method="POST">
                     @csrf
                     @method('put')

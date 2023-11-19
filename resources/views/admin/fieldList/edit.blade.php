@@ -18,10 +18,10 @@
                         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="contoh : Lapangan 1" value="{{ old('name', $item->name) }}" required>
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="body" class="form-label">Deskripsi Singkat</label>
                         <input type="text" class="form-control @error('body') is-invalid @enderror" id="body" name="body" placeholder="deskripsi singkat" value="{{ old('body', $item->body) }}" required>
-                    </div>
+                    </div> --}}
 
                     <div class="mb-3">
                         <label for="image" class="form-label">Gambar</label>

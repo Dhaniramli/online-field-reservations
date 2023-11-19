@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-6 mx-auto my-auto">
             <div class="card p-2 mb-5">
-                <h1 class="title-pelanggan mt-2 text-center">Detail Sewa Lapangan</h1>
+                <h1 class="title-pelanggan mt-2 text-center" data-aos="zoom-in" data-aos-duration="2000">Detail Sewa Lapangan</h1>
 
                 <table class="table">
                     @foreach ($belanja as $item)

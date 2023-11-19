@@ -167,6 +167,17 @@
     }
     </script>
 
+<script>
+    // Mengambil pesan kesalahan dari variabel session
+    var loginError = "{{ session('loginError') }}";
+
+    // Periksa apakah ada pesan kesalahan
+    if(loginError) {
+        // Menampilkan pesan kesalahan menggunakan alert box
+        alert(loginError);
+    }
+</script>
+
 </body>
 
 </html>

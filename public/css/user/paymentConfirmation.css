@@ -75,6 +75,13 @@
     .sub-title-paymentConfir{
         font-size: 13px;
     }
+
+    .content-kanan h1{
+        font-size: 17px;
+    }
+    .content-kanan h4{
+        font-size: 17px;
+    }
 }
 
 .content-paymentConfirmation .btn-konfirmasi-pemesanan:active{

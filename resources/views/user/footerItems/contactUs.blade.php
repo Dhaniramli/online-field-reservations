@@ -4,9 +4,9 @@
 <link rel="stylesheet" href="/css/user/contactUs.css">
 
 <div class="container kontak-kami">
-    <h1>Kontak Kami</h1>
+    <h1 class="text-center" data-aos="zoom-in" data-aos-duration="2000">Kontak Kami</h1>
 
-    <div class="card border-0 shadow">
+    <div class="card border-0 shadow" data-aos="zoom-in-up" data-aos-duration="2000">
         <div class="row row-content">
             <div class="col-lg-6 col-md-6 map-1">
                 <div class="card card-2 shadow-none border-0 m-0">

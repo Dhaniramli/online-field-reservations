@@ -10,7 +10,7 @@ nav {
 
 @media (max-width: 767.98px) {
     .navbar a.navbar-brand {
-        font-size: 25px;
+        font-size: 20px;
     }
 }
 
@@ -147,6 +147,11 @@ nav .dropdown-menu a {
 
     .navbar .dropdown-menu {
         width: auto;
+    }
+
+    .navbar .nav-item .btn-register {
+        margin-left: 20px;
+        margin-right: 20px;
     }
 
 }

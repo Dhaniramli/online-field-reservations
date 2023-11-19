@@ -45,3 +45,6 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
 
 {{-- MIDTRANS --}}
 <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
+
+{{-- AOS --}}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
