@@ -5,6 +5,21 @@
 
 <div class="container-fluid content-home"
     style="background-image: linear-gradient(rgba(1, 78, 96, 1), rgba(1, 78, 96, 0.5)), url('{{ asset('/img/bg-home.jpg') }}'); background-size: cover;">
+
+    @if(session('success'))
+        <script>
+            $(document).ready(function () {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: '{!! session('success') !!}',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            });
+        </script>
+    @endif
+
     <h1 data-aos="zoom-in" data-aos-duration="2000" class="text-center">Sewa Lapangan Karsa Mini Soccer</h1>
     <div class="row card-icon">
         <div class="col-lg-6 col-md-6 col-11 mx-auto my-auto">

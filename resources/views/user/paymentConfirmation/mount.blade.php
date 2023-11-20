@@ -103,7 +103,12 @@
                 })
                 .catch(function (error) {
                     console.error('Gagal mendapatkan Snap Token:', error.response.data);
-                    alert(error.response.data.message);
+                    // alert(error.response.data.message);
+                    Swal.fire({
+                        title: "Eitss!!!",
+                        text: error.response.data.message,
+                        icon: "error"
+                    });
                 });
         });
 

@@ -80,7 +80,11 @@
             // Periksa apakah salah satu radio button dipilih
             if ($("input[type=radio][name=metode]:checked").length === 0) {
                 e.preventDefault(); // Mencegah tindakan default tombol jika tidak ada radio button yang dipilih
-                alert("Pilih metode pembayaran terlebih dahulu.");
+                Swal.fire({
+                    title: "Eitss!!!",
+                    text: "Pilih metode pembayaran terlebih dahulu.",
+                    icon: "error"
+                });
             }
         }); 
 

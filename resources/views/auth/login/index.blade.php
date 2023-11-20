@@ -27,39 +27,42 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/login.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="d-flex align-items-center">
+    @if(session('loginError'))
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: '{!! session('loginError') !!}',
+            showConfirmButton: false,
+            timer: 1000
+        });
+
+    </script>
+    @endif
+
+    @if(session('success'))
+        <script>
+            $(document).ready(function () {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Sukses',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            });
+        </script>
+    @endif
 
     <div class="container content-login">
-        @if(session('loginError'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: '{!! session('
-                loginError ') !!}',
-                showConfirmButton: false,
-                timer: 1000
-            });
 
-        </script>
-        @endif
-        @if(session('success'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '{!! session('
-                success ') !!}',
-                showConfirmButton: false,
-                timer: 1000
-            });
-
-        </script>
-        @endif
-
-        <!-- Outer Row -->
         <div class="row justify-content-center">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
@@ -135,6 +138,7 @@
         </div>
 
     </div>
+    {{-- <script src="sweetalert2.all.min.js"></script> --}}
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -145,9 +149,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="{{ asset('/sw.js') }}"></script>
     <script>
@@ -166,17 +167,6 @@
         console.error("Service workers are not supported.");
     }
     </script>
-
-<script>
-    // Mengambil pesan kesalahan dari variabel session
-    var loginError = "{{ session('loginError') }}";
-
-    // Periksa apakah ada pesan kesalahan
-    if(loginError) {
-        // Menampilkan pesan kesalahan menggunakan alert box
-        alert(loginError);
-    }
-</script>
 
 </body>
 

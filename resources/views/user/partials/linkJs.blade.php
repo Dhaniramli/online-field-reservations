@@ -8,9 +8,6 @@
 {{-- FLICKITY CAROUSEL --}}
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
-{{-- SWEETALERT --}}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 {{-- DATATABLES --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js">
 

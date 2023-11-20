@@ -4,6 +4,10 @@
 <link href="/css/admin/dashboard.css" rel="stylesheet">
 
 <div class="container-fluid">
+    @if (session()->has('success'))
+    @include('admin.partials.alertSuccess')
+    @endif
+
     <div class="card shadow border-0 p-4 mb-4">
         <div class="title text-center">
             <h1>Selamat Datang</h1>

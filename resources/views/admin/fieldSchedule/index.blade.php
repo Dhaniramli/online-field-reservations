@@ -3,6 +3,10 @@
 
 @section('content')
 <div class="container content-schedule mt-4">
+    @if (session()->has('success'))
+    @include('admin.partials.alertSuccess')
+    @endif
+
     <h1 class="h3 mb-2 text-gray-800 text-center">Jadwal {{ $items->name }}</h1>
     <!-- Tambahkan input pencarian di luar tabel -->
     <div class="card shadow">
