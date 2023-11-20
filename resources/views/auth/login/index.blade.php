@@ -31,6 +31,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
 
 <body class="d-flex align-items-center">
@@ -61,7 +63,7 @@
         </script>
     @endif
 
-    <div class="container content-login">
+    <div data-aos="flip-left" data-aos-duration="3000" class="container content-login">
 
         <div class="row justify-content-center">
 
@@ -71,18 +73,18 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block"
+                            <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000"
                                 style="background-image: url('{{ asset('/img/login_img.jpeg') }}'); background-size: cover;">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Silahkan Login</h1>
+                                        <h1 class="h4 text-gray-900 mb-4" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">Silahkan Login</h1>
                                     </div>
                                     <form class="user" action="/login" method="POST">
                                         @csrf
 
-                                        <div class="form-group">
+                                        <div class="form-group" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">
                                             <input name="email" type="email"
                                                 class="form-control form-control-user @error('email') is-invalid @enderror"
                                                 id="email" aria-describedby="emailHelp"
@@ -93,7 +95,7 @@
                                             </div>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">
                                             <input name="password" type="password"
                                                 class="form-control form-control-user @error('password') is-invalid @enderror"
                                                 id="password" placeholder="Kata Sandi">
@@ -109,7 +111,7 @@
                                                 <label class="custom-control-label" for="customCheck">Ingat Saya</label>
                                             </div> --}}
                                         </div>
-                                        <button type="submit" class="btn btn-login btn-user btn-block mt-5">
+                                        <button type="submit" class="btn btn-login btn-user btn-block mt-5" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">
                                             Masuk
                                         </button>
                                         {{-- <hr>
@@ -120,11 +122,11 @@
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a> --}}
                                     </form>
-                                    <hr>
+                                    <hr data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">
                                     <div class="text-center">
                                         {{-- <a class="small" href="forgot-password.html">Forgot Password?</a> --}}
                                     </div>
-                                    <div class="text-center teks-buatAkun">
+                                    <div class="text-center teks-buatAkun" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">
                                         Belum punya akun? <a class="btn-toRegister" href="/register">Daftar!</a>
                                     </div>
                                 </div>
@@ -166,6 +168,11 @@
     } else {
         console.error("Service workers are not supported.");
     }
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
     </script>
 
 </body>

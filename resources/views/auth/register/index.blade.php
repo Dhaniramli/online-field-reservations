@@ -28,28 +28,30 @@
     <link rel="stylesheet" href="/css/colors.css">
     <link rel="stylesheet" href="/css/register.css">
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
 
 <body class="d-flex align-items-center">
 
-    <div class="container content-register">
+    <div data-aos="flip-right" data-aos-duration="3000" class="container content-register">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block"
+                    <div class="col-lg-5 d-none d-lg-block" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000"
                         style="background-image: url('{{ asset('/img/login_img.jpeg') }}'); background-size: cover;">
                     </div>
                     <div class="col-lg-7">
                         <div class="p-5">
-                            <div class="text-center">
+                            <div class="text-center" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                                 <h1 class="h4 text-gray-900 mb-4">Buat akun!</h1>
                             </div>
                             <form class="user" action="/register" method="POST">
                                 @csrf
 
-                                <div class="form-group row">
+                                <div class="form-group row" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input name="first_name" type="text"
                                             class="form-control form-control-user @error('first_name') is-invalid @enderror"
@@ -71,7 +73,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input name="phone_number" type="number"
                                             class="form-control form-control-user @error('phone_number') is-invalid @enderror"
@@ -95,7 +97,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                                     <input name="email" type="email"
                                         class="form-control form-control-user @error('email') is-invalid @enderror"
                                         id="email" placeholder="Email" value="{{ old('email') }}">
@@ -106,7 +108,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group row">
+                                <div class="form-group row" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input name="password" type="password"
                                             class="form-control form-control-user @error('password') is-invalid @enderror"
@@ -128,7 +130,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-register btn-user btn-block mt-5">
+                                <button type="submit" class="btn btn-register btn-user btn-block mt-5" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                                     Daftar
                                 </button>
                                 {{-- <hr>
@@ -139,11 +141,11 @@
                                     <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
                                 </a> --}}
                             </form>
-                            <hr>
+                            <hr data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
                             <div class="text-center">
                                 {{-- <a class="small" href="forgot-password.html">Forgot Password?</a> --}}
                             </div>
-                            <div class="text-center teks-toLogin">
+                            <div data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000" class="text-center teks-toLogin">
                                 Sudah punya akun? <a class="btn-toLogin" href="/login">Login!</a>
                             </div>
                         </div>
@@ -180,6 +182,11 @@
     } else {
         console.error("Service workers are not supported.");
     }
+    </script>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
     </script>
 
 </body>
