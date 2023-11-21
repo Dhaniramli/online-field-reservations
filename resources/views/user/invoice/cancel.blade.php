@@ -47,20 +47,40 @@
 
                 // Close the modal
                 $('#cancelModal' + itemId).modal('hide');
-                alert(data.message);
+                // alert(data.message);
+                Swal.fire({
+                        title: "Sukses!!!",
+                        text: data.message,
+                        icon: "success"
+                });
                 location.reload();
             } else if (data.done && data.done.common) {
                 // Jika ada kondisi spesifik 'done' (atau kondisi lain yang sesuai)
                 var doneMessage = data.done.common.join('\n');
-                alert(doneMessage);
+                // alert(doneMessage);
+                Swal.fire({
+                        title: "Sukses!!!",
+                        text: doneMessage,
+                        icon: "success"
+                });
                 location.reload();
             } else if (data.errors && data.errors.common) {
                 // Jika terjadi kesalahan umum (common errors)
                 var errorMessage = data.errors.common.join('\n');
-                alert(errorMessage);
+                // alert(errorMessage);
+                Swal.fire({
+                        title: "Eitss!!!",
+                        text: errorMessage,
+                        icon: "error"
+                });
             } else {
                 // Kondisi lainnya, misalnya jika ada kesalahan yang tidak dapat diatasi di sisi klien
-                alert('Terjadi kesalahan. Silakan coba lagi nanti.');
+                // alert('Terjadi kesalahan. Silakan coba lagi nanti.');
+                Swal.fire({
+                        title: "Eitss!!!",
+                        text: 'Terjadi kesalahan. Silakan coba lagi nanti.',
+                        icon: "error"
+                });
             }
         })
         .catch(error => {
