@@ -97,4 +97,15 @@
         });
     });
 </script>
+
+<script>
+    // Mendapatkan tanggal saat ini
+    var today = new Date().toISOString().split('T')[0];
+    
+    // Mengambil elemen input date
+    var inputDate = document.getElementById("date");
+
+    // Menetapkan nilai minimum untuk elemen input date
+    inputDate.setAttribute("min", today);
+</script>
 @endsection
