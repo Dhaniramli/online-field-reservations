@@ -24,7 +24,7 @@ class FieldScheduleController extends Controller
     {
         $request->validate([
             'field_list_id' => 'required',
-            'date.*' => 'required', // Gunakan 'date.*' untuk memvalidasi semua elemen dalam array
+            'date.*' => 'required',
             'time_start.*' => 'required',
             'time_finish.*' => 'required',
             'price.*' => 'required',
@@ -41,16 +41,17 @@ class FieldScheduleController extends Controller
         $time_finishes = $request->input('time_finish');
         $prices = $request->input('price');
 
+        $hasDuplicate = false; // Tandai apakah ada duplikasi atau tidak
+
         foreach ($dates as $key => $date) {
             $new_date = date('Ymd', strtotime($date));
             $new_time_start = date('Hi', strtotime($time_starts[$key]));
-            // $new_time_finish = date('Hi', strtotime($time_finishes[$key]));
             $id_schedule = $new_date . $new_time_start;
 
             $fieldSchedules = FieldSchedule::find($id_schedule);
 
             if ($fieldSchedules) {
-                return back()->with('error', 'Terdapat jadwal yang duplikasi!');
+                $hasDuplicate = true; // Set flag jika terdapat duplikasi
             } else {
                 $jadwal = new FieldSchedule([
                     'id' => $id_schedule,
@@ -65,8 +66,13 @@ class FieldScheduleController extends Controller
             }
         }
 
+        if ($hasDuplicate) {
+            return back()->with('error', 'Terdapat jadwal yang duplikasi!, hanya data yang belum ada yang sistem simpan');
+        }
+
         return back()->with('success', 'Berhasil disimpan!');
     }
+
 
 
     public function update(Request $request, $id)

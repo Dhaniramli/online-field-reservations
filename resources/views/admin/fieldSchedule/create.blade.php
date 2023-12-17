@@ -47,7 +47,9 @@
                         </tr>
                         <!-- Table rows will be added dynamically -->
                     </table>
-                    <button type="button" class="btn btn-primary" onclick="addRow()">Tambah</button>
+                    <div class="btn-add d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary" onclick="addRow()">Tambah</button>
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
