@@ -16,7 +16,10 @@ class TransactionDataController extends Controller
 {
     public function index(Request $request)
     {
-        $date = $request->date;
+        // dd($request);
+        $date = $request->filled('date') ? $request->date : null;
+        $month = $request->filled('month') ? sprintf("%02d", $request->month) : null;
+        $year = $request->filled('year') ? $request->year : null;
 
         if ($request->status === 'selesai') {
             $itemsQuery = Transaction::where(function ($query) {
@@ -24,15 +27,37 @@ class TransactionDataController extends Controller
                     ->orWhere('status_pay_final', 'paid');
             });
 
-            if ($request->filled('date')) {
-                $itemsQuery->whereDate('created_at', $request->date);
+            if ($date && $month && $year) {
+                $searchDate = "$year-$month-$date"; // Format tanggal: YYYY-MM-DD
+                $itemsQuery->whereDate('created_at', $searchDate);
+            } elseif ($date && $month) {
+                // Jika hanya tanggal dan bulan yang ada isinya
+                $searchDate = sprintf("%02d", $month) . '-' . sprintf("%02d", $date); // Format tanggal: MM-DD
+                $itemsQuery->whereMonth('created_at', $month)->whereDay('created_at', $date);
+            } elseif ($month && $year) {
+                // Jika hanya bulan dan tahun yang ada isinya
+                $searchDate = "$year-$month"; // Format tanggal: YYYY-MM
+                $itemsQuery->whereYear('created_at', $year)->whereMonth('created_at', $month);
+            } elseif ($date) {
+                // Jika hanya tanggal yang ada isinya
+                $itemsQuery->whereDay('created_at', $date);
+            } elseif ($month) {
+                // Jika hanya bulan yang ada isinya
+                $itemsQuery->whereMonth('created_at', $month);
+            } elseif ($year) {
+                // Jika hanya tahun yang ada isinya
+                $itemsQuery->whereYear('created_at', $year);
+            } elseif ($month && $year) {
+                // Jika hanya bulan dan tahun yang ada isinya
+                $searchDate = "$year-$month"; // Format tanggal: YYYY-MM
+                $itemsQuery->whereYear('created_at', $year)->whereMonth('created_at', $month);
             }
 
             $items = $itemsQuery->get();
 
             $status = 'selesai';
 
-            return view('admin.transactionData.index', compact('items', 'status', 'date'));
+            return view('admin.transactionData.index', compact('items', 'status', 'date', 'year', 'month'));
         } else if ($request->status === 'belum-selesai') {
             $itemsQuery = Transaction::where(function ($query) {
                 $query->where(function ($q) {
@@ -44,46 +69,94 @@ class TransactionDataController extends Controller
                 });
             });
 
-            if ($request->filled('date')) {
-                $itemsQuery->whereDate('created_at', $request->date);
+            if ($date && $month && $year) {
+                $searchDate = "$year-$month-$date";
+                $itemsQuery->whereDate('created_at', $searchDate);
+            } elseif ($date && $month) {
+                $searchDate = sprintf("%02d", $month) . '-' . sprintf("%02d", $date);
+                $itemsQuery->whereMonth('created_at', $month)->whereDay('created_at', $date);
+            } elseif ($month && $year) {
+                $searchDate = "$year-$month";
+                $itemsQuery->whereYear('created_at', $year)->whereMonth('created_at', $month);
+            } elseif ($date) {
+                $itemsQuery->whereDay('created_at', $date);
+            } elseif ($month) {
+                $itemsQuery->whereMonth('created_at', $month);
+            } elseif ($year) {
+                $itemsQuery->whereYear('created_at', $year);
+            } elseif ($month && $year) {
+                $searchDate = "$year-$month";
+                $itemsQuery->whereYear('created_at', $year)->whereMonth('created_at', $month);
             }
 
             $items = $itemsQuery->get();
 
             $status = 'belum-selesai';
 
-            return view('admin.transactionData.index', compact('items', 'status', 'date'));
+            return view('admin.transactionData.index', compact('items', 'status', 'date', 'year', 'month'));
         } else if ($request->status === 'tidak-selesai') {
             $itemsQuery = Transaction::where(function ($query) {
                 $query->where('status_pay_early', 'expire')
                     ->orWhere('status_pay_final', 'expire');
             });
 
-            if ($request->filled('date')) {
-                $itemsQuery->whereDate('created_at', $request->date);
+            if ($date && $month && $year) {
+                $searchDate = "$year-$month-$date";
+                $itemsQuery->whereDate('created_at', $searchDate);
+            } elseif ($date && $month) {
+                $searchDate = sprintf("%02d", $month) . '-' . sprintf("%02d", $date);
+                $itemsQuery->whereMonth('created_at', $month)->whereDay('created_at', $date);
+            } elseif ($month && $year) {
+                $searchDate = "$year-$month";
+                $itemsQuery->whereYear('created_at', $year)->whereMonth('created_at', $month);
+            } elseif ($date) {
+                $itemsQuery->whereDay('created_at', $date);
+            } elseif ($month) {
+                $itemsQuery->whereMonth('created_at', $month);
+            } elseif ($year) {
+                $itemsQuery->whereYear('created_at', $year);
+            } elseif ($month && $year) {
+                $searchDate = "$year-$month";
+                $itemsQuery->whereYear('created_at', $year)->whereMonth('created_at', $month);
             }
 
             $items = $itemsQuery->get();
 
             $status = 'tidak-selesai';
 
-            return view('admin.transactionData.index', compact('items', 'status', 'date'));
+            return view('admin.transactionData.index', compact('items', 'status', 'date', 'year', 'month'));
         } else if ($request->status) {
             $items = [];
             $status = '';
 
-            return view('admin.transactionData.index', compact('items', 'status', 'date'));
+            return view('admin.transactionData.index', compact('items', 'status', 'date', 'year', 'month'));
         } else {
             $status = '';
             $itemsQuery = Transaction::query();
 
-            if ($request->filled('date')) {
-                $itemsQuery->whereDate('created_at', $request->date);
+            if ($date && $month && $year) {
+                $searchDate = "$year-$month-$date";
+                $itemsQuery->whereDate('created_at', $searchDate);
+            } elseif ($date && $month) {
+                $searchDate = sprintf("%02d", $month) . '-' . sprintf("%02d", $date);
+                $itemsQuery->whereMonth('created_at', $month)->whereDay('created_at', $date);
+            } elseif ($month && $year) {
+                $searchDate = "$year-$month";
+                $itemsQuery->whereYear('created_at', $year)->whereMonth('created_at', $month);
+            } elseif ($date) {
+                $itemsQuery->whereDay('created_at', $date);
+            } elseif ($month) {
+                $itemsQuery->whereMonth('created_at', $month);
+            } elseif ($year) {
+                $itemsQuery->whereYear('created_at', $year);
+            } elseif ($month && $year) {
+                $searchDate = "$year-$month";
+                $itemsQuery->whereYear('created_at', $year)->whereMonth('created_at', $month);
             }
 
             $items = $itemsQuery->get();
 
-            return view('admin.transactionData.index', compact('items', 'status', 'date'));
+            return view('admin.transactionData.index', compact('items', 'status', 'date', 'year'));
         }
     }
 

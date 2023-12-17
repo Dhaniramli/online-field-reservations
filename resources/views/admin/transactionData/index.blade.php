@@ -23,10 +23,42 @@
                     </select>
                 </div>
 
-                <div class="mb-3 ml-3">
+                {{-- <div class="mb-3 ml-3">
                     <input type="date" class="form-control @error('date') is-invalid @enderror" id="date" name="date"
                     value="{{ old('date') }}">
+                </div> --}}
+
+                <div class="mb-3 ml-3">
+                    <select class="form-select" aria-label="Default select example" id="date" name="date">
+                        <option value="" selected>Tanggal</option>
+                        @for ($i = 1; $i <= 31; $i++)
+                            <option value="{{ $i }}" {{ old('date') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                        @endfor
+                    </select>
                 </div>
+
+                <div class="mb-3 ml-3">
+                    <select class="form-select" aria-label="Default select example" id="mount" name="mount">
+                        <option value="" selected>Bulan</option>
+                        @for ($i = 1; $i <= 12; $i++)
+                            <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+
+                <div class="mb-3 ml-3">
+                    <select class="form-select" aria-label="Tahun" id="year" name="year">
+                        <option selected value="">Tahun</option>
+                        @php
+                            $currentYear = date('Y');
+                            $startYear = 1900;
+                        @endphp
+                        @for ($i = $currentYear; $i >= $startYear; $i--)
+                            <option value="{{ $i }}" {{ old('year') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+                
                 
                 <div class="mb-3 ml-3">
                     <button type="submit" class="btn btn-success">Filter</button>
@@ -52,7 +84,7 @@
                         @foreach ($items as $item)
                         <tr>
                             <td class="text-center" style="vertical-align: middle;">{{ $loop->iteration }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->user->created_at)->format('d F Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d F Y') }}</td>
                             <td>{{ $item->user->first_name }} {{ $item->user->last_name }}</td>
                             <td>{{ $item->user->team_name }}</td>
                             <td class="text-center">{{ $item->user->phone_number }}</td>
@@ -84,34 +116,11 @@
             </div>
         </div>
         <div class="card card-footer">
-            {{-- <a href="{{ url('/admin/data-transaksi/export') }}" class="btn btn-success">Download Excel</a> --}}
-            <a href="{{ url('/admin/data-transaksi/export?status=' . ($status ? $status : '') . '&date=' . ($date ? $date : '')) }}" class="btn btn-success">Download Excel</a>
+            {{-- <a href="{{ url('/admin/data-transaksi/export?status=' . ($status ? $status : '') . '&date=' . ($date ? $date : '')) }}" class="btn btn-success">Download Excel</a> --}}
         </div>
     </div>
 
 </div>
-
-{{-- <script>
-    const links = {
-        link1: "/admin/data-transaksi",
-        link2: "/admin/data-transaksi?status=selesai",
-        link3: "/admin/data-transaksi?status=belum-selesai",
-        link4: "/admin/data-transaksi?status=tidak-selesai"
-    };
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const selectMenu = document.getElementById('selectMenu');
-
-        selectMenu.addEventListener('change', function () {
-            const selectedOption = selectMenu.options[selectMenu.selectedIndex].value;
-            const selectedLink = links[selectedOption];
-            if (selectedLink) {
-                window.location.href = selectedLink;
-            }
-        });
-    });
-
-</script> --}}
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
