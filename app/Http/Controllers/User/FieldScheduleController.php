@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use App\Models\FieldList;
 use App\Models\FieldSchedule;
+use App\Models\QueueList;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 
 class FieldScheduleController extends Controller
 {
@@ -22,6 +25,12 @@ class FieldScheduleController extends Controller
         $items = FieldSchedule::where('field_list_id', $id);
 
         $fieldList = FieldList::findOrFail($id);
+
+        $queueList = QueueList::all();
+
+        $transactions = Transaction::all();
+
+        $user = Auth::user();
 
         // Inisialisasi variabel $dates jika Anda ingin menggunakannya
         $dates = [];
@@ -42,6 +51,6 @@ class FieldScheduleController extends Controller
         // Mengambil data FieldSchedule
         $items = $items->get();
 
-        return view('user.fieldSchedule.index', compact('items', 'dates', 'id', 'fieldList'));
+        return view('user.fieldSchedule.index', compact('items', 'dates', 'id', 'fieldList', 'queueList', 'user', 'transactions'));
     }
 }

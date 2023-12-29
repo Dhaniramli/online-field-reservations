@@ -52,8 +52,10 @@
                             <td class="text-center" style="vertical-align: middle;">{{ $fieldSchedule->time_finish }}</td>
                             <td class="text-center" style="vertical-align: middle;">Rp. {{ number_format($fieldSchedule->price, 0, ',', '.') }}</td>
                             <td class="text-center" style="vertical-align: middle;">
-                                @if ($fieldSchedule->is_booked == 0)
+                                @if ($fieldSchedule->is_booked == 'available')
                                 Available
+                                @elseif($fieldSchedule->is_booked == 'pending')
+                                Pending
                                 @else
                                 Booked
                                 @endif

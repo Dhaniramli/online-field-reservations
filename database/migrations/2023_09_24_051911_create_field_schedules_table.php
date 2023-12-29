@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('time_start');
             $table->string('time_finish');
             $table->string('price');
-            $table->boolean('is_booked')->default(false);
+            $table->enum('is_booked', ['available', 'pending', 'booked'])->default('available');
             $table->timestamps();
-            
+
             $table->foreign('field_list_id')->references('id')->on('field_lists')->onDelete('cascade');
         });
     }

@@ -15,4 +15,9 @@ class FieldSchedule extends Model
     {
         return $this->belongsTo(FieldList::class, 'field_list_id');
     }
+
+    public function fieldSchedule()
+    {
+        return $this->hasMany(QueueList::class);
+    }
 }

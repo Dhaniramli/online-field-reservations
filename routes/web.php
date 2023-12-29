@@ -19,6 +19,7 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\InvoiceController;
 use App\Http\Controllers\User\PaymentConfirmationController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\QueueListController;
 use Illuminate\Support\Facades\Route;
 
 //route home
@@ -37,9 +38,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/sewa-lapangan', [UserFieldScheduleController::class, 'field'])->name('index-booking');
-
-Route::get('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'index'])->name('index-jadwal');
-Route::post('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'index'])->name('index-jadwal');
 
 Route::middleware(['auth', 'onlyAdmin'])->group(function () {
     //route dashboard
@@ -105,9 +103,9 @@ Route::middleware(['auth', 'onlyPengguna'])->group(function () {
     Route::get('/payment/{ids}', [PaymentConfirmationController::class, 'paymentDetail'])->name('paymentDetail');
     Route::post('/pay', [PaymentConfirmationController::class, 'payNow'])->name('payNow');
     Route::get('/deleteTransaction/{id}', [PaymentConfirmationController::class, 'destroy']);
-
+    
     Route::put('/generate-snap-token/{id}', [PaymentConfirmationController::class, 'generateSnapToken']);
-
+    
     Route::get('/pembelian', [InvoiceController::class, 'index'])->name('pembelian');
     Route::get('/pembelian/{id}', [InvoiceController::class, 'show'])->name('show-pembelian');
     Route::post('/cancel/{id}', [InvoiceController::class, 'cancel'])->name('cancel-pembelian');
@@ -115,6 +113,14 @@ Route::middleware(['auth', 'onlyPengguna'])->group(function () {
     //route profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('index-profile');
     Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('update-profile');
+    
+    //route jadwal lapangan
+    Route::get('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'index'])->name('index-jadwal');
+    Route::post('/sewa-lapangan/{id}/jadwal', [UserFieldScheduleController::class, 'index'])->name('index-jadwal');
+    
+    // route antrian
+    Route::post('/antrian/store', [QueueListController::class, 'store'])->name('store-antrian');
+    Route::get('/deleteQueue/{id}', [QueueListController::class, 'destroy']);
 });
 
 Route::get('/kontak-kami', [FooterItemsController::class, 'contact_us'])->name('contact-us');

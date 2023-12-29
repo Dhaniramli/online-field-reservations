@@ -6,8 +6,10 @@ use Midtrans\Snap;
 use Midtrans\Config;
 use App\Http\Controllers\Controller;
 use App\Models\FieldSchedule;
+use App\Models\QueueList;
 use App\Models\Transaction;
 use App\Models\TransactionDetails;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,21 +67,23 @@ class PaymentConfirmationController extends Controller
 
         $order_id_final = $order_id + 1;
 
-
-
+        
         //Ubah Status Jadwal Yang diPesan
         $idsubah = explode(',', $request->ids);
         $bookingToUpdate = [];
-
+        
         foreach ($idsubah as $id) {
             $booking = FieldSchedule::find($id);
+            $queueCheck = QueueList::where('field_schedule_id', $id)->where('user_id', $user->id)->first();
 
             if (!$booking) {
                 return response()->json(['message' => 'Data tidak ditemukan'], 404);
             }
 
-            if ($booking->is_booked) {
+            if ($booking->is_booked === 'booked' || $booking->is_booked === 'pending') {
                 return response()->json(['message' => 'Jadwal sudah tidak tersedia, silahkan pilih jadwal lain yang masih tersedia!'], 400);
+            } elseif($queueCheck->status === false) {
+                return response()->json(['message' => 'Waktu anda habis, Anda mungkin sudah di kembalikan ke antrian selanjutnya!'], 400);
             } else {
                 $bookingToUpdate[] = $booking;
             }
@@ -112,8 +116,26 @@ class PaymentConfirmationController extends Controller
         }
 
         foreach ($bookingToUpdate as $booking) {
-            $booking->is_booked = true;
+            $booking->is_booked = 'pending';
             $booking->save();
+
+            $ids = $booking->id;
+
+            $queues = QueueList::where('field_schedule_id', $ids)->first();
+
+            if ($queues) {
+                $queues->created_at = Carbon::now();
+                $queues->save();
+            } else {
+                $dataToQueue = [
+                    'field_schedule_id' => $booking->id,
+                    'user_id' => $user->id,
+                    'status' => true,
+                    'number' => 1
+                ];
+
+                QueueList::create($dataToQueue);
+            }
         }
         //AKHIR Ubah Status Jadwal Yang diPesan
 
@@ -166,6 +188,7 @@ class PaymentConfirmationController extends Controller
     public function destroy($id)
     {
         $transaksi = Transaction::find($id);
+        $user = Auth::user();
 
         //Ubah Status Jadwal Yang diPesan
         $idsubah = explode(',', $transaksi->schedule_ids);
@@ -177,8 +200,10 @@ class PaymentConfirmationController extends Controller
         }
 
         foreach ($bookingToUpdate as $booking) {
-            $booking->is_booked = false;
+            $booking->is_booked = 'available';
             $booking->save();
+
+            QueueList::where('field_schedule_id', $booking->id)->where('user_id', $user->id)->delete();
         }
         //AKHIR Ubah Status Jadwal Yang diPesan
 

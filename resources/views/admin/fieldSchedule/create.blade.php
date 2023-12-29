@@ -32,7 +32,7 @@
                         <!-- Default row -->
                         <tr id="defaultRow">
                             <td>
-                                <input type="date" name="date[]" class="form-control" required>
+                                <input id="date" type="date" name="date[]" class="form-control" required>
                             </td>
                             <td>
                                 <input type="time" name="time_start[]" class="form-control" required>
@@ -86,5 +86,32 @@
             row.parentNode.removeChild(row);
         }
     }
+
+</script>
+
+
+<script>
+  // JavaScript
+    document.addEventListener("DOMContentLoaded", function() {
+        const dateInput = document.getElementById('date');
+
+        // Mendapatkan tanggal hari ini
+        const today = new Date();
+        const currentDay = today.getDay(); // Mendapatkan hari dalam bentuk angka (0: Minggu, 1: Senin, dst.)
+        const currentDate = today.getDate(); // Mendapatkan tanggal saat ini
+
+        let startOfCurrentWeek;
+
+        // Mencari hari Senin pada minggu ini
+        if (currentDay === 1) {
+            startOfCurrentWeek = currentDate; // Jika hari ini Senin, maka Senin adalah hari ini
+        } else {
+            startOfCurrentWeek = currentDate - currentDay + (currentDay === 0 ? 1 : 2); // Jika bukan Senin, cari Senin pada minggu ini
+        }
+
+        // Memperbarui batasan tanggal berdasarkan rentang yang diinginkan (7 hari)
+        dateInput.setAttribute('min', new Date(today.getFullYear(), today.getMonth(), startOfCurrentWeek).toISOString().split("T")[0]);
+        dateInput.setAttribute('max', new Date(today.getFullYear(), today.getMonth(), startOfCurrentWeek + 6).toISOString().split("T")[0]);
+    });
 
 </script>
