@@ -162,9 +162,9 @@ class TransactionDataController extends Controller
 
     public function index(Request $request)
     {
-        $date = $request->filled('date') ? $request->date : null;
-        $month = $request->filled('month') ? sprintf("%02d", $request->month) : null;
-        $year = $request->filled('year') ? $request->year : null;
+        // dd($request);
+        $date1 = $request->filled('date1') ? $request->date1 : null;
+        $date2 = $request->filled('date2') ? $request->date2 : null;
 
         $itemsQuery = Transaction::query();
 
@@ -190,30 +190,16 @@ class TransactionDataController extends Controller
             });
         }
 
-        if ($date !== null && $month !== null && $year !== null) {
-            $searchDate = "$year-$month-$date";
-            $itemsQuery->whereDate('created_at', $searchDate);
-        } elseif ($date !== null && $month !== null) {
-            $searchDate = sprintf("%02d", $month) . '-' . sprintf("%02d", $date);
-            $itemsQuery->whereRaw("DATE_FORMAT(created_at, '%m-%d') = ?", [$searchDate]);
-        } elseif ($year !== null && $month !== null) {
-            $searchDate = "$year-$month";
-            $itemsQuery->whereYear('created_at', $year)->whereMonth('created_at', $month);
-        } elseif ($date !== null && $year !== null) {
-            $searchDate = "$year-$month-$date";
-            $itemsQuery->whereYear('created_at', $year)->whereMonth('created_at', $month)->whereDay('created_at', $date);
-        } elseif ($date !== null) {
-            $itemsQuery->whereDay('created_at', $date);
-        } elseif ($month !== null) {
-            $itemsQuery->whereMonth('created_at', $month);
-        } elseif ($year !== null) {
-            $itemsQuery->whereYear('created_at', $year);
+        if ($date1 !== null && $date2 !== null) {
+            $date2 = date('Y-m-d', strtotime($date2 . '+1 day')); // Tambah 1 hari untuk mengambil data sampai akhir tanggal yang dimaksud
+    
+            $itemsQuery->whereBetween('created_at', [$date1, $date2]);
         }
 
         $items = $itemsQuery->get();
         $status = $request->status ?? '';
 
-        return view('admin.transactionData.index', compact('items', 'status', 'date', 'year', 'month'));
+        return view('admin.transactionData.index', compact('items', 'status'));
     }
 
 

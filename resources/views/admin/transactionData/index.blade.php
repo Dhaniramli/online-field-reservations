@@ -23,12 +23,31 @@
                     </select>
                 </div>
 
-                {{-- <div class="mb-3 ml-3">
-                    <input type="date" class="form-control @error('date') is-invalid @enderror" id="date" name="date"
-                    value="{{ old('date') }}">
-                </div> --}}
+                <div class="mb-3 ml-3">
+                    <table>
+                        <tr>
+                            <td class="text-center align-middle">Dari</td>
+                            <td></td>
+                            <td>
+                                <input type="date" class="form-control @error('date') is-invalid @enderror" id="date1" name="date1">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
                 <div class="mb-3 ml-3">
+                    <table>
+                        <tr>
+                            <td class="text-center align-middle">Sampai</td>
+                            <td></td>
+                            <td>
+                                <input type="date" class="form-control @error('date') is-invalid @enderror" id="date2" name="date2">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                {{-- <div class="mb-3 ml-3">
                     <select class="form-select" aria-label="Default select example" id="date" name="date">
                         <option value="" selected>Tanggal</option>
                         @for ($i = 1; $i <= 31; $i++)
@@ -57,7 +76,7 @@
                             <option value="{{ $i }}" {{ old('year') == $i ? 'selected' : '' }}>{{ $i }}</option>
                         @endfor
                     </select>
-                </div>
+                </div> --}}
                 
                 
                 <div class="mb-3 ml-3">

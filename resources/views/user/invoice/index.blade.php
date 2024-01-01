@@ -105,15 +105,25 @@
 
                         @if (!$cancel->where('transaction_id', $item->id)->first())
                             
-                            @if ($item->status_pay_early != 'paid_final' && $item->status_pay_final != 'paid' &&
-                                $item->status_pay_early === 'paid' && $item->status_pay_early != 'expire' &&
-                                $item->status_pay_final != 'expire' && $item->status_pay_early != 'pending' &&
+                            @if ($item->status_pay_early != 'paid_final' &&
+                                $item->status_pay_final != 'paid' &&
+                                $item->status_pay_early === 'paid' &&
+                                $item->status_pay_early != 'expire' &&
+                                $item->status_pay_final != 'expire' &&
+                                $item->status_pay_early != 'pending' &&
                                 $item->status_pay_final != 'pending')
                                 <button id="pay-button" data-item-id="{{ $item->id }}" class="btn btn-invoice-utama">Bayar</button>
                             @endif
                             
-                            @if ($item->status_pay_early != 'expire' && $item->status_pay_final != 'expire')
-                            <button class="btn btn-invoice-utama btn bg-danger" data-bs-toggle="modal" data-bs-target="#cancelModal{{ $item->id }}">Batal</button>
+                            @if (
+                                $item->status_pay_early !== 'expire' && 
+                                $item->status_pay_early !== 'unpaid' && 
+                                $item->status_pay_early !== 'pending' && 
+                                $item->status_pay_final !== 'expire' && 
+                                $item->status_pay_final !== 'unpaid' && 
+                                $item->status_pay_final !== 'pending'
+                            )
+                                <button class="btn btn-invoice-utama btn bg-danger" data-bs-toggle="modal" data-bs-target="#cancelModal{{ $item->id }}">Batal</button>
                             @endif
 
                         @endif
