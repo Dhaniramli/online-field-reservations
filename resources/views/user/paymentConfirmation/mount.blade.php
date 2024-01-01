@@ -105,8 +105,9 @@
                     console.error('Gagal mendapatkan Snap Token:', error.response.data);
                     // alert(error.response.data.message);
                     Swal.fire({
-                        title: "Eitss!!!",
-                        text: error.response.data.message,
+                        title: "Oopss!!!",
+                        text: "Terjadi Kesalahan Sistem!",
+                        // text: error.response.data.message,
                         icon: "error"
                     });
                 });
