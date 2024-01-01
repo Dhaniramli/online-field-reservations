@@ -24,29 +24,52 @@ class FieldScheduleController extends Controller
     {
         $request->validate([
             'field_list_id' => 'required',
-            'date' => 'required',
-            'time_start' => 'required',
-            'time_finish' => 'required',
-            'price' => 'required',
+            'date.*' => 'required',
+            'time_start.*' => 'required',
+            'time_finish.*' => 'required',
+            'price.*' => 'required',
         ], [
-            'field_list_id.required' => 'isi kolom yang masih kosong',
-            'date.required' => 'isi kolom yang masih kosong',
-            'time_start.required' => 'isi kolom yang masih kosong',
-            'time_finish.required' => 'isi kolom yang masih kosong',
-            'price.required' => 'isi kolom yang masih kosong',
+            'field_list_id.required' => 'Kolom ID lapangan harus diisi.',
+            'date.*.required' => 'Kolom Tanggal harus diisi.',
+            'time_start.*.required' => 'Kolom Jam Mulai harus diisi.',
+            'time_finish.*.required' => 'Kolom Jam Selesai harus diisi.',
+            'price.*.required' => 'Kolom Harga harus diisi.',
         ]);
 
-        $jadwal = new FieldSchedule([
-            'field_list_id' => $request->input('field_list_id'),
-            'date' => $request->input('date'),
-            'time_start' => $request->input('time_start'),
-            'time_finish' => $request->input('time_finish'),
-            'price' => $request->input('price'),
-        ]);
+        $dates = $request->input('date');
+        $time_starts = $request->input('time_start');
+        $time_finishes = $request->input('time_finish');
+        $prices = $request->input('price');
 
-        $jadwal->save();
+        $hasDuplicate = false; // Tandai apakah ada duplikasi atau tidak
 
-        // return redirect('/admin/jadwal-lapangan/{id}')->with('success', 'Berhasil disimpan!');
+        foreach ($dates as $key => $date) {
+            $new_date = date('Ymd', strtotime($date));
+            $new_time_start = date('Hi', strtotime($time_starts[$key]));
+            $id_schedule = $new_date . $new_time_start;
+
+            $fieldSchedules = FieldSchedule::find($id_schedule);
+
+            if ($fieldSchedules) {
+                $hasDuplicate = true; // Set flag jika terdapat duplikasi
+            } else {
+                $jadwal = new FieldSchedule([
+                    'id' => $id_schedule,
+                    'field_list_id' => $request->input('field_list_id'),
+                    'date' => $date,
+                    'time_start' => $time_starts[$key],
+                    'time_finish' => $time_finishes[$key],
+                    'price' => $prices[$key],
+                ]);
+
+                $jadwal->save();
+            }
+        }
+
+        if ($hasDuplicate) {
+            return back()->with('error', 'Terdapat jadwal yang duplikasi!, hanya data yang belum ada yang sistem simpan');
+        }
+
         return back()->with('success', 'Berhasil disimpan!');
     }
 
