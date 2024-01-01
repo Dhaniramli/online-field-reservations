@@ -6,6 +6,9 @@
     @if (session()->has('success'))
     @include('admin.partials.alertSuccess')
     @endif
+    @if (session()->has('error'))
+    @include('admin.partials.alertError')
+    @endif
 
     <h1 class="h3 mb-2 text-gray-800 text-center">Jadwal {{ $items->name }}</h1>
     <!-- Tambahkan input pencarian di luar tabel -->

@@ -9,15 +9,10 @@ class FieldSchedule extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $fillable = ['id', 'field_list_id', 'date', 'time_start', 'time_finish', 'price'];
 
     public function fieldList()
     {
         return $this->belongsTo(FieldList::class, 'field_list_id');
-    }
-
-    public function booked()
-    {
-        return $this->hasMany(Booked::class);
     }
 }
