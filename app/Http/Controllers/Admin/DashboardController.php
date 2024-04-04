@@ -15,8 +15,9 @@ class DashboardController extends Controller
         $now = Carbon::now();
 
         $user = User::where('is_admin', false)->get();
-        $jadwalTersedia = FieldSchedule::where('is_booked', false)->whereDate('date', '>=', $now->toDateString())->get();
-        $jadwalTerjual = FieldSchedule::where('is_booked', true)->whereYear('date', now()->year)->whereMonth('date', now()->month)->get();
+        // $jadwalTersedia = FieldSchedule::where('is_booked', 'available')->whereDate('date', '>=', $now->toDateString())->get();
+        $jadwalTersedia = FieldSchedule::where('is_booked', 'available')->whereYear('date', now()->year)->whereMonth('date', now()->month)->get();
+        $jadwalTerjual = FieldSchedule::where('is_booked', 'booked')->whereYear('date', now()->year)->whereMonth('date', now()->month)->get();
         $permintaanPembatalan = RequestCancelled::where('status', 'pending')->get();
 
         return view('admin.home', compact('user', 'jadwalTersedia', 'jadwalTerjual', 'permintaanPembatalan'));

@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <h2 class="text-center">
-                        {{ $jadwalTerjual && $jadwalTerjual->count() > 99 ? '99+' : ($jadwalTerjual ? $jadwalTerjual->count() : 0) }}
+                        {{ $jadwalTerjual->count() > 99 ? '99+' : ($jadwalTerjual ? $jadwalTerjual->count() : 0) }}
                     </h2>
                     <h3 class="text-center">Jadwal Terjual</h3>
                 </div>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <h2 class="text-center">
-                        {{ $jadwalTersedia && $jadwalTersedia->count() > 99 ? '99+' : ($jadwalTersedia ? $jadwalTersedia->count() : 0) }}
+                        {{ $jadwalTersedia->count() > 99 ? '99+' : ($jadwalTersedia->count() > 0 ? $jadwalTersedia->count() : 0) }}
                     </h2>
                     <h3 class="text-center">Jadwal Tersedia</h3>
                 </div>
