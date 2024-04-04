@@ -46,38 +46,6 @@
                         </tr>
                     </table>
                 </div>
-
-                {{-- <div class="mb-3 ml-3">
-                    <select class="form-select" aria-label="Default select example" id="date" name="date">
-                        <option value="" selected>Tanggal</option>
-                        @for ($i = 1; $i <= 31; $i++)
-                            <option value="{{ $i }}" {{ old('date') == $i ? 'selected' : '' }}>{{ $i }}</option>
-                        @endfor
-                    </select>
-                </div>
-
-                <div class="mb-3 ml-3">
-                    <select class="form-select" aria-label="Default select example" id="mount" name="mount">
-                        <option value="" selected>Bulan</option>
-                        @for ($i = 1; $i <= 12; $i++)
-                            <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
-                    </select>
-                </div>
-
-                <div class="mb-3 ml-3">
-                    <select class="form-select" aria-label="Tahun" id="year" name="year">
-                        <option selected value="">Tahun</option>
-                        @php
-                            $currentYear = date('Y');
-                            $startYear = 1900;
-                        @endphp
-                        @for ($i = $currentYear; $i >= $startYear; $i--)
-                            <option value="{{ $i }}" {{ old('year') == $i ? 'selected' : '' }}>{{ $i }}</option>
-                        @endfor
-                    </select>
-                </div> --}}
-                
                 
                 <div class="mb-3 ml-3">
                     <button type="submit" class="btn btn-success">Filter</button>
