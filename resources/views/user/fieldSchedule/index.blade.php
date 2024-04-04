@@ -53,20 +53,24 @@
         @endphp
         <div class="col-lg-3 col-md-4 col-6 p-2" data-aos="zoom-in-up" data-aos-duration="2000">
             <div class="card card-jadwal d-flex flex-column justify-content-center align-items-center {{ $item->is_booked === 'booked' ? 'booked' : '' }}"
-                data-id="{{ $item->id }}" data-selected="false" data-is-booked="{{ $item->is_booked === 'booked' ? 'booked' : ($item->is_booked === 'pending' || !$queues || $queueList->where('user_id', $user->id)->where('field_schedule_id', $item->id)->where('status', false)->first() ? 'pending' : 'not-booked') }}">
+                data-id="{{ $item->id }}"
+                data-selected="false"
+                data-is-booked="{{ $item->is_booked === 'booked' ? 'booked' : ($item->is_booked === 'pending' || !$queues || $queueList->where('user_id', $user->id)->where('field_schedule_id', $item->id)->where('status', false)->first() ? 'pending' : 'not-booked') }}"
+                data-button-satu="{{ app(\App\Models\QueueList::class)::where('user_id', $user->id)->where('field_schedule_id', $item->id)->first(); }}"
+                data-button-dua="{{ app(\App\Models\QueueList::class)::where('user_id', $user->id)->where('field_schedule_id', $item->id)->where('status', true)->first(); }}">
                 <h1 class="text-center">{{ $item->time_start . ' - ' . $item->time_finish }}</h1>
                 <h2 class="text-center">
                     @if ($item->is_booked === 'pending' || $queueTimeFalseByUserId || !$queues)
                     Pending <br>
-                    @if ($queueNumber)
-                        <span idJadwal="{{ $queueNumber->field_schedule_id }}">{{ $queueNumber->field_schedule_id }}</span>
-                    @else
-                        <span id="teks{{ $item->id }}">Queue number not available</span>
-                    @endif
+                        {{-- @if ($queueNumber)
+                            <span idJadwal="{{ $queueNumber->field_schedule_id }}">{{ $queueNumber->field_schedule_id }}</span>
+                        @else
+                            <span id="teks{{ $item->id }}">Queue number not available</span>
+                        @endif --}}
 
-                        @if ($queueTimeFalseByUserId)
-                        <span id="teks{{ $item->id }}">{{ $queueNumber }}</span>
-                        @endif
+                        {{-- @if ($queueTimeFalseByUserId)
+                        <span id="teks{{ $item->id }}"></span>
+                        @endif --}}
                 
                         {{-- @if ($queueOne)
                             <script>
@@ -182,6 +186,8 @@
         $(".card.card-jadwal").click(function () {
             var id = $(this).data("id");
             var isBooked = $(this).data("is-booked");
+            var custom1 = $(this).data("button-satu");
+            var custom2 = $(this).data("button-dua");
 
             // Menambahkan kondisi untuk mencegah klik jika item sudah dibooking
             if (isBooked === 'booked') {
@@ -190,68 +196,41 @@
                 $(this).removeClass("selected");
                 return;
             }  else if (isBooked === 'pending') {
-                // var dataAntrian = app(\App\Models\QueueList::class)::where('user_id', $user->id)->where('field_schedule_id', $id)->first();
-                // if(idJadwal){
-                //     Swal.fire({
-                //     title: "Anda Sudah Berada Dalam Antrian",
-                //     text: "Silahkan tunggu dan cek email anda",
-                //     icon: "question"
-                //     });
-                // }
+                console.log(custom1.field_schedule_id);
+                console.log(custom2);
 
-                Swal.fire({
-                    title: "Apakah Anda ingin masuk dalam antrian?",
-                    text: "Jadwal ini sebelumnya telah dipilih oleh orang lain. Jika orang tersebut tidak melanjutkan pembayaran, Anda akan menggantikan tempatnya.",
-                    showCancelButton: true,
-                    confirmButtonText: "Oke",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Lakukan permintaan POST ke endpoint dengan data yang ingin Anda kirimkan
-                        let field_schedule_id = id; // Ganti dengan nilai yang sesuai
+                if(custom2 != ""){
+                    Swal.fire({
+                        title: "Anda Telah Melakukan Checkout!!",
+                        text: "Silahkann cek email dan selesaikan pembayaran anda",
+                        icon: "warning",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Oke"
+                    });
+                } else if(custom1 != "") {
+                    Swal.fire({
+                    title: "Anda Sudah Berada Dalam Antrian",
+                    text: "Silahkan tunggu dan cek email anda",
+                    icon: "warning",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "Oke"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Apakah Anda ingin masuk dalam antrian?",
+                        text: "Jadwal ini sebelumnya telah dipilih oleh orang lain. Jika orang tersebut tidak melanjutkan pembayaran, Anda akan menggantikan tempatnya.",
+                        showCancelButton: true,
+                        confirmButtonText: "Oke",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Lakukan permintaan POST ke endpoint dengan data yang ingin Anda kirimkan
+                            let field_schedule_id = id; // Ganti dengan nilai yang sesuai
 
-                        // TAMPILKAN INI
-                        window.location.href = "/payment-queue/" + field_schedule_id;
-
-                        // fetch('/antrian/store', {
-                        //     method: 'POST',
-                        //     headers: {
-                        //         'Content-Type': 'application/json',
-                        //         'X-CSRF-TOKEN': '{{ csrf_token() }}' // Pastikan untuk menyertakan CSRF token jika digunakan dalam Laravel
-                        //     },
-                        //     body: JSON.stringify({
-                        //         field_schedule_id: field_schedule_id // Mengirim field_schedule_id ke server
-                        //         // Anda juga dapat menambahkan data lain yang diperlukan untuk dikirimkan di sini
-                        //     })
-                        // })
-                        // .then(response => {
-                        //     if (response.ok) {
-                        //         return response.json();
-                        //     }
-                        //     throw new Error('Network response was not ok.');
-                        // })
-                        // .then(data => {
-                        //     // Swal.fire("Saved!", "", "success");
-                        //     // Lakukan tindakan lain jika diperlukan setelah permintaan berhasil
-
-                        //     location.reload();
-                        //     console.log(data);
-                        //     Swal.fire({
-                        //         // title: 'Response',
-                        //         text: data.message, // Menampilkan respons JSON dalam alert
-                        //         icon: 'success'
-                        //     });
-                        // })
-                        // .catch(error => {
-                        //     console.error('There was an error!', error);
-                        //     // Handle error jika terjadi kesalahan dalam permintaan
-                        //     Swal.fire({
-                        //         title: 'Terjadi Kesalahan',
-                        //         text: 'Anda belum login, Silahkan login terlebih dahulu.', // Menampilkan respons JSON dalam alert
-                        //         icon: 'error'
-                        //     });
-                        // });
-                    }
-                });
+                            // TAMPILKAN INI
+                            window.location.href = "/payment-queue/" + field_schedule_id;
+                        }
+                    });
+                }
 
                 return;
             }

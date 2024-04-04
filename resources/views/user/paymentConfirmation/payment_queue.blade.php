@@ -4,7 +4,24 @@
 <link rel="stylesheet" href="/css/user/mount.css">
 
 <div class="container content-mount">
-
+    @if(session('success'))
+    <script>
+        $(document).ready(function () {
+            Swal.fire({
+            title: "Berhasil Submit!!!",
+            text: "Silahkan tunggu dan cek email anda",
+            icon: "warning",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Oke"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/sewa-lapangan";
+                }
+            });
+        });
+    </script>    
+    @endif
+    
     <div class="row mb-5">
         <div class="col-lg-6">
             <div class="card card-mount">

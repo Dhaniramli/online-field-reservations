@@ -79,7 +79,6 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
         var payButtonFull = document.getElementById('pay-button');
@@ -103,13 +102,7 @@
                 })
                 .catch(function (error) {
                     console.error('Gagal mendapatkan Snap Token:', error.response.data);
-                    // alert(error.response.data.message);
-                    // Swal.fire({
-                    //     title: "Oopss!!!",
-                    //     text: "Terjadi Kesalahan Sistem!",
-                    //     // text: error.response.data.message,
-                    //     icon: "error"
-                    // });
+
                     Swal.fire({
                         title: "Oopss!!!",
                         text: "Terjadi Kesalahan Sistem!",
@@ -118,7 +111,7 @@
                         confirmButtonText: "Oke"
                         }).then((result) => {
                         if (result.isConfirmed) {
-                           window.location.href = '/sewa-lapangan'
+                            window.location.href = '/sewa-lapangan'
                         }
                         });
                 });
@@ -149,15 +142,6 @@
                         });
                 },
                 onClose: function () {
-                    // axios.put('/updateScheduleFalse/' + bookingId)
-                    //     .then(function (response) {
-                    //         console.log('Data berhasil diupdate ke false');
-                    //         // location.reload();
-                    //     })
-                    //     .catch(function (error) {
-                    //         console.log('Gagal mengupdate data false: ' + error);
-                    //         // location.reload();
-                    //     });
 
                     console.log('Pop-up pembayaran ditutup');
                     axios.get('/deleteTransaction/' + dataTransaksi.id)

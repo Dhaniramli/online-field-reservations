@@ -51,6 +51,16 @@ class PaymentConfirmationController extends Controller
             'totalPrice' => 'required',
         ]);
 
+        // Mengecek apakah ada entry di QueueList yang memenuhi kriteria
+        $existingQueue = QueueList::where('field_schedule_id', $validatedData['itemId'])
+            ->where('user_id', $user->id)
+            ->first();
+
+        if ($existingQueue) {
+            // Jika ada, arahkan pengguna ke halaman /sewa-lapangan
+            return redirect('/sewa-lapangan')->with('error', 'Anda sudah memiliki antrian untuk jadwal ini.');
+        }
+
         // Membuat array data yang akan disimpan dalam format JSON
         $queueData = [
             'id' => $validatedData['itemId'],
