@@ -10,7 +10,7 @@
             Swal.fire({
             title: "Berhasil Submit!!!",
             text: "Silahkan tunggu dan cek email anda",
-            icon: "warning",
+            icon: "success",
             confirmButtonColor: "#3085d6",
             confirmButtonText: "Oke"
             }).then((result) => {

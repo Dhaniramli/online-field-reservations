@@ -273,14 +273,11 @@ class MidtransController extends Controller
                             \Midtrans\Config::$serverKey = 'SB-Mid-server-a8DzWcJyPpn6NoW9oF6aIcps';
 
                             // Lakukan pengecekan kondisi untuk jenis pembayaran
-                            if ($tipePembayaranC === 'alfamart' || $tipePembayaranC === 'indomart') {
+                            if ($tipePembayaranC === 'alfamart' || $tipePembayaranC === 'indomaret') {
                                 // Ubah nilai parameter sesuai dengan jenis pembayaran
                                 $paymentType = 'cstore';
                                 $bankTransfer = array(
-                                    'cstore' => array(
-                                        'store' => ($tipePembayaranC === 'alfamart') ? 'alfamart' : 'indomart',
-                                        'message' => 'Terima Kasih Telah Menggunakan Layanan Kami',
-                                    )
+                                    'store' => ($tipePembayaranC === 'alfamart') ? 'alfamart' : 'indomaret',
                                 );
                             } else {
                                 // Jika bukan alfamart atau indomart, gunakan metode pembayaran lainnya
