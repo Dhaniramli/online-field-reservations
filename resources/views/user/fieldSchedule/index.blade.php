@@ -58,8 +58,14 @@
                 <h2 class="text-center">
                     @if ($item->is_booked === 'pending' || $queueTimeFalseByUserId || !$queues)
                     Pending <br>
+                    @if ($queueNumber)
+                        <span idJadwal="{{ $queueNumber->field_schedule_id }}">{{ $queueNumber->field_schedule_id }}</span>
+                    @else
+                        <span id="teks{{ $item->id }}">Queue number not available</span>
+                    @endif
+
                         @if ($queueTimeFalseByUserId)
-                        <span id="teks{{ $item->id }}"></span>
+                        <span id="teks{{ $item->id }}">{{ $queueNumber }}</span>
                         @endif
                 
                         {{-- @if ($queueOne)
@@ -185,7 +191,7 @@
                 return;
             }  else if (isBooked === 'pending') {
                 // var dataAntrian = app(\App\Models\QueueList::class)::where('user_id', $user->id)->where('field_schedule_id', $id)->first();
-                // if(dataAntrian){
+                // if(idJadwal){
                 //     Swal.fire({
                 //     title: "Anda Sudah Berada Dalam Antrian",
                 //     text: "Silahkan tunggu dan cek email anda",
