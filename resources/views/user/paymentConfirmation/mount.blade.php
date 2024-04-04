@@ -104,12 +104,23 @@
                 .catch(function (error) {
                     console.error('Gagal mendapatkan Snap Token:', error.response.data);
                     // alert(error.response.data.message);
+                    // Swal.fire({
+                    //     title: "Oopss!!!",
+                    //     text: "Terjadi Kesalahan Sistem!",
+                    //     // text: error.response.data.message,
+                    //     icon: "error"
+                    // });
                     Swal.fire({
                         title: "Oopss!!!",
                         text: "Terjadi Kesalahan Sistem!",
-                        // text: error.response.data.message,
-                        icon: "error"
-                    });
+                        icon: "warning",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Oke"
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                           window.location.href = '/sewa-lapangan'
+                        }
+                        });
                 });
         });
 

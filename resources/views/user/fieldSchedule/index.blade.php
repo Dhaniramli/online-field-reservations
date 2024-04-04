@@ -62,7 +62,7 @@
                         <span id="teks{{ $item->id }}"></span>
                         @endif
                 
-                        @if ($queueOne)
+                        {{-- @if ($queueOne)
                             <script>
                                 const queueNumber{{ $item->id }} = '{{ isset($queueNumber) ? $queueNumber->number : "0" }}';
                                 const queueOne{{ $item->id }} = '{{ $queueOne->created_at }}';
@@ -93,7 +93,7 @@
                                 }, 1000);
 
                             </script>
-                        @endif
+                        @endif --}}
                 
                     @elseif ($item->is_booked === 'booked')
                     Booked
@@ -102,7 +102,7 @@
                     Rp. {{ number_format($item->price, 0, ',', '.') }} <br>
                     <span id="teks2{{ $item->id }}"></span>
 
-                        @if (!$transactionOne && $queueOne && $queues)
+                        {{-- @if (!$transactionOne && $queueOne && $queues)
                             <script>
                                 const queueOne{{ $item->id }} = '{{ $queueOne->created_at }}';
                                 const queueOne2{{ $item->id }} = new Date(queueOne{{ $item->id }}).getTime();
@@ -142,7 +142,7 @@
                                     }
                                 }, 1000);
                             </script>
-                        @endif
+                        @endif --}}
                     @endif
                 </h2>
             </div>
@@ -184,7 +184,15 @@
                 $(this).removeClass("selected");
                 return;
             }  else if (isBooked === 'pending') {
-               
+                // var dataAntrian = app(\App\Models\QueueList::class)::where('user_id', $user->id)->where('field_schedule_id', $id)->first();
+                // if(dataAntrian){
+                //     Swal.fire({
+                //     title: "Anda Sudah Berada Dalam Antrian",
+                //     text: "Silahkan tunggu dan cek email anda",
+                //     icon: "question"
+                //     });
+                // }
+
                 Swal.fire({
                     title: "Apakah Anda ingin masuk dalam antrian?",
                     text: "Jadwal ini sebelumnya telah dipilih oleh orang lain. Jika orang tersebut tidak melanjutkan pembayaran, Anda akan menggantikan tempatnya.",
@@ -194,44 +202,48 @@
                     if (result.isConfirmed) {
                         // Lakukan permintaan POST ke endpoint dengan data yang ingin Anda kirimkan
                         let field_schedule_id = id; // Ganti dengan nilai yang sesuai
-                        fetch('/antrian/store', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}' // Pastikan untuk menyertakan CSRF token jika digunakan dalam Laravel
-                            },
-                            body: JSON.stringify({
-                                field_schedule_id: field_schedule_id // Mengirim field_schedule_id ke server
-                                // Anda juga dapat menambahkan data lain yang diperlukan untuk dikirimkan di sini
-                            })
-                        })
-                        .then(response => {
-                            if (response.ok) {
-                                return response.json();
-                            }
-                            throw new Error('Network response was not ok.');
-                        })
-                        .then(data => {
-                            // Swal.fire("Saved!", "", "success");
-                            // Lakukan tindakan lain jika diperlukan setelah permintaan berhasil
 
-                            location.reload();
-                            console.log(data);
-                            Swal.fire({
-                                // title: 'Response',
-                                text: data.message, // Menampilkan respons JSON dalam alert
-                                icon: 'success'
-                            });
-                        })
-                        .catch(error => {
-                            console.error('There was an error!', error);
-                            // Handle error jika terjadi kesalahan dalam permintaan
-                            Swal.fire({
-                                title: 'Terjadi Kesalahan',
-                                text: 'Anda belum login, Silahkan login terlebih dahulu.', // Menampilkan respons JSON dalam alert
-                                icon: 'error'
-                            });
-                        });
+                        // TAMPILKAN INI
+                        window.location.href = "/payment-queue/" + field_schedule_id;
+
+                        // fetch('/antrian/store', {
+                        //     method: 'POST',
+                        //     headers: {
+                        //         'Content-Type': 'application/json',
+                        //         'X-CSRF-TOKEN': '{{ csrf_token() }}' // Pastikan untuk menyertakan CSRF token jika digunakan dalam Laravel
+                        //     },
+                        //     body: JSON.stringify({
+                        //         field_schedule_id: field_schedule_id // Mengirim field_schedule_id ke server
+                        //         // Anda juga dapat menambahkan data lain yang diperlukan untuk dikirimkan di sini
+                        //     })
+                        // })
+                        // .then(response => {
+                        //     if (response.ok) {
+                        //         return response.json();
+                        //     }
+                        //     throw new Error('Network response was not ok.');
+                        // })
+                        // .then(data => {
+                        //     // Swal.fire("Saved!", "", "success");
+                        //     // Lakukan tindakan lain jika diperlukan setelah permintaan berhasil
+
+                        //     location.reload();
+                        //     console.log(data);
+                        //     Swal.fire({
+                        //         // title: 'Response',
+                        //         text: data.message, // Menampilkan respons JSON dalam alert
+                        //         icon: 'success'
+                        //     });
+                        // })
+                        // .catch(error => {
+                        //     console.error('There was an error!', error);
+                        //     // Handle error jika terjadi kesalahan dalam permintaan
+                        //     Swal.fire({
+                        //         title: 'Terjadi Kesalahan',
+                        //         text: 'Anda belum login, Silahkan login terlebih dahulu.', // Menampilkan respons JSON dalam alert
+                        //         icon: 'error'
+                        //     });
+                        // });
                     }
                 });
 

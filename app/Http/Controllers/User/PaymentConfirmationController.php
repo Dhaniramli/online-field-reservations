@@ -24,6 +24,60 @@ class PaymentConfirmationController extends Controller
         return view('user.paymentConfirmation.index', compact('items'));
     }
 
+    public function paymentQueue($ids)
+    {
+        $user = Auth::user();
+        $idsubah = explode(',', $ids);
+        $items = FieldSchedule::whereIn('id', $idsubah)->get();
+
+        $totalPrice = 0;
+
+        foreach ($items as $item) {
+            $totalPrice += $item->price;
+        }
+
+        return view('user.paymentConfirmation.payment_queue', compact('items', 'user', 'totalPrice'));
+    }
+
+    public function submitPayment(Request $request)
+    {
+        $user = Auth::user();
+
+        // Validasi data yang diterima dari permintaan POST
+        $validatedData = $request->validate([
+            'pilihanBayar' => 'required',
+            'tipePembayaran' => 'required',
+            'itemId' => 'required',
+            'totalPrice' => 'required',
+        ]);
+
+        // Membuat array data yang akan disimpan dalam format JSON
+        $queueData = [
+            'id' => $validatedData['itemId'],
+            'pilihanBayar' => $validatedData['pilihanBayar'],
+            'tipePembayaran' => $validatedData['tipePembayaran'],
+            'totalPrice' => $validatedData['totalPrice'],
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+            'phone' => $user->phone_number,
+        ];
+
+        $Queues = QueueList::where('field_schedule_id', $validatedData['itemId'])->get();
+
+        // Lakukan sesuatu dengan data yang diterima, contoh disini adalah menyimpannya ke dalam database
+        QueueList::create([
+            'field_schedule_id' => $validatedData['itemId'],
+            'queue_data' => json_encode($queueData), // Simpan data dalam format JSON
+            'user_id' => $user->id,
+            'number' => count($Queues) + 1,
+            // Masukkan kolom lain yang ingin Anda isi di sini
+        ]);
+
+        // Redirect atau tindakan lainnya setelah data berhasil disimpan
+        return redirect()->back()->with('success', 'Pembayaran berhasil disubmit!');
+    }
+
     public function paymentDetail(Request $request, $ids)
     {
         $user = Auth::user();
@@ -67,11 +121,11 @@ class PaymentConfirmationController extends Controller
 
         $order_id_final = $order_id + 1;
 
-        
+
         //Ubah Status Jadwal Yang diPesan
         $idsubah = explode(',', $request->ids);
         $bookingToUpdate = [];
-        
+
         foreach ($idsubah as $id) {
             $booking = FieldSchedule::find($id);
             $queueCheck = QueueList::where('field_schedule_id', $id)->where('user_id', $user->id)->first();
@@ -82,9 +136,11 @@ class PaymentConfirmationController extends Controller
 
             if ($booking->is_booked === 'booked' || $booking->is_booked === 'pending') {
                 return response()->json(['message' => 'Jadwal sudah tidak tersedia, silahkan pilih jadwal lain yang masih tersedia!'], 400);
-            } elseif($queueCheck->status === false) {
-                return response()->json(['message' => 'Waktu anda habis, Anda mungkin sudah di kembalikan ke antrian selanjutnya!'], 400);
-            } else {
+            }
+            // elseif($queueCheck->status === false) {
+            //     return response()->json(['message' => 'Waktu anda habis, Anda mungkin sudah di kembalikan ke antrian selanjutnya!'], 400);
+            // } 
+            else {
                 $bookingToUpdate[] = $booking;
             }
         }

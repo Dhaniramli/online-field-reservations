@@ -103,6 +103,8 @@ Route::middleware(['auth', 'onlyPengguna'])->group(function () {
     Route::get('/payment/{ids}', [PaymentConfirmationController::class, 'paymentDetail'])->name('paymentDetail');
     Route::post('/pay', [PaymentConfirmationController::class, 'payNow'])->name('payNow');
     Route::get('/deleteTransaction/{id}', [PaymentConfirmationController::class, 'destroy']);
+    Route::get('/payment-queue/{ids}', [PaymentConfirmationController::class, 'paymentQueue'])->name('paymentQueue');
+    Route::post('/submit-payment', [PaymentConfirmationController::class, 'submitPayment'])->name('submitPayment');
     
     Route::put('/generate-snap-token/{id}', [PaymentConfirmationController::class, 'generateSnapToken']);
     

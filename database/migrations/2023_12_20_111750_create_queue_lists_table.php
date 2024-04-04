@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('field_schedule_id');
             $table->boolean('status')->default(false);
             $table->string('number');
+            $table->text('queue_data')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
