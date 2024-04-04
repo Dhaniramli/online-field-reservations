@@ -122,10 +122,7 @@ class MidtransController extends Controller
                                 // Ubah nilai parameter sesuai dengan jenis pembayaran
                                 $paymentType = 'cstore';
                                 $bankTransfer = array(
-                                    'cstore' => array(
-                                        'store' => ($tipePembayaranC === 'alfamart') ? 'alfamart' : 'indomart',
-                                        'message' => 'Terima Kasih Telah Menggunakan Layanan Kami',
-                                    )
+                                    'store' => ($tipePembayaranC === 'alfamart') ? 'alfamart' : 'indomaret',
                                 );
                             } else {
                                 // Jika bukan alfamart atau indomart, gunakan metode pembayaran lainnya
