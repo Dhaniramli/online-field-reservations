@@ -80,7 +80,7 @@
                                 Pilihan Pembayaran<br>
                             </td>
                             <td class="h-12 " style="text-align: right;">
-                                <select id="pilihanBayar" name="pilihanBayar">
+                                <select id="pilihanBayar" name="pilihanBayar" select class="form-select" aria-label="Default select example">
                                     <option value="DP">Bayar DP</option>
                                     <option value="Full">Bayar Penuh</option>
                                 </select>
@@ -88,7 +88,7 @@
                         </tr>
                         <tr>
                             <td class="h-12">
-                                Bayar
+                                Total Bayar
                             </td>
                             <td class="h-12 " style="text-align: right;">
                                 <span id="bayarAmount"></span>
@@ -99,7 +99,7 @@
                                 Tipe Pembayaran<br>
                             </td>
                             <td class="h-12 " style="text-align: right;">
-                                <select id="tipePembayaran" name="tipePembayaran">
+                                <select id="tipePembayaran" name="tipePembayaran" select class="form-select" aria-label="Default select example">
                                     <option value="bca">BCA Virtual Account</option>
                                     <option value="bni">BNI Virtual Account</option>
                                     <option value="bri">BRI Virtual Account</option>
