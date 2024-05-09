@@ -32,6 +32,53 @@ class DatabaseSeeder extends Seeder
             'team_name' => 'jumrah team',
             'password' => bcrypt('123456')
         ]);
+        
+        \App\Models\User::create([
+            'is_admin' => false,
+            'first_name' => 'agung',
+            'last_name' => 'faturohman',
+            'phone_number' => '082393437052',
+            'email' => 'faturagung07@gmail.com',
+            'team_name' => 'Swadaya FC',
+            'password' => bcrypt('123456')
+        ]);
+        \App\Models\User::create([
+            'is_admin' => false,
+            'first_name' => 'khaidir',
+            'last_name' => 'ansyar',
+            'phone_number' => '085396426641',
+            'email' => 'didipengpeng@gmail.com',
+            'team_name' => 'Peng Peng',
+            'password' => bcrypt('123456')
+        ]);
+        \App\Models\User::create([
+            'is_admin' => false,
+            'first_name' => 'nur ilahi',
+            'last_name' => 'syam',
+            'phone_number' => '085212621205',
+            'email' => 'didipengpeng@gmail.com',
+            'team_name' => 'Peng Peng',
+            'password' => bcrypt('123456')
+        ]);
+        \App\Models\User::create([
+            'is_admin' => false,
+            'first_name' => 'muh',
+            'last_name' => 'rato',
+            'phone_number' => '085343762181',
+            'email' => 'blitzer10@gmail.com',
+            'team_name' => 'Blitzer',
+            'password' => bcrypt('123456')
+        ]);
+        \App\Models\User::create([
+            'is_admin' => false,
+            'first_name' => 'muh',
+            'last_name' => 'awal',
+            'phone_number' => '085343762181',
+            'email' => 'awalvespa@gmail.com',
+            'team_name' => 'SIBIJA',
+            'password' => bcrypt('123456')
+        ]);
+
         \App\Models\User::create([
             'is_admin' => false,
             'first_name' => 'dhani',
