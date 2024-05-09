@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             'first_name' => 'nur ilahi',
             'last_name' => 'syam',
             'phone_number' => '085212621205',
-            'email' => 'didipengpeng@gmail.com',
+            'email' => 'nurilahi027@gmail.com',
             'team_name' => 'Peng Peng',
             'password' => bcrypt('123456')
         ]);
