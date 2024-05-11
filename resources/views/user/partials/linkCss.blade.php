@@ -1,9 +1,5 @@
 <link rel="icon" type="image/png" href="{{ asset('/img/karsa_logo.png') }}">
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
-<!-- PWA  -->
-<meta name="theme-color" content="#6777ef"/>
-<link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
-<link rel="manifest" href="{{ asset('/manifest.json') }}">
 
 <link rel="stylesheet" href="/css/user/body.css">
 
