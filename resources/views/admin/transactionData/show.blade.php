@@ -70,7 +70,7 @@
                 </td>
             </tr>
     
-            @if (!($transactionDetail->status_pay_early === 'expire' || $transactionDetail->status_pay_early === 'pending' || $transactionDetail->status_pay_final === 'pending' || $transactionDetail->status_pay_final ===
+            {{-- @if (!($transactionDetail->status_pay_early === 'expire' || $transactionDetail->status_pay_early === 'pending' || $transactionDetail->status_pay_final === 'pending' || $transactionDetail->status_pay_final ===
             'paid' || $transactionDetail->status_pay_final === 'expire'))
             <tr>
                 <td colspan="2" class="h-12 text-center">
@@ -79,7 +79,7 @@
                     @endif
                 </td>
             </tr>
-            @endif
+            @endif --}}
     
         </table>
     </div>

@@ -71,14 +71,14 @@ class TransactionDataController extends Controller
         return back();
     }
 
-    public function export_excel(Request $request)
-    {
-        $statusAndDate = [
-            'status' => $request->input('status'),
-            'date' => $request->input('date'),
-        ];
+    // public function export_excel(Request $request)
+    // {
+    //     $statusAndDate = [
+    //         'status' => $request->input('status'),
+    //         'date' => $request->input('date'),
+    //     ];
 
-        $timestamp = Carbon::now()->format('Ymd');
-        return (new ExportTransaction($statusAndDate))->download('transaksi-' . $timestamp . '.xlsx');
-    }
+    //     $timestamp = Carbon::now()->format('Ymd');
+    //     return (new ExportTransaction($statusAndDate))->download('transaksi-' . $timestamp . '.xlsx');
+    // }
 }
